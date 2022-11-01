@@ -1,0 +1,422 @@
+body {
+    background: linear-gradient(135deg, rgb(0, 0, 0) 40%, rgb(73, 73, 73)) !important;
+}
+
+.sezione {
+    color: #D9D9D9 !important;
+    font-size: 23px;
+}
+
+.elemento-tendina {
+    color: #D9D9D9 !important;
+}
+
+.elemento-tendina {
+    background-color: grey !important;
+}
+
+.dropdown-item:hover {
+    background-color: rgb(26, 25, 25) !important;
+}
+
+
+i {
+    color: white !important;
+}
+
+
+.car-item {
+    height: 500re !important;
+}
+
+.titolo-film {
+    font-size: 22px;
+    color: white;
+}
+
+h2 {
+    color: #D9D9D9 !important;
+}
+
+.genere {
+    font-size: 20px;
+}
+
+/*scheda film*/
+#titolo-pagina-film {
+    color: white !important;
+}
+
+#descrizione-pagina-film {
+    color: white;
+}
+
+#regia-pagina-film {
+    color: white;
+}
+
+#cast-pagina-film {
+    color: white;
+}
+
+p {
+    color: #D9D9D9;
+}
+
+#btnPrenota {
+    width: 400px !important;
+    height: auto;
+}
+
+
+/* hover effect film image*/
+.transition {
+    -webkit-transform: scale(1.30);
+    -moz-transform: scale(1.30);
+    -o-transform: scale(1.30);
+    transform: scale(1.30);
+}
+
+.content {
+    -webkit-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -ms-transition: all .4s ease-in-out;
+}
+
+/* media queries */
+
+@media (max-width: 992px) {
+    .img-pagina-film {
+        float: left;
+    }
+
+    #btnPrenota {
+        width: 200px !important;
+        height: auto;
+    }
+}
+
+
+
+/*TABELLA CLASSIFICA*/
+
+#tblClassifica {
+    color: #DFE0E0;
+    background-color: #f2efea !important;
+}
+
+#tblClassifica p {
+    color: #000000;
+}
+
+#tblHead {
+    background-color: #111112;
+}
+
+#tblClassifica tr td .btn {
+    background-color: #dd8b19;
+    color: black;
+}
+
+#btnClassificaMensile,
+#btnClassificaAt {
+    background-color: #F18E00 !important;
+    color: black !important;
+}
+
+.badge-success {
+    background-color: goldenrod !important;
+    color: black !important;
+}
+
+.badge-primary {
+    background-color: silver !important;
+    color: black !important;
+}
+
+.badge-info {
+    background-color: #b38001 !important;
+    color: black !important;
+}
+
+
+/* prenotazione */
+
+.modal-body {
+    background-color: #242333;
+    color: #fff;
+}
+
+.modal-header {
+    background-color: #F18E00;
+    color: rgb(55, 54, 54) !important;
+}
+
+.movie-container {
+    margin: 20px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column
+}
+
+.movie-container select {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    padding: 5px 15px;
+    margin-bottom: 40px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.container1 {
+    perspective: 1000px;
+    margin: 40px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.seat {
+    background-color: #444451;
+    height: 12px;
+    width: 15px;
+    margin: 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.selected {
+    background-color: #0081cb;
+}
+
+.occupied {
+    background-color: #fff;
+}
+
+/*
+.seat:nth-of-type(3) {
+    margin-right: 18px;
+}
+
+.seat:nth-last-of-type(3) {
+    margin-left: 18px;
+}
+*/
+
+.seat:not(.occupied):hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.showcase1 .seat:not(.occupied):hover {
+    cursor: default;
+    transform: scale(1);
+}
+
+.showcase1 {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #777;
+}
+
+.showcase1 li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+}
+
+.showcase1 li small {
+    margin-left: 2px;
+}
+
+.row1 {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.screen {
+    background: #fff;
+    height: 70px;
+    width: 70%;
+    margin: 15px 0;
+    transform: rotateX(-45deg);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+}
+
+p.text {
+    margin: 40px 0;
+}
+
+p.text span {
+    color: #0081cb;
+    font-weight: 600;
+    box-sizing: content-box;
+}
+
+.credits a {
+    color: #fff;
+}
+
+/* MODAL RISPOSTA */
+#modaleRisposta {
+    background-color: #D6F0E0;
+    color: green;
+}
+
+
+/*avatar*/
+#navbarDropdownMenuAvatar {
+    padding-left: 15px;
+}
+
+/*immagine profilo pubblico
+#imgUtente{
+    padding-left: 100px;
+}*/
+
+/*numero classifica all time*/
+.statsUtenteAllTime {
+    font-family: monospace;
+    font-size: 10vw;
+    color: #dd8b19;
+    margin-bottom: -3vw;
+}
+
+/* STELLE */
+.rating {
+    display: inline-block;
+    font-size: 0;
+    position: relative;
+    text-transform: capitalize;
+    padding: 0 50px 8%;
+    color: gray;
+    margin-top: 4.4vw;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.labelProfiloUtente:hover {
+    float: right;
+    padding: 0;
+    font-size: 50px;
+    cursor: pointer;
+
+}
+
+.spanProfiloUtente {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    height: 20px;
+    font-size: 1rem;
+    white-space: nowrap;
+    transition: 0.15s ease-out;
+    pointer-events: none;
+    letter-spacing: -2px;
+    transform: translateY(-50%);
+
+}
+
+.labelProfiloUtente:hover .spanProfiloUtente {
+    opacity: 1;
+    transform: none;
+    letter-spacing: 0;
+}
+
+.stellaPiena::before {
+    content: "\2605";
+    color: orange;
+    filter: drop-shadow(0 0 4px);
+    transform: rotate(.2turn);
+    transition-delay: calc(0.1 * attr(data-idx integer));
+    font-size: 50px !important;
+}
+
+.stellaVuota::before {
+    content: "\2606";
+    color: orange;
+    filter: drop-shadow(0 0 4px);
+    transform: rotate(.2turn);
+    transition-delay: calc(0.1 * attr(data-idx integer));
+    font-size: 50px !important;
+}
+
+#imgFilm {
+    float: left;
+    height: 12.4vw;
+    width: 8.7vw;
+}
+
+#nomeFilm1 {
+    float: left;
+    text-align: center;
+    margin-top: 5vw;
+    font-size: 2vw;
+    border-left: 10vw;
+}
+
+#nomeFilm2 {
+    float: left;
+    text-align: center;
+    margin-top: 5vw;
+    font-size: 2vw;
+    border-left: 10vw;
+}
+
+#nomeFilm3 {
+    float: left;
+    text-align: center;
+    margin-top: 5vw;
+    font-size: 2vw;
+    border-left: 10vw;
+}
+
+
+.statsUtenteMensile {
+    font-family: monospace;
+    font-size: 10vw;
+    color: #dd8b19;
+    margin-bottom: -3vw;
+}
+
+.statsUtente {
+    font-family: monospace;
+    font-size: 10vw;
+    color: #dd8b19;
+    margin-bottom: -3vw;
+}
+
+
+
+/*immagine profilo utente, username e descrizione*/
+.col {
+    text-align: center;
+}
+
+#descrizioneProfilo {
+    word-wrap: break-word;
+}
+
+/*CARDS DENTRO PROFILO UTENTE*/
+.card {
+    background-color: #000000 !important;
+}
+
+.card h5 {
+    color: #dd8b19;
+}

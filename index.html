@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: black !important;">
+            <!-- Container wrapper -->
+            <div class="container mt-3 mb-3">
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                    <!-- Navbar brand -->
+                    <div>
+                        <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                            <img src="img/logo.png" height="auto" width="230px" alt="MDB Logo" loading="lazy" />
+                        </a>
+                    </div>
+                    <!-- Left links -->
+                    <div>
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+                            <li class="nav-item mx-2">
+                                <a class="nav-link sezione" href="index.html">Biglietteria</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link sezione" href="classifica.html">Classifica</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link sezione" href="#">News</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link sezione" href="#">Coming soon</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <p style="color: black">asdasdasdasd</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div></div>
+                    <!-- Left links -->
+                </div>
+                <!-- Collapsible wrapper -->
+
+                <!-- Right elements -->
+                <div class="d-flex align-items-center">
+                    <!-- Notifications -->
+                    <div class="dropdown" style="display:none">
+                        <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
+                            role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item elemento-tendina" href="#">Some news</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item elemento-tendina" href="#">Another news</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item elemento-tendina" href="#">Something else here</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Avatar -->
+                    <div>
+                        <button id="btnLogin" style="display: block;" type="button" class="btn btn-outline-warning me-3" data-mdb-toggle="modal"
+                            data-mdb-target="#modalLogin">Login</button>
+                        <div id="containerImg" class="dropdown  me-3" style="display: none;">
+                            <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
+                                id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown"
+                                aria-expanded="false">
+                                <img id="imgProfilo" src="img/avatar/profilo1.png" class="rounded-circle" height="35"
+                                    alt="Black and White Portrait of a Man" loading="lazy" />
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                                <li>
+                                    <a id="clickProfilo" class="dropdown-item elemento-tendina" href="profilo.html">Profilo</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item elemento-tendina" href="#">Impostazioni</a>
+                                </li>
+                                <li>
+                                    <a id="btnLogout" class="dropdown-item elemento-tendina" href="#">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Icon -->
+                    <a class="text-reset" href="#">
+                        <img src="img/icona_carrello.png" alt="" width="77re">
+                    </a>
+                </div>
+                <!-- Right elements -->
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+    </header>
+
+
+    <!-- Carousel wrapper -->
+    <div id="carouselBasicExample" class="carousel slide carousel-fade mb-5" data-mdb-ride="carousel">
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+            <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="2"
+                aria-label="Slide 3"></button>
+            <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="3"
+                aria-label="Slide 4"></button>
+        </div>
+
+        <!-- Inner -->
+        <div class="carousel-inner">
+            <!-- Single item -->
+            <div class="carousel-item active">
+                <img src="img/black-adam.png" class="d-block w-100" alt="Sunset Over the City" />
+            </div>
+
+            <!-- Single item -->
+            <div class="carousel-item">
+                <img src="img/dampyr.jpeg" class="d-block w-100" alt="Canyon at Nigh" />
+            </div>
+
+            <!-- Single item -->
+            <div class="carousel-item">
+                <img src="img/wakanda-forever.jpg" class="d-block w-100" alt="Cliff Above a Stormy Sea" />
+            </div>
+            <div class="carousel-item">
+                <img src="img/halloween-ends.jpg" class="d-block w-100" alt="Cliff Above a Stormy Sea" />
+            </div>
+        </div>
+        <!-- Inner -->
+
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-mdb-target="#carouselBasicExample"
+            data-mdb-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-mdb-target="#carouselBasicExample"
+            data-mdb-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <!-- Carousel wrapper -->
+
+
+    <div class="container-film gy-5">
+        <div class="container" id="containerFilmSala">
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-BLACK text-muted GY-5">
+        <!-- Section: Social media -->
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+            <!-- Left -->
+            <div class="me-1 d-none d-lg-block">
+            </div>
+            <!-- Left -->
+
+            <!-- Right -->
+            <div>
+                <a href="" class="me-4 link-secondary">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="" class="me-4 link-secondary">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="" class="me-4 link-secondary">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <i class="fas fa-gem me-3 text-secondary"></i>Somnia Cinema
+                        </h6>
+                        <p>
+                            Dove i tuoi sogni diventano realtà
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Products
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Angular</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">React</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Useful links
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Pricing</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Help</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                        <p><i class="fas fa-home me-3 text-secondary"></i> Via Domodossola 42, Torino</p>
+                        <p>
+                            <i class="fas fa-envelope me-3 text-secondary"></i>
+                            info@somniacinema.com
+                        </p>
+                        <p><i class="fas fa-phone me-3 text-secondary"></i> +32 3920043667</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+            © 2022 Copyright:
+            <a class="text-reset" href="https://mdbootstrap.com/">SOMNIA CINEMA</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+
+        <!-- Modal Login -->
+        <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <div class="pb-5">
+                            <div id="formLogin">
+                                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                                <p class="text-white-50 mb-5">Inserire email e password!</p>
+    
+                                <div class="form-outline form-white mb-4">
+                                    <input type="email" id="emailLogin" class="form-control form-control-lg" />
+                                    <label class="form-label" for="emailLogin">Email</label>
+                                </div>
+    
+                                <div class="form-outline form-white mb-4">
+                                    <input type="password" id="passwordLogin" class="form-control form-control-lg"
+                                        autocomplete="off" />
+                                    <label class="form-label" for="passwordLogin">Password</label>
+                                </div>
+    
+                                <p class="small pb-lg-2"><a class="text-white-50" href="#!" data-mdb-toggle="modal"
+                                        data-mdb-target="#modalRecuperaPassword">Dimenticato la password?</a></p>
+    
+                                <button class="btn btn-outline-light btn-lg px-5" type="submit"
+                                    id="submitLogin">Login</button>
+    
+                                <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                                    <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                                    <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                                    <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="">Non hai un account? <a href="#!" class="text-white-50 fw-bold"
+                                    data-mdb-toggle="modal" data-mdb-target="#modalRegister">Registrati</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Modal Forgot Password -->
+        <div class="modal fade" id="modalRecuperaPassword" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <div class="pb-5">
+    
+                            <h2 class="fw-bold mb-2 text-uppercase">Recupera password</h2>
+                            <p class="text-white-50 mb-5">Inserire email!</p>
+    
+                            <div class="form-outline form-white mb-4">
+                                <input type="email" id="emailLogin" class="form-control form-control-lg" />
+                                <label class="form-label" for="emailLogin">Email</label>
+                            </div>
+    
+                            <button class="btn btn-outline-light btn-lg px-5" type="submit"
+                                id="submitRecupera">Recupera</button>
+    
+                            <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                                <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                                <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                                <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="">Non hai un account? <a href="#!" class="text-white-50 fw-bold"
+                                    data-mdb-toggle="modal" data-mdb-target="#modalRegister">Registrati</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Register Login -->
+        <div class="modal fade" id="modalRegister" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <div class="pb-5">
+                            <div id="formRegister">
+                                <h2 class="fw-bold mb-2 text-uppercase">Registrazione</h2>
+                                <p class="text-white-50 mb-5">Inserire i dati per completare la registrazione!</p>
+    
+                                <div class="form-outline form-white mb-4">
+                                    <input type="email" id="emailRegister" class="form-control form-control-lg" />
+                                    <label class="form-label" for="emailRegister">Email</label>
+                                </div>
+    
+                                <div class="form-outline form-white mb-4">
+                                    <input type="text" id="usernameRegister" class="form-control form-control-lg" />
+                                    <label class="form-label" for="usernameRegister">Username</label>
+                                </div>
+    
+                                <div class="form-outline form-white mb-4">
+                                    <input type="date" id="dateRegister" class="form-control form-control-lg" />
+                                    <label class="form-label" for="dateRegister">Data di nascità</label>
+                                </div>
+    
+                                <div class="form-outline form-white mb-4">
+                                    <input type="password" id="passwordRegister" class="form-control form-control-lg" />
+                                    <label class="form-label" for="passwordRegister">Password</label>
+                                </div>
+    
+                                <div class="form-outline form-white mb-4">
+                                    <input type="password" id="passwordRegisterConfirm"
+                                        class="form-control form-control-lg" />
+                                    <label class="form-label" for="passwordRegisterConfirm">Conferma Password</label>
+                                </div>
+    
+                                <div class="form-check text-start">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Accetti i termini e le condizioni.
+                                    </label>
+                                </div>
+    
+                                <div class="container mt-3">
+                                    <button class="btn btn-outline-light btn-lg px-5" type="submit"
+                                        id="submitRegister">Registrati</button>
+                                </div>
+                            </div>
+    
+                            <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                                <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                                <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                                <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                            </div>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- MODAL FORM SUCCESS LOGIN/REGISTER -->
+    <div class="modal fade" id="modalRisposta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body text-center rounded-4" id="modaleRisposta">
+                    <h5 class="modal-title" id="contentModalRisposta"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
