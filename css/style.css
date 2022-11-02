@@ -467,3 +467,26 @@ p.text span {
 #modalUpdateUsernameDescr input, textarea {
     color: #DFE0E0!important;
 }
+
+
+/* NEWS OFFERTE*/
+
+.titoloNews{
+    color: #F18E00;
+    
+}
+
+h1{
+    font-size: 7vw !important;
+    text-align: center;
+    color: white;
+}
+
+
+.descrizione{
+    color: white
+}
+
+.ImgCards{
+    align-items: center !important;
+}
