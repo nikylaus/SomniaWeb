@@ -24,7 +24,7 @@ $(document).ready(function () {
                             }
                             result += '</div><div class="row mt-5">';
                         }
-                        result += '<div class="col-md"><div class="text-center"><a href="#"><img src="' + film.img + '"alt="" width="70%" class="content"></a><div class="mt-4"><a href="#" class="titolo-film">' + film.nome + '</a><p class="genere">' + film.genere + '</p></div></div></div>'
+                        result += '<div class="col-md"><div class="text-center"><a href="#"><img data-id="' + film.id + '" src="' + film.img + '"alt="" width="70%" class="content"></a><div class="mt-4"><a href="#" class="titolo-film">' + film.nome + '</a><p class="genere">' + film.genere + '</p></div></div></div>'
                     }
                     counter++;
                 }
@@ -42,447 +42,497 @@ $(document).ready(function () {
         });
         return listaFilm;
     }
+
+    //reindirizzamento alla pagine film dopo aver clickato sul film nella homepage
+    $('body').on("click", ".content", function () {
+        let infoFilm = $(this).attr("data-id");
+        $.cookie("filmId", infoFilm);
+        console.log($.cookie("filmId"));
+        window.location.pathname = "film.html"
+    });
+
+    (async()=>{
+        if(window.location.pathname == "/film.html"){
+            let idFilm = $.cookie("filmId");
+            let filmInfo = await findFilmById(idFilm)
+            $('#img-pagina-film').attr("src", filmInfo.img);
+            $('#titolo-pagina-film').append(filmInfo.nome);
+            $('#descrizione-pagina-film').append(filmInfo.descrizione);
+            $('#regia-pagina-film').append(filmInfo.regia);
+            $('#cast-pagina-film').append(filmInfo.cast);
+            $('#img-banner1-film').attr("src", filmInfo.img1);
+            $('#img-banner2-film').attr("src", filmInfo.img2);
+            $('#img-banner3-film').attr("src", filmInfo.img3);
+            $('#url-pagina-film').attr("src", filmInfo.urlTrailer + '?rel=0&modestbranding=1&autohide=1&mute=0&showinfo=0&controls=1&autoplay=1');
+        }
+    })(); 
+
+    async function findFilmById(idFilm) {
+        let info;
+        await $.get('http://localhost:8080/api/film/' + idFilm, function (response) {
+            info = {
+                id: response.id,
+                nome: response.nome,
+                descrizione: response.descrizione,
+                img: response.img,
+                regia: response.regia,
+                cast: response.cast,
+                genere: response.genere,
+                img1: response.imgBannerUno,
+                img2: response.imgBannerDue,
+                img3: response.imgBannerTre,
+                etaMinima: response.etaMinima,
+                anno: response.anno,
+                durata: response.durata,
+                urlTrailer: response.urlTrailer,
+                condizione: response.condizione
+            }
+        });
+        return info;
+    }
     //FINE HOMEPAGE FILM////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
     let JWTHeader = {
-        Authorization: 'Bearer ' + $.cookie('jwt')
-    }
+            Authorization: 'Bearer ' + $.cookie('jwt')
+        }
 
     let info = null;
-    let infoOspite = null;
-    let jwtCookie = $.cookie("jwt");
+        let infoOspite = null;
+        let jwtCookie = $.cookie("jwt");
 
-    //imposta i dettagli nella pagina utente
-    (async () => {
-        if (window.location.href.indexOf("/profilo.html") > -1) {
-            $.cookie("username", new URLSearchParams(window.location.search))
-            infoOspite = await getUserInfoUsername($.cookie("username").substring(0, $.cookie("username").length - 1))
-            impostaPaginaUtente();
-            if(checkCookieTime()){
-                checkModificaProfiloPossibile();
-            }  
-        } else {
-            info = $.cookie("profilo")
-            if(info != null & checkCookieTime()){
-                impostaProfilo(info.email);
-            }
-        }
-    })();
-
-
-
-    //CHECK ATTRVAERSO JWT SE L'UNTENTE è LOGGATO + EXPERATION DATE////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    function checkCookieTime() {
-        if (jwtCookie != null && jwtCookie != "") {
-            let payloadData = extractPayload(jwtCookie);
-            let jwtData = new Date(payloadData[1] * 1000);
-            let data = new Date();
-            if (jwtData.getTime() > data.getTime()) {
-                if (location.pathname == '/profilo.html') {
+        //imposta i dettagli nella pagina utente
+        (async () => {
+            if (window.location.href.indexOf("/profilo.html") > -1) {
+                $.cookie("username", new URLSearchParams(window.location.search))
+                infoOspite = await getUserInfoUsername($.cookie("username").substring(0, $.cookie("username").length - 1))
+                impostaPaginaUtente();
+                if (checkCookieTime()) {
+                    checkModificaProfiloPossibile();
                 }
-                impostaProfiloEmail(payloadData[0]);
-                return true;
             } else {
+                info = $.cookie("profilo")
+                if (info != null & checkCookieTime()) {
+                    impostaProfilo(info.email);
+                }
+            }
+        })();
+
+
+
+        //CHECK ATTRVAERSO JWT SE L'UNTENTE è LOGGATO + EXPERATION DATE////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        function checkCookieTime() {
+            if (jwtCookie != null && jwtCookie != "") {
+                let payloadData = extractPayload(jwtCookie);
+                let jwtData = new Date(payloadData[1] * 1000);
+                let data = new Date();
+                if (jwtData.getTime() > data.getTime()) {
+                    if (location.pathname == '/profilo.html') {
+                    }
+                    impostaProfiloEmail(payloadData[0]);
+                    return true;
+                } else {
+                    $.cookie('jwt', "");
+                    info = null;
+                    return false;
+                }
+            } else {
+                $('#btnLogin').css("display", "block")
                 $.cookie('jwt', "");
                 info = null;
                 return false;
             }
-        } else {
-            $('#btnLogin').css("display", "block")
-            $.cookie('jwt', "");
+        };
+
+        async function impostaProfiloEmail(email) {
+            info = await getUserInfo(email);
+            $('#btnLogin').hide()
+            $('#imgProfilo').attr("src", "img/avatar/" + info.img)
+            $('#containerImg').show();
+        }
+
+        async function impostaProfilo() {
+            let infoDentro = JSON.parse(info);
+            $('#btnLogin').hide()
+            $('#imgProfilo').attr("src", "img/avatar/" + infoDentro.img)
+            $('#containerImg').show();
+        }
+
+        async function getUserInfoUsername(username) {
+            await $.get('http://localhost:8080/api/username/' + username, function (response) {
+                let uInfo = {
+                    id: response.id,
+                    username: response.username,
+                    email: response.email,
+                    img: response.img,
+                    descrizioneProfilo: response.descrizioneProfilo,
+                    dataIscrizione: response.dataIscrizione,
+                    dataNascita: response.dataNascita,
+                    prenotazioni: response.prenotazioni,
+                    ruoli: response.ruoli
+                };
+                $.cookie("profiloUtente", JSON.stringify(uInfo));
+                //alert(JSON.parse($.cookie("profilo")))
+            })
+            return JSON.parse($.cookie("profiloUtente"));
+        }
+
+        async function getUserInfo(email) {
+            await $.get('http://localhost:8080/api/email/' + email, function (response) {
+                let uInfo = {
+                    id: response.id,
+                    username: response.username,
+                    email: response.email,
+                    img: response.img,
+                    descrizioneProfilo: response.descrizioneProfilo,
+                    dataIscrizione: response.dataIscrizione,
+                    dataNascita: response.dataNascita,
+                    prenotazioni: response.prenotazioni,
+                    ruoli: response.ruoli
+                };
+                $.cookie("profilo", JSON.stringify(uInfo));
+                //alert(JSON.parse($.cookie("profilo")))
+            })
+            return JSON.parse($.cookie("profilo"));
+        }
+
+        //imposta il nome del profilo utente nell url e portalo alla pagina profilo
+        $('#clickProfilo').click(function () {
+            $('#clickProfilo').attr("href", "profilo.html?" + info.username)
+        });
+
+        //esegue logout
+        $('#btnLogout').click(function () {
+            let payloadData = extractPayload($.cookie("jwt"));
+            let jwtData = new Date(payloadData[1] * 1000);
+            let data = new Date();
+            if (jwtData.getTime() > data.getTime()) {
+                logout();
+            }
+        })
+
+        function logout() {
+            $('#containerImg').hide();
+            $('#btnLogin').show()
+            $.cookie("profilo", "")
+            $.cookie("jwt", "")
             info = null;
-            return false;
+            updateHeader();
+            location.reload();
         }
-    }; 
+        //FINE CHECK ATTRVAERSO JWT SE L'UNTENTE è LOGGATO + EXPERATION DATE////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    async function impostaProfiloEmail(email) {
-        info = await getUserInfo(email);
-        $('#btnLogin').hide()
-        $('#imgProfilo').attr("src", "img/avatar/" + info.img)
-        $('#containerImg').show();
-    }
 
-    async function impostaProfilo() {
-        let infoDentro = JSON.parse(info);
-        $('#btnLogin').hide()
-        $('#imgProfilo').attr("src", "img/avatar/" + infoDentro.img)
-        $('#containerImg').show();
-    }
 
-    async function getUserInfoUsername(username) {
-        await $.get('http://localhost:8080/api/username/' + username, function (response) {
-            let uInfo = {
-                id: response.id,
-                username: response.username,
-                email: response.email,
-                img: response.img,
-                descrizioneProfilo: response.descrizioneProfilo,
-                dataIscrizione: response.dataIscrizione,
-                dataNascita: response.dataNascita,
-                prenotazioni: response.prenotazioni,
-                ruoli: response.ruoli
-            };
-            $.cookie("profiloUtente", JSON.stringify(uInfo));
-            //alert(JSON.parse($.cookie("profilo")))
-        })
-        return JSON.parse($.cookie("profiloUtente"));
-    }
-
-    async function getUserInfo(email) {
-        await $.get('http://localhost:8080/api/email/' + email, function (response) {
-            let uInfo = {
-                id: response.id,
-                username: response.username,
-                email: response.email,
-                img: response.img,
-                descrizioneProfilo: response.descrizioneProfilo,
-                dataIscrizione: response.dataIscrizione,
-                dataNascita: response.dataNascita,
-                prenotazioni: response.prenotazioni,
-                ruoli: response.ruoli
-            };
-            $.cookie("profilo", JSON.stringify(uInfo));
-            //alert(JSON.parse($.cookie("profilo")))
-        })
-        return JSON.parse($.cookie("profilo"));
-    }
-
-    //imposta il nome del profilo utente nell url e portalo alla pagina profilo
-    $('#clickProfilo').click(function () {
-        $('#clickProfilo').attr("href", "profilo.html?" + info.username)
-    });
-
-    //esegue logout
-    $('#btnLogout').click(function () {
-        let payloadData = extractPayload($.cookie("jwt"));
-        let jwtData = new Date(payloadData[1] * 1000);
-        let data = new Date();
-        if (jwtData.getTime() > data.getTime()) {
-            logout();
+        //PROFILO UTENTE////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        async function impostaPaginaUtente() {
+            $('#imgProfiloUtente').attr("src", "img/avatar/" + infoOspite.img);
+            $('#username').append('@' + infoOspite.username);
+            $('#descrizioneProfilo').append(infoOspite.descrizioneProfilo);
+            let datiFilm = await infoFilmUtente();
+            $('#filmValutati').append(datiFilm[2]);
+            $('#vistiDiRecente').append(datiFilm[0]);
+            $('#vistiTotale').append(datiFilm[1]);
+            let result = await findLastFilms();
+            $('#valutazioniUtenti').append(result);
         }
-    })
 
-    function logout() {
-        $('#containerImg').hide();
-        $('#btnLogin').show()
-        $.cookie("profilo", "")
-        $.cookie("jwt", "")
-        info = null;
-        updateHeader();
-        location.reload();
-    }
-    //FINE CHECK ATTRVAERSO JWT SE L'UNTENTE è LOGGATO + EXPERATION DATE////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        function infoFilmUtente() {
+            let counterRecenti = 0;
+            let counterAllTime = infoOspite.prenotazioni.length;
+            let valutazioni = 0;
+            const date = new Date();
 
-
-
-    //PROFILO UTENTE////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    async function impostaPaginaUtente() {
-        $('#imgProfiloUtente').attr("src", "img/avatar/" + infoOspite.img);
-        $('#username').append('@' + infoOspite.username);
-        $('#descrizioneProfilo').append(infoOspite.descrizioneProfilo);
-        let datiFilm = await infoFilmUtente();
-        $('#filmValutati').append(datiFilm[2]);
-        $('#vistiDiRecente').append(datiFilm[0]);
-        $('#vistiTotale').append(datiFilm[1]);
-        let result = await findLastFilms();
-        $('#valutazioniUtenti').append(result);
-    }
-
-    function infoFilmUtente() {
-        let counterRecenti = 0;
-        let counterAllTime = infoOspite.prenotazioni.length;
-        let valutazioni = 0;
-        const date = new Date();
-
-        for (let prenotazione of infoOspite.prenotazioni) {
-            if (prenotazione.valutazione > 0) {
-                valutazioni++;
+            for (let prenotazione of infoOspite.prenotazioni) {
+                if (prenotazione.valutazione > 0) {
+                    valutazioni++;
+                }
             }
-        }
 
-        for (let prenotazione of infoOspite.prenotazioni) {
-            let responseDate = new Date(prenotazione.data).getMonth();
-            if (responseDate == date.getMonth()) {
-                counterRecenti++;
+            for (let prenotazione of infoOspite.prenotazioni) {
+                let responseDate = new Date(prenotazione.data).getMonth();
+                if (responseDate == date.getMonth()) {
+                    counterRecenti++;
+                }
             }
+
+
+            return [counterRecenti, counterAllTime, valutazioni];
         }
 
-
-        return [counterRecenti, counterAllTime, valutazioni];
-    }
-
-    async function findLastFilms() {
-        let c = 0;
-        let result = '';
-        for (let prenotazione of infoOspite.prenotazioni) {
-            if (c < 3) {
-                let idFilm = await findFilmId(prenotazione.id);
-                let film = await getFilmById(idFilm);
-                //result += '<div class="row mt-2"><div class="colProfiloUtente col-4 mt-5"><img id="imgFilm" src="' + film.img + '"></div><div class="colProfiloUtente col-3"><p id="nomeFilm1" class="ms-3">' + film.nome + '</p></div>'
-                //result += giveValutazione(prenotazione.valutazione)
-                //result += '<div class="col-1"><p>'+film.descrizione+ '</p></div></div>'
-                result += '<div class="col-lg my-3"><div class="card text-center"><img src="' + film.img + '" class="card-img-top"/><div class="card-body"><h5 class="card-title">' + film.nome + '</h5><p class="card-text">' + film.descrizione + '</p>'
-                result += giveValutazione(prenotazione.valutazione);
-                result += '</div></div></div>'
+        async function findLastFilms() {
+            let c = 0;
+            let result = '';
+            for (let prenotazione of infoOspite.prenotazioni) {
+                if (c < 3) {
+                    let idFilm = await findFilmId(prenotazione.id);
+                    let film = await getFilmById(idFilm);
+                    //result += '<div class="row mt-2"><div class="colProfiloUtente col-4 mt-5"><img id="imgFilm" src="' + film.img + '"></div><div class="colProfiloUtente col-3"><p id="nomeFilm1" class="ms-3">' + film.nome + '</p></div>'
+                    //result += giveValutazione(prenotazione.valutazione)
+                    //result += '<div class="col-1"><p>'+film.descrizione+ '</p></div></div>'
+                    result += '<div class="col-lg my-3"><div class="card text-center"><img src="' + film.img + '" class="card-img-top"/><div class="card-body"><h5 class="card-title">' + film.nome + '</h5><p class="card-text">' + film.descrizione + '</p>'
+                    result += giveValutazione(prenotazione.valutazione);
+                    result += '</div></div></div>'
+                }
+                c++;
             }
-            c++;
+            return result;
         }
-        return result;
-    }
 
-    async function findFilmId(idPrenotazione) {
-        listaFilm = await riempiListaFilm();
-        for (let film of listaFilm) {
-            if (film.proiezioni != null) {
-                for (let proiezione of film.proiezioni) {
-                    if (proiezione.prenotazioni != null) {
-                        for (let prenotazione of proiezione.prenotazioni) {
-                            if (prenotazione.id == idPrenotazione) {
-                                return film.id;
+        async function findFilmId(idPrenotazione) {
+            listaFilm = await riempiListaFilm();
+            for (let film of listaFilm) {
+                if (film.proiezioni != null) {
+                    for (let proiezione of film.proiezioni) {
+                        if (proiezione.prenotazioni != null) {
+                            for (let prenotazione of proiezione.prenotazioni) {
+                                if (prenotazione.id == idPrenotazione) {
+                                    return film.id;
+                                }
                             }
                         }
                     }
                 }
             }
         }
-    }
 
-    async function getFilmById(id) {
-        let filmInfo = null;
-        await $.get('http://localhost:8080/api/film/' + id, function (response) {
-            filmInfo = {
-                nome: response.nome,
-                img: response.img,
-                descrizione: response.descrizione
-            }
-        });
-        return filmInfo;
-    }
-
-    //mostra le immagini di profilo disponibili
-    $('#imgProfiloUtente').click(function (event) {
-        event.preventDefault();
-        if (checkModificaProfiloPossibile()) {
-            $('#modaleRisposta').empty();
-            let result = '<h3 class="modal-title" id="contentModalRisposta">Selezione l\'immagine di profilo</h3>'
-            for (let i = 1; i < 12; i++) {
-                result += '<a href=""><img class="cambiaImgProfilo immaginiProfiloUtenti" data-img="profilo' + i + '.png" src="img/avatar/profilo' + i + '.png" class="rounded-circle" height="250"/></a>'
-            }
-            $('#modaleRisposta').append(result);
-            $('#modalRisposta').modal('toggle');
-        }
-    });
-
-    //imposta la nuova immagine di profilo
-    $(document).on("click", ".cambiaImgProfilo", async function (event) {
-        event.preventDefault();
-        if (checkModificaProfiloPossibile()) {
-            let img = $(this).attr("data-img");
-            let params = {
-                immagine: img
-            }
-            console.log(JSON.stringify(params));
-            await $.ajax({
-                url: 'http://localhost:8080/user/api/account/update/immagine/' + info.id,
-                contentType: 'application/json;charset=UTF-8',
-                type: 'PUT',
-                data: JSON.stringify(params),
-                success: async function (data) {
-                    await modalRisposta("Immagine cambiata");
-                },
-                error: async function () {
-                    await modalRisposta("Immagine non cambiata, provare piu' tardi.");
+        async function getFilmById(id) {
+            let filmInfo = null;
+            await $.get('http://localhost:8080/api/film/' + id, function (response) {
+                filmInfo = {
+                    nome: response.nome,
+                    img: response.img,
+                    descrizione: response.descrizione
                 }
             });
-            location.reload();
+            return filmInfo;
         }
-    });
-    //prova a vedere se l'utente che modifica il profilo è lo stesso utente del profilo che si visualizza
-    function checkModificaProfiloPossibile() {
-        info = $.cookie("profilo");
-        if(info != null & info != "" & infoOspite != null){
-            info = JSON.parse($.cookie("profilo"));
-            if (null != info) {
-                console.log(info.username, infoOspite.username)
-                if (info.username == infoOspite.username) {
-                    $('#btnModificaDesc').css("display", "inline")
-                    return true;
+
+        //mostra le immagini di profilo disponibili
+        $('#imgProfiloUtente').click(function (event) {
+            event.preventDefault();
+            if (checkModificaProfiloPossibile()) {
+                $('#modaleRisposta').empty();
+                let result = '<h3 class="modal-title" id="contentModalRisposta">Selezione l\'immagine di profilo</h3>'
+                for (let i = 1; i < 12; i++) {
+                    result += '<a href=""><img class="cambiaImgProfilo immaginiProfiloUtenti" data-img="profilo' + i + '.png" src="img/avatar/profilo' + i + '.png" class="rounded-circle" height="250"/></a>'
                 }
+                $('#modaleRisposta').append(result);
+                $('#modalRisposta').modal('toggle');
             }
-        }   
-        return false;
-    };
+        });
 
-    $('#btnSendModificaProfilo').click(async function(){
-        let params = {
-            username: $('#cambiaUsername').val(),
-            descrizione: $('#cambiaDescrizione').val()
-        }
-        $('#modalUpdateUsernameDescr').modal("toggle");
-        await $.ajax({
-            url: 'http://localhost:8080/user/api/account/update/usernamedescr/' + info.id,
-            contentType: 'application/json;charset=UTF-8',
-            type: 'PUT',
-            data: JSON.stringify(params),
-            success: function (data) {
-                modalRisposta("Modifiche effettuate");
-                info.username = $('#cambiaUsername').val();
-                console.log(info.username)
-                window.location = "http://127.0.0.1:5500/profilo.html?"+ $('#cambiaUsername').val();
-            },
-            error: function () {
-                modalRisposta("Qualcosa è andato storto");
-            }
-        });       
-    });
-
-    $('body').on("click", "#btnModificaDesc", function(){
-        $('#cambiaUsername').val(info.username);
-        $('#cambiaDescrizione').val(info.descrizioneProfilo);
-        $('#modalUpdateUsernameDescr').modal("toggle");
-    });
-
-    $('body').on('mouseenter', ".immaginiProfiloUtenti", function () {
-        $(this).addClass('transition');
-    });
-    $('body').on('mouseleave', ".immaginiProfiloUtenti", function () {
-        $(this).removeClass('transition');
-    });
-    //FINE PROFILO UTENTE////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    //CLASSIFICA UTENTI////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    let topAccountMese = new Map();
-    let topAccountAt = new Map();
-    let utenti = null;
-    //se sei sulla pagina della classifica
-    if (location.pathname == '/classifica.html') {
-        //popoliamo mappa to paccount mese e all time
-        $.get('http://localhost:8080/api/account', function (response) {
-            utenti = response;
-            for (account of response) {
-                if (topAccountAt.has(account.id)) {
-                    topAccountAt[account.id] = account.prenotazioni.length;
-                } else {
-                    topAccountAt.set(parseInt(account.id), account.prenotazioni.length);
+        //imposta la nuova immagine di profilo
+        $(document).on("click", ".cambiaImgProfilo", async function (event) {
+            event.preventDefault();
+            if (checkModificaProfiloPossibile()) {
+                let img = $(this).attr("data-img");
+                let params = {
+                    immagine: img
                 }
+                console.log(JSON.stringify(params));
+                await $.ajax({
+                    url: 'http://localhost:8080/user/api/account/update/immagine/' + info.id,
+                    contentType: 'application/json;charset=UTF-8',
+                    type: 'PUT',
+                    data: JSON.stringify(params),
+                    success: async function (data) {
+                        await modalRisposta("Immagine cambiata");
+                    },
+                    error: async function () {
+                        await modalRisposta("Immagine non cambiata, provare piu' tardi.");
+                    }
+                });
+                location.reload();
             }
-            const date = new Date();
-            for (account of response) {
-                for (prenotazione of account.prenotazioni) {
-                    let responseDate = new Date(prenotazione.data).getMonth();
-                    if (responseDate == date.getMonth() && topAccountMese.has(account.id)) {
-                        topAccountMese.set(account.id, topAccountMese.get(account.id) + 1);
-                    } else if (!topAccountMese.has(account.id) && responseDate == date.getMonth()) {
-                        topAccountMese.set(parseInt(account.id), 1);
+        });
+        //prova a vedere se l'utente che modifica il profilo è lo stesso utente del profilo che si visualizza
+        function checkModificaProfiloPossibile() {
+            info = $.cookie("profilo");
+            if (info != null & info != "" & infoOspite != null) {
+                info = JSON.parse($.cookie("profilo"));
+                if (null != info) {
+                    console.log(info.username, infoOspite.username)
+                    if (info.username == infoOspite.username) {
+                        $('#btnModificaDesc').css("display", "inline")
+                        return true;
                     }
                 }
             }
-            topAccountAt = new Map([...topAccountAt].sort((a, b) => b[1] - a[1]));
-            topAccountMese = new Map([...topAccountMese].sort((a, b) => b[1] - a[1]));
-            //chiamata al metodo per inserire account  mnesili nella tabella al aprirsi della pagina
-            inserimentoUtentiClassifica(topAccountAt);
-        })
+            return false;
+        };
 
-        $("#btnClassificaMensile").click(function () {
-            inserimentoUtentiClassifica(topAccountMese);
-        })
-        $("#btnClassificaAt").click(function () {
-            inserimentoUtentiClassifica(topAccountAt);
-        })
-
-
-        //creaiamo la lista degli utenti e la inseriamo nella tabella  (mappa account mensili/alltime)
-        function inserimentoUtentiClassifica(accountMap) {
-            $("#tableBodyClassifica tr").remove();
-            let result = null;
-            let counter = 1;
-            //let accounts = Array.from(accountMap.keys());
-            for (let [key, value] of accountMap) {
-                let utente = getUtente(key);
-                result += '<tr><td><span class="badge badge-success rounded-pill d-inline">' + counter + '</span></td><td><div class="d-flex align-items-center">'
-                result += '<img src="img/avatar/' + utente.img + '" alt=""style="width: 45px; height: 45px" class="rounded-circle" /><div class="ms-3"><p class="fw-bold mb-1">' + utente.username + '</p></div></div></td>'
-                result += '<td><p class="fw-normal mb-1">' + value + '</p></td><td><p>' + utente.dataIscrizione + '</p></td><td><button type="button" class="btn btn-link btn-sm btn-rounded">Vedi</button></td></tr>'
-                counter++;
+        $('#btnSendModificaProfilo').click(async function () {
+            let params = {
+                username: $('#cambiaUsername').val(),
+                descrizione: $('#cambiaDescrizione').val()
             }
-            $('#tableBodyClassifica').append(result);
-        }
+            $('#modalUpdateUsernameDescr').modal("toggle");
+            await $.ajax({
+                url: 'http://localhost:8080/user/api/account/update/usernamedescr/' + info.id,
+                contentType: 'application/json;charset=UTF-8',
+                type: 'PUT',
+                data: JSON.stringify(params),
+                success: function (data) {
+                    modalRisposta("Modifiche effettuate");
+                    info.username = $('#cambiaUsername').val();
+                    console.log(info.username)
+                    window.location = "http://127.0.0.1:5500/profilo.html?" + $('#cambiaUsername').val();
+                },
+                error: function () {
+                    modalRisposta("Qualcosa è andato storto");
+                }
+            });
+        });
+
+        $('body').on("click", "#btnModificaDesc", function () {
+            $('#cambiaUsername').val(info.username);
+            $('#cambiaDescrizione').val(info.descrizioneProfilo);
+            $('#modalUpdateUsernameDescr').modal("toggle");
+        });
+
+        $('body').on('mouseenter', ".immaginiProfiloUtenti", function () {
+            $(this).addClass('transition');
+        });
+        $('body').on('mouseleave', ".immaginiProfiloUtenti", function () {
+            $(this).removeClass('transition');
+        });
+        //FINE PROFILO UTENTE////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //CLASSIFICA UTENTI////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        let topAccountMese = new Map();
+        let topAccountAt = new Map();
+        let utenti = null;
+        //se sei sulla pagina della classifica
+        if (location.pathname == '/classifica.html') {
+            //popoliamo mappa to paccount mese e all time
+            $.get('http://localhost:8080/api/account', function (response) {
+                utenti = response;
+                for (account of response) {
+                    if (topAccountAt.has(account.id)) {
+                        topAccountAt[account.id] = account.prenotazioni.length;
+                    } else {
+                        topAccountAt.set(parseInt(account.id), account.prenotazioni.length);
+                    }
+                }
+                const date = new Date();
+                for (account of response) {
+                    for (prenotazione of account.prenotazioni) {
+                        let responseDate = new Date(prenotazione.data).getMonth();
+                        if (responseDate == date.getMonth() && topAccountMese.has(account.id)) {
+                            topAccountMese.set(account.id, topAccountMese.get(account.id) + 1);
+                        } else if (!topAccountMese.has(account.id) && responseDate == date.getMonth()) {
+                            topAccountMese.set(parseInt(account.id), 1);
+                        }
+                    }
+                }
+                topAccountAt = new Map([...topAccountAt].sort((a, b) => b[1] - a[1]));
+                topAccountMese = new Map([...topAccountMese].sort((a, b) => b[1] - a[1]));
+                //chiamata al metodo per inserire account  mnesili nella tabella al aprirsi della pagina
+                inserimentoUtentiClassifica(topAccountAt);
+            })
+
+            $("#btnClassificaMensile").click(function () {
+                inserimentoUtentiClassifica(topAccountMese);
+            })
+            $("#btnClassificaAt").click(function () {
+                inserimentoUtentiClassifica(topAccountAt);
+            })
 
 
-        //attraverso un id andiamo a prenderci un specifico oggetto Utente
-        function getUtente(idUtente) {
-            for (utente of utenti) {
-                if (utente.id == idUtente) {
-                    return utente;
+            //creaiamo la lista degli utenti e la inseriamo nella tabella  (mappa account mensili/alltime)
+            function inserimentoUtentiClassifica(accountMap) {
+                $("#tableBodyClassifica tr").remove();
+                let result = null;
+                let counter = 1;
+                //let accounts = Array.from(accountMap.keys());
+                for (let [key, value] of accountMap) {
+                    let utente = getUtente(key);
+                    result += '<tr><td><span class="badge badge-success rounded-pill d-inline">' + counter + '</span></td><td><div class="d-flex align-items-center">'
+                    result += '<img src="img/avatar/' + utente.img + '" alt=""style="width: 45px; height: 45px" class="rounded-circle" /><div class="ms-3"><p class="fw-bold mb-1">' + utente.username + '</p></div></div></td>'
+                    result += '<td><p class="fw-normal mb-1">' + value + '</p></td><td><p>' + utente.dataIscrizione + '</p></td><td><button type="button" class="btn btn-link btn-sm btn-rounded">Vedi</button></td></tr>'
+                    counter++;
+                }
+                $('#tableBodyClassifica').append(result);
+            }
+
+
+            //attraverso un id andiamo a prenderci un specifico oggetto Utente
+            function getUtente(idUtente) {
+                for (utente of utenti) {
+                    if (utente.id == idUtente) {
+                        return utente;
+                    }
                 }
             }
         }
-    }
-    //FINE CLASSIFICA UTENTI////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //FINE CLASSIFICA UTENTI////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
 
 
 
-    //REGISTRAZIONE////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    $('#submitRegister').click(function () {
-        let email = $('#emailRegister').val();
-        let username = $('#usernameRegister').val();
-        let dataNascita = $('#dateRegister').val();
-        let pass = $('#passwordRegister').val();
-        let params = {
-            email: email,
-            username: username,
-            dataNascita: dataNascita,
-            pass: pass
-        }
-        $.ajax({
-            url: 'http://localhost:8080/api/auth/signup',
-            contentType: 'application/json;charset=UTF-8',
-            type: 'POST',
-            data: JSON.stringify(params),
-            success: function () {
-                resetForm("registerForm");
-                $('#modalRegister').modal('hide');
-                modalRisposta("Benvenuto su Somnia!")
-            },
-            error: function () {
-
+        //REGISTRAZIONE////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $('#submitRegister').click(function () {
+            let email = $('#emailRegister').val();
+            let username = $('#usernameRegister').val();
+            let dataNascita = $('#dateRegister').val();
+            let pass = $('#passwordRegister').val();
+            let params = {
+                email: email,
+                username: username,
+                dataNascita: dataNascita,
+                pass: pass
             }
+            $.ajax({
+                url: 'http://localhost:8080/api/auth/signup',
+                contentType: 'application/json;charset=UTF-8',
+                type: 'POST',
+                data: JSON.stringify(params),
+                success: function () {
+                    resetForm("registerForm");
+                    $('#modalRegister').modal('hide');
+                    modalRisposta("Benvenuto su Somnia!")
+                },
+                error: function () {
 
+                }
+
+            })
         })
-    })
 
-    $('#submitLogin').click(function () {
-        let email = $('#emailLogin').val();
-        let pass = $('#passwordLogin').val();
-        let params = {
-            email: email,
-            pass: pass
-        }
-        $.ajax({
-            url: 'http://localhost:8080/api/auth/login',
-            contentType: 'application/json;charset=UTF-8',
-            type: 'POST',
-            data: JSON.stringify(params),
-            success: function (response) {
-                checkModificaProfiloPossibile();
-                resetForm("formLogin");
-                $('#modalLogin').modal('toggle');
-                let token = response.accessToken;
-                console.log("token ricevuto = " + token);
-                $.cookie("jwt", token);
-                JWTHeader = updateHeader();
-                impostaProfiloEmail(extractPayload(token)[0]);
-                modalRisposta("Benvenuto su Somnia!")
-                //location.reload(true);
-            },
-            error: function () {
-                $('modalLogin').modal('hide');
-                modalRisposta("Email o password errati!")
+        $('#submitLogin').click(function () {
+            let email = $('#emailLogin').val();
+            let pass = $('#passwordLogin').val();
+            let params = {
+                email: email,
+                pass: pass
             }
+            $.ajax({
+                url: 'http://localhost:8080/api/auth/login',
+                contentType: 'application/json;charset=UTF-8',
+                type: 'POST',
+                data: JSON.stringify(params),
+                success: function (response) {
+                    checkModificaProfiloPossibile();
+                    resetForm("formLogin");
+                    $('#modalLogin').modal('toggle');
+                    let token = response.accessToken;
+                    console.log("token ricevuto = " + token);
+                    $.cookie("jwt", token);
+                    JWTHeader = updateHeader();
+                    impostaProfiloEmail(extractPayload(token)[0]);
+                    modalRisposta("Benvenuto su Somnia!")
+                    //location.reload(true);
+                },
+                error: function () {
+                    $('modalLogin').modal('hide');
+                    modalRisposta("Email o password errati!")
+                }
+            })
         })
-    })
 
 
 
@@ -490,39 +540,39 @@ $(document).ready(function () {
 
 
 
-    function modalRisposta(risposta) {
-        $('#contentModalRisposta').empty();
-        $('#contentModalRisposta').append(risposta);
-        $('#modalRisposta').modal('toggle');
-        setTimeout(function () {
-            $('#modalRisposta').modal('hide')
-        }, 1500);
-    }
-
-
-    //update jwtHeader
-    function updateHeader() {
-        return {
-            Authorization: 'Bearer ' + $.cookie('jwt')
+        function modalRisposta(risposta) {
+            $('#contentModalRisposta').empty();
+            $('#contentModalRisposta').append(risposta);
+            $('#modalRisposta').modal('toggle');
+            setTimeout(function () {
+                $('#modalRisposta').modal('hide')
+            }, 1500);
         }
-    }
-
-    //reset form di register/login
-    function resetForm(formName) {
-        $('#' + formName).trigger('reset');
-    }
 
 
+        //update jwtHeader
+        function updateHeader() {
+            return {
+                Authorization: 'Bearer ' + $.cookie('jwt')
+            }
+        }
+
+        //reset form di register/login
+        function resetForm(formName) {
+            $('#' + formName).trigger('reset');
+        }
 
 
 
-    //SCHEDA FILM////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        //SCHEDA FILM////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-    //FINE SCHEDA FILM////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //FINE SCHEDA FILM////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-});
+    });
 
 function extractPayload(token) {
     let array = token.split(".");
@@ -555,7 +605,7 @@ function giveValutazione(valutazione) {
 
 
 
-/*
+
 //PRENOTAZIONE
 const container = document.querySelector('.container1');
 const seats = document.querySelectorAll('.row .seat:not(.occupied)');
@@ -587,7 +637,7 @@ container.addEventListener('click', e => {
     }
     updateSelectedCount();
 });
-*/
+
 
 
 

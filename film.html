@@ -15,7 +15,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script src="js/script.js"></script>
 </head>
 
 <body>
@@ -42,10 +41,10 @@
                     <div>
                         <ul class="navbar-nav mb-2 mb-lg-0">
                             <li class="nav-item mx-2">
-                                <a class="nav-link sezione" href="#">Biglietteria</a>
+                                <a class="nav-link sezione" href="index.html">Biglietteria</a>
                             </li>
                             <li class="nav-item mx-2">
-                                <a class="nav-link sezione" href="#">Classifica</a>
+                                <a class="nav-link sezione" href="classifica.html">Classifica</a>
                             </li>
                             <li class="nav-item mx-2">
                                 <a class="nav-link sezione" href="#">News</a>
@@ -54,7 +53,7 @@
                                 <a class="nav-link sezione" href="#">Coming soon</a>
                             </li>
                             <li class="nav-item mx-2">
-                                <p style="color: black">asdasdas</p>
+                                <p style="color: black">asdasdasdasd</p>
                             </li>
                         </ul>
                     </div>
@@ -65,13 +64,8 @@
 
                 <!-- Right elements -->
                 <div class="d-flex align-items-center">
-                    <!-- Icon -->
-                    <a class="text-reset me-3" href="#">
-                        <i class="fas fa-shopping-cart"></i>
-                    </a>
-
                     <!-- Notifications -->
-                    <div class="dropdown">
+                    <div class="dropdown" style="display:none">
                         <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
                             role="button" data-mdb-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-bell"></i>
@@ -90,25 +84,34 @@
                         </ul>
                     </div>
                     <!-- Avatar -->
-                    <div class="dropdown">
-                        <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
-                            id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown"
-                            aria-expanded="false">
-                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle"
-                                height="35" alt="Black and White Portrait of a Man" loading="lazy" />
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-                            <li>
-                                <a class="dropdown-item elemento-tendina" href="#">My profile</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item elemento-tendina" href="#">Settings</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item elemento-tendina" href="#">Logout</a>
-                            </li>
-                        </ul>
+                    <div>
+                        <button id="btnLogin" style="display: block;" type="button" class="btn btn-outline-warning me-3"
+                            data-mdb-toggle="modal" data-mdb-target="#modalLogin">Login</button>
+                        <div id="containerImg" class="dropdown  me-3" style="display: none;">
+                            <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
+                                id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown"
+                                aria-expanded="false">
+                                <img id="imgProfilo" src="img/avatar/profilo1.png" class="rounded-circle" height="35"
+                                    alt="Black and White Portrait of a Man" loading="lazy" />
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                                <li>
+                                    <a id="clickProfilo" class="dropdown-item elemento-tendina"
+                                        href="profilo.html">Profilo</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item elemento-tendina" href="#">Impostazioni</a>
+                                </li>
+                                <li>
+                                    <a id="btnLogout" class="dropdown-item elemento-tendina" href="#">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                    <!-- Icon -->
+                    <a class="text-reset" href="#">
+                        <img src="img/icona_carrello.png" alt="" width="77re">
+                    </a>
                 </div>
                 <!-- Right elements -->
             </div>
@@ -134,19 +137,19 @@
         <div class="carousel-inner">
             <!-- Single item -->
             <div class="carousel-item active car-item">
-                <img src="img/screen/black_adam_1.png" class="d-block w-100" alt="Sunset Over the City"
+                <img id="img-banner1-film" src="" class="d-block w-100" alt="Sunset Over the City"
                     style="max-width:2560 px;max-height:1064px;" />
             </div>
 
             <!-- Single item -->
             <div class="carousel-item car-item">
-                <img src="img/screen/black_adam_2.png" class="d-block w-100" alt="Canyon at Nigh"
+                <img id="img-banner2-film" src="" class="d-block w-100" alt="Canyon at Nigh"
                     style="max-width:2560 px;max-height:1064px;" />
             </div>
 
             <!-- Single item -->
             <div class="carousel-item car-item">
-                <img src="img/screen/black_adam_3.png" class="d-block w-100" alt="Cliff Above a Stormy Sea"
+                <img id="img-banner3-film" src="" class="d-block w-100" alt="Cliff Above a Stormy Sea"
                     style="max-width:2560 px;max-height:1064px;" />
             </div>
         </div>
@@ -172,24 +175,17 @@
             <div class="row my-5">
                 <div class="col-lg text-end">
                     <div>
-                        <img src="img/film/black-adam.jpeg" alt="" width="450re" class="img-pagina-film">
+                        <img id="img-pagina-film" src="" alt="" width="450re">
                     </div>
                 </div>
                 <div class="col-lg position-relative">
-                    <h2 id="titolo-pagina-film">BLACK ADAM</h2>
-                    <h3 id="descrizione-pagina-film">Descrizione</h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum.</p>
-                    <h3 id="regia-pagina-film">Regia</h3>
-                    <p>Dwayne Johnson, Aldis Hodge</p>
-                    <h3 id="cast-pagina-film">Cast</h3>
-                    <p>Dwayne Johnson, Aldis Hodge, Pierce Brosnan, Noah Centineo, Quintessa Swindell, Sarah Shahi,
-                        Marwan Kenzari, Viola Davis </p>
+                    <h2 id="titolo-pagina-film"></h2>
+                    <h3>Descrizione</h3>
+                    <p id="descrizione-pagina-film"></p>
+                    <h3>Regia</h3>
+                    <p id="regia-pagina-film"></p>
+                    <h3>Cast</h3>
+                    <p id="cast-pagina-film"></p>
                     <button id="btnPrenota" type="button"
                         class="btn btn-lg btn-outline-warning position-relative bottom-0 start-0"
                         data-mdb-ripple-color="dark" data-mdb-toggle="modal"
@@ -199,7 +195,7 @@
             </div>
 
             <div class="row mt-5">
-                <div class="col-7 text-end"><iframe
+                <div class="col-7 text-end"><iframe id="url-pagina-film"
                         src="https://www.youtube.com/embed/FV1AhDCy2L0?rel=0&modestbranding=1&autohide=1&mute=0&showinfo=0&controls=1&autoplay=1"
                         width="560" height="315" frameborder="0" allowfullscreen></iframe>
                     <div class="col"></div>
@@ -452,6 +448,173 @@
         <!-- Copyright -->
     </footer>
     <!-- Footer -->
+
+    <!-- Modal Login -->
+    <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="pb-5">
+                        <div id="formLogin">
+                            <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                            <p class="text-white-50 mb-5">Inserire email e password!</p>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="email" id="emailLogin" class="form-control form-control-lg" />
+                                <label class="form-label" for="emailLogin">Email</label>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="password" id="passwordLogin" class="form-control form-control-lg"
+                                    autocomplete="off" />
+                                <label class="form-label" for="passwordLogin">Password</label>
+                            </div>
+
+                            <p class="small pb-lg-2"><a class="text-white-50" href="#!" data-mdb-toggle="modal"
+                                    data-mdb-target="#modalRecuperaPassword">Dimenticato la password?</a></p>
+
+                            <button class="btn btn-outline-light btn-lg px-5" type="submit"
+                                id="submitLogin">Login</button>
+
+                            <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                                <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                                <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                                <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="">Non hai un account? <a href="#!" class="text-white-50 fw-bold"
+                                data-mdb-toggle="modal" data-mdb-target="#modalRegister">Registrati</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Forgot Password -->
+    <div class="modal fade" id="modalRecuperaPassword" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="pb-5">
+
+                        <h2 class="fw-bold mb-2 text-uppercase">Recupera password</h2>
+                        <p class="text-white-50 mb-5">Inserire email!</p>
+
+                        <div class="form-outline form-white mb-4">
+                            <input type="email" id="emailLogin" class="form-control form-control-lg" />
+                            <label class="form-label" for="emailLogin">Email</label>
+                        </div>
+
+                        <button class="btn btn-outline-light btn-lg px-5" type="submit"
+                            id="submitRecupera">Recupera</button>
+
+                        <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                            <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                            <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                            <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="">Non hai un account? <a href="#!" class="text-white-50 fw-bold"
+                                data-mdb-toggle="modal" data-mdb-target="#modalRegister">Registrati</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Login -->
+    <div class="modal fade" id="modalRegister" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="pb-5">
+                        <div id="formRegister">
+                            <h2 class="fw-bold mb-2 text-uppercase">Registrazione</h2>
+                            <p class="text-white-50 mb-5">Inserire i dati per completare la registrazione!</p>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="email" id="emailRegister" class="form-control form-control-lg" />
+                                <label class="form-label" for="emailRegister">Email</label>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="text" id="usernameRegister" class="form-control form-control-lg" />
+                                <label class="form-label" for="usernameRegister">Username</label>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="date" id="dateRegister" class="form-control form-control-lg" />
+                                <label class="form-label" for="dateRegister">Data di nascità</label>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="password" id="passwordRegister" class="form-control form-control-lg" />
+                                <label class="form-label" for="passwordRegister">Password</label>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="password" id="passwordRegisterConfirm"
+                                    class="form-control form-control-lg" />
+                                <label class="form-label" for="passwordRegisterConfirm">Conferma Password</label>
+                            </div>
+
+                            <div class="form-check text-start">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Accetti i termini e le condizioni.
+                                </label>
+                            </div>
+
+                            <div class="container mt-3">
+                                <button class="btn btn-outline-light btn-lg px-5" type="submit"
+                                    id="submitRegister">Registrati</button>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                            <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                            <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                            <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                        </div>
+                    </div>
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL FORM SUCCESS LOGIN/REGISTER -->
+    <div class="modal fade" id="modalRisposta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body text-center rounded-4" id="modaleRisposta">
+                    <h5 class="modal-title" id="contentModalRisposta"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
     <script src="js/script.js"></script>
 </body>
