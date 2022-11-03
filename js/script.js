@@ -107,7 +107,7 @@ $(document).ready(function () {
     (async () => {
         if (window.location.href.indexOf("/profilo.html") > -1) {
             $.cookie("username", new URLSearchParams(window.location.search))
-            infoOspite = await getUserInfoUsername($.cookie("username").substring(0, $.cookie("username").length - 1))
+            infoOspite = await getUserInfoUsername($.cookie("username").substring(0, $.cookie("username").length - 1));
             impostaPaginaUtente();
             if (checkCookieTime()) {
                 checkModificaProfiloPossibile();
@@ -584,7 +584,7 @@ $(document).ready(function () {
                 let utente = getUtente(key);
                 result += '<tr><td><span class="badge badge-success rounded-pill d-inline">' + counter + '</span></td><td><div class="d-flex align-items-center">'
                 result += '<img src="img/avatar/' + utente.img + '" alt=""style="width: 45px; height: 45px" class="rounded-circle" /><div class="ms-3"><p class="fw-bold mb-1 usernameClassifica">' + utente.username + '</p></div></div></td>'
-                result += '<td><p class="fw-normal mb-1">' + value + '</p></td><td><p>' + utente.dataIscrizione + '</p></td><td><button type="button" class="btn btn-link btn-sm btn-rounde btnVediProfiloClassifica" data-username="'+ utente.username +'">Vedi</button></td></tr>'
+                result += '<td><p class="fw-normal mb-1">' + value + '</p></td><td><p>' + utente.dataIscrizione + '</p></td><td><button type="button" class="btn btn-link btn-sm btn-rounde btnVediProfiloClassifica" data-username="' + utente.username + '">Vedi</button></td></tr>'
                 counter++;
             }
             $('#tableBodyClassifica').append(result);
@@ -601,15 +601,98 @@ $(document).ready(function () {
         }
 
         //ti porta al profilo utente che clicki
-        $('body').on("click", '.btnVediProfiloClassifica', function(){
+        $('body').on("click", '.btnVediProfiloClassifica', function () {
             let uname = $(this).attr("data-username");
-            uname = "?"+ uname;
-            window.location= "http://127.0.0.1:5500/profilo.html" + uname;
+            uname = "?" + uname;
+            window.location = "http://127.0.0.1:5500/profilo.html" + uname;
         })
 
-        
+
     }
     //FINE CLASSIFICA UTENTI////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    //PRENOTAZIONI////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    $('#iconaCarello').click(function () {
+        if (checkCookieTime()) {
+            window.location = "http://127.0.0.1:5500/prenotazioni.html"
+            
+        }
+    })
+
+    async function getProiezioni() {
+        let proiezioni = null;
+        await $.get('http://localhost:8080/api/proiezioni', function (response) {
+            proiezioni = response;
+        });
+        return proiezioni;
+    }
+
+    async function trovaPrenotazioniComplete(prenotazioni) {
+        let films = await getFilm();
+        let prenotazioniUtenteComplete = [];
+        let posti = await getPosti();
+        let c = 0;
+        for (let prenotazione of prenotazioni) {
+            for (film of films) {
+                for (proiezione of film.proiezione) {
+                    for (prenot of proiezione.prenotazioni) {
+                        if (prenot.id == prenotazione.id) {
+                            let numPosto = await trovaNumeroPosto(posti,prenotazione)
+                            let prenotazioneCompleta = {
+                                nomeFilm: film.nome,
+                                imgFilm: film.img,
+                                dataFilm: proezione.data,
+                                oraFilm: proiezione.oraInizio,
+                                numPosto: numPosto
+                            }
+                            prenotazioniUtenteComplete[c] = prenotazioneCompleta;
+                            c++;
+                        }
+                    }
+                }
+            }
+        }
+        return prenotazioniUtenteComplete;
+    }
+
+    async function getPosti() {
+        let posti = null;
+        await $.get('http://localhost:8080/api/posto', function (response) {
+            posti = response;
+        });
+        return posti;
+    }
+
+    async function getFilm() {
+        let film = null;
+        await $.get('http://localhost:8080/api/film', function (response) {
+            film = response;
+        });
+        return film;
+    }
+
+    function trovaNumeroPosto(posti, prenotazione) {
+        for (let posto of posti) {
+            for (let prenot of posto.prenotazioni) {
+                if(prenotazione.id == prenot.id){
+                    return posto.numeroPosto;
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+    //FINE PRENOTAZIONI////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 

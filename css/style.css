@@ -423,18 +423,19 @@ p.text span {
 
 /* BOTTONI PROFILO PRIVATO */
 
-.btnModificaDesc{
+.btnModificaDesc {
     background-color: #F18E00 !important;
     color: black !important;
 }
 
-.imgProfilo img:hover{
+.imgProfilo img:hover {
     filter: grayscale(100%);
     -webkit-filter: grayscale(100%);
     -moz-filter: grayscale(100%);
-    -ms-filter: grayscale(100%); 
+    -ms-filter: grayscale(100%);
     -o-filter: grayscale(100%);
-    filter: gray; /* Fix per Explorer */
+    filter: gray;
+    /* Fix per Explorer */
 }
 
 
@@ -443,15 +444,17 @@ p.text span {
 
 }
 
-.imgProfilo:hover + .btnModificaImg, .btnModificaImg:hover {
+.imgProfilo:hover+.btnModificaImg,
+.btnModificaImg:hover {
     display: inline-block;
-   
-   
+
+
 }
+
 #btnModificaImg {
     background-color: black !important;
-    
-    
+
+
 }
 
 /*MODALE CAMBIA USERNAME E DESCRIZONNE PROFILO UTENTE*/
@@ -464,29 +467,81 @@ p.text span {
     background-color: #242333;
 }
 
-#modalUpdateUsernameDescr input, textarea {
-    color: #DFE0E0!important;
+#modalUpdateUsernameDescr input,
+textarea {
+    color: #DFE0E0 !important;
 }
 
 
 /* NEWS OFFERTE*/
 
-.titoloNews{
+.titoloNews {
     color: #F18E00;
-    
+
 }
 
-h1{
+h1 {
     font-size: 3vw !important;
     text-align: center;
     color: white;
 }
 
 
-.descrizione{
+.descrizione {
     color: white
 }
 
-.ImgCards{
+.ImgCards {
     align-items: center !important;
+}
+
+
+/*PRENOTAZIONE */
+h4 {
+    color: #F18E00 !important;
+}
+
+.card h5 {
+    color: #DFE0E0 !important;
+}
+
+
+
+/*valutazione prenotazione*/
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+
+
+.rating>input {
+    display: none;
+}
+
+.rating>label {
+    position: relative;
+    width: 1.1em;
+    font-size: 3rem;
+    color: #FFD700;
+    cursor: pointer;
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0;
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important;
+}
+
+.rating>input:checked~label:before {
+    opacity: 1;
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4;
 }
