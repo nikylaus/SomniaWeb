@@ -1,5 +1,6 @@
 $(document).ready(function () {
     console.log($.cookie("jwt"))
+    $.cookie("profilo", "");
     //HOMEPAGE FILM+PAGINA FILM////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     $('#containerFilmSala',).on('mouseenter', ".content", function () {
         $(this).addClass('transition');
@@ -107,13 +108,17 @@ $(document).ready(function () {
     (async () => {
         if (window.location.href.indexOf("/profilo.html") > -1) {
             $.cookie("username", new URLSearchParams(window.location.search))
-            infoOspite = await getUserInfoUsername($.cookie("username").substring(0, $.cookie("username").length - 1));
+            if($.cookie("profilo") != null & $.cookie("profilo") != ""){
+                info = JSON.parse($.cookie("profilo"));
+            }
+            infoOspite = await getUserInfoUsername($.cookie("username").substring(0, $.cookie("username").length - 1));  
             impostaPaginaUtente();
             if (checkCookieTime()) {
                 checkModificaProfiloPossibile();
             }
         } else {
-            info = $.cookie("profilo")
+            //console.log($.cookie("profilo"));
+            //info = JSON.parse($.cookie("profilo"));
             if (info != null & checkCookieTime()) {
                 impostaProfilo(info.email);
             }
@@ -154,6 +159,7 @@ $(document).ready(function () {
     }
 
     async function impostaProfilo() {
+        console.log(info)
         let infoDentro = JSON.parse(info);
         $('#btnLogin').hide()
         $('#imgProfilo').attr("src", "img/avatar/" + infoDentro.img)
@@ -161,6 +167,7 @@ $(document).ready(function () {
     }
 
     async function getUserInfoUsername(username) {
+        let infoUsername = null;
         await $.get('http://localhost:8080/api/username/' + username, function (response) {
             let uInfo = {
                 id: response.id,
@@ -173,13 +180,24 @@ $(document).ready(function () {
                 prenotazioni: response.prenotazioni,
                 ruoli: response.ruoli
             };
+            infoUsername = uInfo;
             $.cookie("profiloUtente", JSON.stringify(uInfo));
             //alert(JSON.parse($.cookie("profilo")))
         })
-        return JSON.parse($.cookie("profiloUtente"));
+        return infoUsername;
+        //return JSON.parse($.cookie("profiloUtente"));
     }
 
     async function getUserInfo(email) {
+        info= await getUserInfoByEmail(email);
+        console.log("denrtro" + info);
+        console.log("asd1" + $.cookie("profilo"))
+        return info;
+        //return JSON.parse($.cookie("profilo"));
+    };
+
+    async function getUserInfoByEmail(email){
+        info = null;
         await $.get('http://localhost:8080/api/email/' + email, function (response) {
             let uInfo = {
                 id: response.id,
@@ -192,10 +210,9 @@ $(document).ready(function () {
                 prenotazioni: response.prenotazioni,
                 ruoli: response.ruoli
             };
-            $.cookie("profilo", JSON.stringify(uInfo));
-            //alert(JSON.parse($.cookie("profilo")))
-        })
-        return JSON.parse($.cookie("profilo"));
+            info = uInfo;
+        });
+        return info;
     }
 
     //imposta il nome del profilo utente nell url e portalo alla pagina profilo
@@ -482,9 +499,12 @@ $(document).ready(function () {
     });
     //prova a vedere se l'utente che modifica il profilo è lo stesso utente del profilo che si visualizza
     function checkModificaProfiloPossibile() {
-        info = $.cookie("profilo");
+        //info = $.cookie("profilo");
+        console.log("asd"+infoOspite);
+        console.log(info);
         if (info != null & info != "" & infoOspite != null) {
-            info = JSON.parse($.cookie("profilo"));
+            //info = JSON.parse(info);
+            //alert(infoOspite);
             if (null != info) {
                 console.log(info.username, infoOspite.username)
                 if (info.username == infoOspite.username) {
@@ -616,7 +636,7 @@ $(document).ready(function () {
     $('#iconaCarello').click(function () {
         if (checkCookieTime()) {
             window.location = "http://127.0.0.1:5500/prenotazioni.html"
-            
+
         }
     })
 
