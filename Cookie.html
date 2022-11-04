@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: black !important;">
+            <!-- Container wrapper -->
+            <div class="container mt-3 mb-3">
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                    <!-- Navbar brand -->
+                    <div>
+                        <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                            <img src="img/logo.png" height="auto" width="230px" alt="MDB Logo" loading="lazy" />
+                        </a>
+                    </div>
+                    <!-- Left links -->
+                    <div>
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+                            <li class="nav-item mx-2">
+                                <a class="nav-link sezione" href="index.html">Biglietteria</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link sezione" href="classifica.html">Classifica</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link sezione" href="News&Offerte.html">News</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link sezione" href="#">Coming soon</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <p style="color: black">asdasdasdasd</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div></div>
+                    <!-- Left links -->
+                </div>
+                <!-- Collapsible wrapper -->
+
+                <!-- Right elements -->
+                <div class="d-flex align-items-center">
+                    <!-- Notifications -->
+                    <div class="dropdown" style="display:none">
+                        <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
+                            role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item elemento-tendina" href="#">Some news</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item elemento-tendina" href="#">Another news</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item elemento-tendina" href="#">Something else here</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Avatar -->
+                    <div>
+                        <button id="btnLogin" style="display: block;" type="button" class="btn btn-outline-warning me-3"
+                            data-mdb-toggle="modal" data-mdb-target="#modalLogin">Login</button>
+                        <div id="containerImg" class="dropdown  me-3" style="display: none;">
+                            <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
+                                id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown"
+                                aria-expanded="false">
+                                <img id="imgProfilo" src="img/avatar/profilo1.png" class="rounded-circle" height="35"
+                                    alt="Black and White Portrait of a Man" loading="lazy" />
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                                <li>
+                                    <a id="clickProfilo" class="dropdown-item elemento-tendina"
+                                        href="profilo.html">Profilo</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item elemento-tendina" href="#">Impostazioni</a>
+                                </li>
+                                <li>
+                                    <a id="btnLogout" class="dropdown-item elemento-tendina" href="#">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Icon -->
+                    <a class="text-reset" href="#">
+                        <img src="img/icona_carrello.png" alt="" width="77re">
+                    </a>
+                </div>
+                <!-- Right elements -->
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+    </header>
+
+    <!-- RIGHE E COLONNE NEWS -->
+
+    <main id="main" role="main">
+        <h1 class="sr-only">Cookie Policy</h1>
+
+        <script type="text/javascript">
+            if (dataLayer) dataLayer.push(JSON.parse("{\"pageCategory1\":\"site\",\"pageCategory2\":\"info\",\"userLoggedIn\":\"f\",\"userId\":\"na\",\"userSex\":\"na\",\"userAge\":\"na\",\"userRegisterDate\":null,\"venue\":\"Torino\",\"productId\":\"na\",\"productTitle\":\"na\",\"productType\":\"na\",\"productGenres\":null,\"productDistributor\":\"na\"}"));
+
+        </script>
+        <div id="article-content-area" class="generic-content content-light content-light--solid">
+
+            <div class="container container-tiny generic-content__text written-content">
+                <div class="wysiwyg">
+                    <p style="text-align: center;"><span style="text-align: center;"><strong>&nbsp;<span
+                                    style="text-decoration: underline; font-size: 19px;">COOKIE
+                                    POLICY</span></strong></span></p>
+                    <p style="margin: 0cm 14.2pt 0.0001pt; text-align: justify;"><strong><span
+                                style="font-size: 18px; color:#F18E00;">Premessa</span></strong></p>
+                    <p class="p1" style="margin-right: 0px; margin-left: 14.2px; text-align: left;"><span class="s1">La
+                            presente informativa è resa ai sensi dell'art. 13 </span>del Regolamento UE 2016/679
+                        “Protezione delle persone fisiche con riguardo al trattamento dei dati personali, nonché alla
+                        libera circolazione di tali dati” (di seguito “Regolamento Privacy” o “GDPR”)<span class="s1">,
+                            a coloro che interagiscono con i servizi web di Somnia Cinema, accessibili per via
+                            telematica a partire dall'indirizzo:</span><span
+                            style="text-align: left; font-weight: lighter;">&nbsp;</span><a
+                            href=""
+                            style="text-align: left; font-weight: lighter;">www.somniacinema.it</a><span
+                            style="text-align: left; font-weight: lighter;">&nbsp;</span><span
+                            style="text-align: justify; font-weight: lighter;">corrispondente alla pagina iniziale del
+                            sito ufficiale della Società Somnia Cinema 1.</span></p>
+                    <p style="margin: 0cm 14.2pt 0.0001pt; text-align: left;"><span>&nbsp;</span></p>
+                    <p class="p1" style="margin-right: 0px; margin-bottom: 3px; margin-left: 14.2px; text-align: left;">
+                        Secondo il GDPR i Cookie costituiscono dati personali quando possono essere associati ad un
+                        dispositivo e, pertanto, ad una persona identificabile.</p>
+                    <p class="p2" style="margin: 0px 0px 0px 14.2px; text-align: left;">La presente informativa tiene
+                        conto:</p>
+                    <p class="li3" style="margin: 0px; text-align: left;">&nbsp; &nbsp; - del Provvedimento
+                        dell’Autorità Garante per la protezione dei dati personali dell’8 maggio 2014 “Individuazione
+                        delle modalità semplificate per l’informativa e per l’acquisizione del&nbsp;consenso per
+                         l’uso dei Cookie”;</p>
+                    <p class="li4" style="margin: 0px 0px 3px; text-align: left;">&nbsp; &nbsp; - del Provvedimento
+                        dell’Autorità Garante per la protezione dei dati personali del 10 giugno 2021 “Linee guida
+                        Cookie e altri strumenti di tracciamento”.</p>
+                    <p class="p5" style=" margin: 0px 0px 3px 14.2px; text-align: left;">
+                        Titolare del trattamento dei dati innanzi descritto è Somnia Cinema 1 SpA (da ora Somnia
+                        Cinema o anche TSC), con sede in Roma, Piazza Augusto Imperatore n. 3.</p>
+                    <p class="p5" style="margin: 0px 0px 3px 14.2px; text-align: left;">
+                        Somnia Cinema tratta dati personali al fine di fornire i propri servizi ai clienti ed utenti; per
+                        tali trattamenti si rimanda alle informative specifiche presenti sul sito web.</p>
+                    <p class="p6"
+                        style="margin-top: 0px; margin-right: 0px; margin-left: 14.2px; text-align: left;">
+                        Resta salva la facoltà dei Contraenti di esercitare in ogni momento i diritti di cui agli <span
+                            class="s1">artt. 13, 15-22 del GDPR</span>, in particolare: il diritto di accedere ai propri
+                        dati personali, chiederne la rettifica, l'aggiornamento e la cancellazione se incompleti,
+                        erronei o raccolti in violazione della normativa vigente, nonché di opporsi al loro trattamento
+                        per motivi legittimi, scrivendo all'indirizzo e-mail:<br>
+                        <a
+                            style="font-weight: lighter;"><strong><em>dpo@somniacinema.it</em></strong></a><strong><em>.</em></strong>
+                    </p>
+                    <p class="p1"
+                        style="margin-right: 0px; margin-bottom: 3px; margin-left: 14.2px; text-align: left;">
+                        Quando un utente accede al sito web, servizi, app, i nostri fornitori di servizi autorizzati
+                        possono usare Cookie, web beacon e altre tecnologie similari per scopi pubblicitari e per
+                        memorizzare le informazioni, al fine di offrirti un'esperienza migliore, più veloce e più
+                        sicura.</p>
+                    <p class="p2"
+                        style="margin-top: 0px; margin-right: 0px; margin-left: 14.2px; text-align: left;">
+                        Attraverso questa informativa intendiamo fornirti alcune indicazioni sulle tecnologie adottate e
+                        su come vengono usate nei nostri siti e nei nostri servizi, app e strumenti. Di seguito vengono
+                        riepilogati alcuni aspetti importanti da conoscere riguardo all'utilizzo di tali
+                        tecnologie.<span style="text-align: left; font-weight: lighter;">&nbsp;</span></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><span>&nbsp;</span></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><strong><span
+                                style="font-size: 18px; color: #F18E00;">Cosa sono i cookie, i web beacon e tecnologie
+                                similari</span></strong></p>
+                    <p class="p1"
+                        style="margin-right: 0px; margin-left: 14.2px; text-align: left;">
+                        Come quasi tutti i siti Web, usiamo file di dati di piccole dimensioni, che vengono salvati sul
+                        tuo computer, tablet, telefono cellulare o altro dispositivo mobile (indicati complessivamente
+                        come "dispositivo") per registrare determinati dati ogni volta che accedi o interagisci con i
+                        nostri siti, servizi, app, sistemi di messaggistica e strumenti.<br>
+                        <span style="text-align: justify; font-weight: lighter;">I nomi e i tipi specifici di Cookie,
+                            web beacon e altre tecnologie similari usati possono cambiare nel tempo. Per aiutarti a
+                            comprendere meglio le regole e l'uso di tali tecnologie, di seguito sono riportati alcuni
+                            termini con le relative definizioni:</span>
+                    </p>
+                    <p style=" margin: 3pt 14.2pt 0.0001pt; text-align: left;">
+                        <strong><span>Cookie:&nbsp;</span></strong><span
+                            style="text-align: justify; font-weight: lighter;">piccoli file di testo (formati in genere
+                            da lettere e numeri) che vengono salvati nella memoria del browser o del dispositivo quando
+                            visiti un sito o visualizzi un messaggio. I Cookie consentono a un sito di riconoscere un
+                            particolare dispositivo o browser. Esistono diversi tipi di Cookie:</span></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;">
+                        <span>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+                            style="text-decoration: underline;">temporanei</span><span> (o di sessione): sono utilizzati
+                            per archiviare informazioni temporanee, consentono di collegare le tue azioni durante quella
+                            sessione specifica e sono rimossi dal computer alla chiusura di Internet Explorer;</span>
+                    </p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;">
+                        <span>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+                            style="text-decoration: underline;">permanenti</span><span> (o salvati): sono utilizzati per
+                            archiviare informazioni, ad esempio il nome e la password di accesso, in modo da evitare che
+                            l'utente debba ridigitarli ogni volta che visita un sito specifico; rimangono memorizzati
+                            nel computer anche dopo aver chiuso Internet Explorer;</span></p>
+                    <p style="margin: 0cm 14.2pt 0.0001pt; text-align: left;">
+                        <span>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+                            style="text-decoration: underline;">di prima parte</span><span>: derivano dal sito Web
+                            visualizzato e possono essere permanenti o temporanei; possono essere utilizzati per
+                            archiviare informazioni che verranno riutilizzate alla successiva visita del sito;</span>
+                    </p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;">
+                        <span>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+                            style="text-decoration: underline;">di terze parti</span><span>: derivano da annunci di
+                            altri siti, ad esempio popup o striscioni pubblicitari, presenti nel sito Web visualizzato;
+                            possono essere utilizzati per registrare l'utilizzo del sito Web a scopo di marketing.<br>
+                        </span><span style="text-align: justify; font-weight: lighter;">I Cookie possono essere
+                            disattivati o rimossi usando gli strumenti disponibili nella maggior parte dei browser. Le
+                            preferenze relative ai Cookie devono essere impostate separatamente per ciascun browser
+                            usato, poiché ognuno di essi offre funzionalità e opzioni specifiche.</span></p>
+                    <p style=" margin: 3pt 14.2pt 0.0001pt; text-align: left;"><strong><span>Web
+                                beacon: </span></strong><span>f</span><span
+                            style="text-align: justify; font-weight: lighter;">rammenti di codice che consentono a un
+                            sito web di trasferire o raccogliere informazioni attraverso la richiesta di un'immagine
+                            grafica; possono essere utilizzati per diversi fini, quali l'analisi dell'uso dei siti web,
+                            attività di controllo e reportistica sulle pubblicità e la personalizzazione di pubblicità e
+                            contenuti;</span></p>
+                    <p style=" margin: 3pt 14.2pt 0.0001pt; text-align: left;">
+                        <strong><span>Tecnologie similari:&nbsp;</span></strong><span
+                            style="text-align: justify; font-weight: lighter;">tecnologie che archiviano dati nel
+                            browser o dispositivo usando oggetti condivisi a livello locale o archiviazione locale,
+                            quali Cookie flash, Cookie HTML 5 e altri metodi software per applicazioni web. Queste
+                            tecnologie funzionano in tutti i browser. In alcuni casi l'uso dell'archiviazione locale non
+                            può essere pienamente gestito dai browser, ma richiede la gestione tramite strumenti
+                            specifici. Non usiamo tali tecnologie per memorizzare informazioni utili per creare
+                            pubblicità mirate sul nostro o su altri siti.</span></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><span>&nbsp;</span></p>
+                    <p style="margin: 0cm 14.2pt 0.0001pt; text-align: left;"><span>&nbsp;</span></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><span
+                            style="font-size: 18px;"><strong><span style="color: #F18E00;">I cookie del sito
+                                </span></strong><strong><span
+                                    style="color: #F18E00;">www.somniacinema.it</span></strong></span></p>
+                    <p class="p1"
+                        style=" margin-right: 0px; margin-bottom: 3px; margin-left: 14.2px; text-align: left;">
+                        I nostri Cookie hanno diverse funzioni: sono utili per assicurare il funzionamento dei nostri
+                        servizi, ci permettono di migliorare le prestazioni del sito web, sono utilizzati per finalità
+                        di marketing.</p>
+                    <p class="p1" style=" margin: 0px 0px 3px 14.2px; text-align: left;">
+                        Usiamo Cookie e tecnologie similari che rimangono sul tuo dispositivo solo per il periodo di
+                        attività del browser (Cookie di sessione) o per un periodo più lungo (Cookie persistenti).</p>
+                    <p class="p1" style=" margin: 0px 0px 3px 14.2px; text-align: left;">
+                        Laddove possibile, vengono implementate misure di sicurezza per impedire l'accesso non
+                        autorizzato a Cookie e tecnologie simili. Un codice univoco garantisce che solo noi e/o i nostri
+                        fornitori di servizi autorizzati possano accedere ai dati dei Cookie.</p>
+                    <p class="p1" style=" margin: 0px 0px 3px 14.2px; text-align: left;">I
+                        fornitori di servizi sono aziende che ci supportano in vari aspetti della nostra attività,
+                        occupandosi, ad esempio, di operazioni, servizi, app e strumenti del sito. Possono anche
+                        acquisire informazioni che consentono loro di identificare il tuo dispositivo, quale l'indirizzo
+                        IP o altri codici univoci o di dispositivo. Tra questi fornitori ci sono le Società del Gruppo
+                        Vue Entertainment International e le Società di servizi informatici da queste incaricate.</p>
+                    <p class="p2"
+                        style=" margin-top: 0px; margin-right: 0px; margin-left: 14.2px; text-align: left;">
+                        Determinate funzioni, servizi, app e strumenti del sito sono disponibili solo attraverso l'uso
+                        di queste tecnologie. Potrai sempre bloccarle, eliminarle o disattivarle se il tuo browser,
+                        l'app installata o il dispositivo usato lo consentono. Per ulteriori informazioni su come
+                        bloccare, eliminare o disattivare tali tecnologie, consulta le impostazioni del dispositivo o
+                        del browser usato.<span style="text-align: left; font-weight: lighter;">&nbsp;</span></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><span>&nbsp;</span></p>
+                    <p class="p1"
+                        style=" margin-right: 0px; margin-left: 14.2px; text-align: justify;">
+                        <strong><span style="font-size: 18px; color:#F18E00;">Gestione dei Cookie nel sito web
+                                www.somniacinema.it</span></strong></p>
+                    <p class="p1"
+                        style=" margin-right: 0px; margin-left: 14.2px; text-align: left;">Al
+                        primo accesso al nostro sito Web, troverai un banner contenente l’informativa breve
+                        sull’utilizzo dei Cookie.</p>
+                    <p class="p1"
+                        style=" margin-right: 0px; margin-left: 14.2px; text-align: justify;">
+                        Hai tre alternative:</p>
+                    <p style=" margin: 3pt 14.2pt 0.0001pt; text-align: left;"><span>
+                            - I</span><span style="text-align: justify; font-weight: lighter;">l click su “Accetta i
+                            Cookie”, autorizzerà l’utilizzo di tutti i Cookie;</span></p>
+                    <p style=" margin: 3pt 14.2pt 0.0001pt; text-align: left;"><span
+                            style="font-weight: lighter;">- I</span><span
+                            style="text-align: justify; font-weight: lighter;">l click su “Rifiuta tutti”, bloccherà
+                            tutti i Cookie, tranne quelli considerati “Cookie strettamente necessari”, in quanto
+                            indispensabili per il funzionamento del sito e non disattivabili dai nostri sistemi;</span>
+                    </p>
+                    <p style=" margin: 3pt 14.2pt 0.0001pt; text-align: left;"><span
+                            style="text-align: justify; font-weight: lighter;">-&nbsp;</span><span
+                            style="text-align: justify; font-weight: lighter;">Il click su “Gestisci i Cookie”,
+                            consentirà la scelta di utilizzo delle diverse tipologie di Cookie, con relativa spiegazione
+                            della stessa tipologia.</span></p>
+                    <p class="p1"
+                        style=" margin-right: 0px; margin-left: 14.2px; text-align: left;">Ti
+                        rammentiamo che, in ogni caso, potrai bloccare, eliminare o disattivare i Cookie, anche quelli
+                        considerati “Cookie strettamente necessari”, se il tuo dispositivo lo consente. In questo caso
+                        puoi gestire i Cookie e le preferenze dei Cookie nelle impostazioni del dispositivo o del
+                        browser. Per ulteriori informazioni su come bloccare, eliminare o disattivare tali tecnologie,
+                        consulta le impostazioni del dispositivo o del browser usato.<span
+                            style="text-align: left; font-weight: lighter;">&nbsp;</span></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><span>&nbsp;</span></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><strong><span
+                                style="font-size: 18px; color: #F18E00;">Categorie di cookie</span></strong></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><strong><span
+                                style="font-size: 18px; color:#F18E00;">&nbsp;</span></strong><span
+                            style="text-decoration: underline;">Cookie tecnici</span></p>
+                    <p class="p1"
+                        style=" margin-right: 0px; margin-left: 14.2px; text-align: left;">
+                        Sono utili per assicurare il funzionamento dei nostri servizi, ci permettono di migliorare le
+                        prestazioni. Queste tecnologie consentono ai nostri siti, servizi, app e strumenti di conservare
+                        informazioni importanti nel tuo browser o dispositivo e quindi di usarle successivamente per
+                        identificarti sui nostri server o sistemi interni. Laddove applicabile, proteggiamo i Cookie e
+                        altre tecnologie simili per assicurare che solo Somnia Cinema e/o i nostri fornitori di
+                        servizi autorizzati possano interpretarli assegnando loro un codice univoco. I tuoi dati
+                        personali non vengono archiviati in Cookie o altre tecnologie similari usate.</p>
+                    <p class="p1"
+                        style=" margin-right: 0px; margin-left: 14.2px; text-align: justify;">
+                        Tutti i dati personali acquisiti e archiviati tramite l'uso di queste tecnologie vengono
+                        ottenuti solo dopo averti fornito una specifica informativa.</p>
+                    <p class="p1"
+                        style="margin-right: 0px; margin-left: 14.2px; text-align: left;">Gli
+                        usi di tali tecnologie rientrano nelle seguenti categorie generali, che troverai dettagliate
+                        nell’area “Gestisci i Cookie”:<br>
+                        <br>
+                        <span style="text-align: left; font-weight: lighter;">1.&nbsp; &nbsp; &nbsp;</span><span
+                            style="text-align: justify; font-weight: lighter;">“</span><strong
+                            style="text-align: justify;">Cookie strettamente necessari</strong><span
+                            style="text-align: justify; font-weight: lighter;">”. L'uso di Cookie, web beacon o altre
+                            tecnologie similari è necessario per il funzionamento del sito web, servizi, app e
+                            strumenti. Questo include tecnologie che consentono all'utente di accedere ai siti, servizi,
+                            app e strumenti richiesti per evitare attività fraudolente e migliorare la sicurezza o di
+                            usare altre funzioni quali carrelli, ricerche salvate o funzioni simili. Sono Cookie sempre
+                            attivi e non disattivabili dal sito web.<br>
+                            <br>
+                        </span><span style="font-weight: lighter;">2.&nbsp; &nbsp; &nbsp;</span><span
+                            style="text-align: justify; font-weight: lighter;">“</span><strong
+                            style="text-align: justify;">Cookie di prestazione</strong><span
+                            style="text-align: justify; font-weight: lighter;">”. Possiamo usare Cookie, web beacon o
+                            altre tecnologie similari per valutare le prestazioni dei nostri siti web, app, strumenti e
+                            servizi, anche nell'ambito delle attività di analisi per capire in che modo i visitatori
+                            usano i nostri siti web, stabilire se hanno interagito con il nostro sistema di
+                            messaggistica o visualizzato un elemento o un collegamento, o per migliorare i contenuti, le
+                            app, i servizi o gli strumenti del sito.<br>
+                            <br>
+                        </span><span style="font-weight: lighter;">3.&nbsp; &nbsp; </span><span
+                            style="font-weight: lighter; text-align: justify;">“</span><strong
+                            style="text-align: justify;">Cookie di funzionalità</strong><span
+                            style="font-weight: lighter; text-align: justify;">”. Possiamo usare Cookie, web beacon o
+                            altre tecnologie similari per offrirti funzionalità avanzate durante l'accesso o l'uso dei
+                            nostri siti, servizi, app o strumenti. Grazie a queste funzionalità possiamo, ad esempio,
+                            identificare gli utenti che accedono ai nostri siti o monitorarne preferenze, interessi o
+                            oggetti visualizzati in precedenza, in modo da migliorare la presentazione dei contenuti sui
+                            nostri siti.</span>
+                    </p>
+                    <p class="p1"
+                        style=" margin-right: 0px; margin-left: 14.2px; text-align: left;">Il
+                        consenso per l’utilizzo di “Cookie di prestazione” e “Cookie di funzionalità” non è
+                        obbligatorio. Se ritieni di non accettare l’utilizzo di questi Cookie tecnici potrai
+                        disattivarli come indicato in precedenza; in questo caso potresti non essere in grado di
+                        sfruttare determinate funzioni, servizi, app o strumenti del sito web. Ad esempio, il sito
+                        potrebbe richiederti di reinserire la password più volte durante una stessa sessione.<br>
+                        <span style="font-weight: lighter; text-align: justify;">Il sito web di Somnia Cinema può
+                            utilizzare, anche in combinazione tra di loro, i Cookie tecnici di terze parti.</span>
+                    </p>
+                    <p class="p1"
+                        style=" margin-right: 0px; margin-left: 14.2px; text-align: left;">
+                        <span style="text-align: justify; font-weight: lighter;"><br>
+                            I Cookie tecnici sono riportati nella tabella che segue:</span><span
+                            style="text-align: justify; font-weight: lighter;"><br>
+                        </span></p>
+                    <p style=" margin: 0cm 2.85pt 0.0001pt; text-align: left;"><span>&nbsp;</span></p>
+                    <table border="1" cellspacing="0" cellpadding="0" align="left" width="462"
+                        style=" width: 464px; margin-right: 4.8pt; margin-left: 4.8pt; height: 84px;">
+                        <tbody>
+                            <tr style="height: 20.3pt;">
+                                <td
+                                    style="height: 20.3pt; width: 82.45pt; padding: 0cm; border-width: 1pt; border-style: inset inset solid; border-top-color: initial; border-right-color: initial;  border-left-color: initial; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;"><span>Nome Cookie</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="height: 20.3pt; width: 117.4pt; padding: 0cm; border-top: 1pt inset; border-right: 1pt inset; border-left: none; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;"><span>Tipologia</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="height: 20.3pt; width: 147pt; padding: 0cm; border-top: 1pt inset; border-right: 1pt inset;  border-left: none; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;"><span>Descrizione</span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width: 82.45pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ;border-left: 1pt inset; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;"><span>Google
+                                            Analytics</span></p>
+                                </td>
+                                <td
+                                    style="width: 117.4pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: none; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;"><span>Analitico</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 147pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: none; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;"><span>Analitico/
+                                            misurazione</span></p>
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;">
+                                        <span>Ottimizzazione</span></p>
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;"><span>Target
+                                            Pubblicitario</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width: 82.45pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: 1pt inset; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;"><span>Adobe
+                                            Analytics</span></p>
+                                </td>
+                                <td
+                                    style="width: 117.4pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: none; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;"><span>Analitico</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 147pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: none; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;"><span>Analitico /
+                                            misurazione Ottimizzazione</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width: 82.45pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid; border-left: 1pt inset; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;"><span>Sitecore</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 117.4pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid; border-left: none; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;"><span>Tecnico</span></p>
+                                </td>
+                                <td
+                                    style="width: 147pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: none; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;"><span>Analitico</span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width: 82.45pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid; border-left: 1pt inset; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;"><span>AppDynamics</span>
+                                    </p>
+                                </td>
+                                <td
+                                    style="width: 117.4pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: none; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;"><span>Tecnico</span></p>
+                                </td>
+                                <td
+                                    style="width: 147pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid; border-left: none; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;"><span>Analitico</span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width: 82.45pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid; border-left: 1pt inset; text-align: left;">
+                                </td>
+                                <td
+                                    style="width: 117.4pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid; border-left: none; text-align: left;">
+                                </td>
+                                <td
+                                    style="width: 147pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: none; text-align: left;">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><span>&nbsp;</span></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><span>&nbsp;</span></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><span>&nbsp;</span></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><span>&nbsp;</span></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><span>&nbsp;</span></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><span>&nbsp;</span></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><span>&nbsp;</span></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><span>&nbsp;</span></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;">
+                        <span>&nbsp;</span><span style="font-weight: lighter;">&nbsp;</span></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><span>&nbsp;</span></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><span>&nbsp;</span></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><span>&nbsp;</span></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><span
+                            style="text-decoration: underline;">“<strong>Cookie per ottimizzazione del
+                                marketing</strong>”&nbsp;</span><span style="text-decoration: underline;">di prima
+                            parte</span></p>
+                    <p class="p1"
+                        style=" margin-right: 0px; margin-bottom: 3px; margin-left: 14.2px; text-align: left;">
+                        Possiamo usare Cookie e web beacon di prima parte per proporre contenuti, incluse pubblicità
+                        rilevanti per gli interessi dell'utente, sui nostri siti o su siti terzi. Ciò include l'uso di
+                        tecnologie per valutare meglio l'utilità di pubblicità e contenuti presentati all'utente, ad
+                        esempio monitorando se ha selezionato o meno un annuncio pubblicitario.</p>
+                    <p class="p1" style=" margin: 0px 0px 3px 14.2px; text-align: left;">
+                        Possiamo collaborare con altre aziende, generalmente note come fornitori di servizi, che sono
+                        autorizzate a usare Cookie, web beacon o tecnologie similari per archiviare dati sui nostri siti
+                        o nei nostri servizi, app e strumenti. Tali fornitori di servizi ci permettono di offrirti
+                        un'esperienza migliore, più veloce e più sicura sui nostri siti.</p>
+                    <p class="p1" style=" margin: 0px 0px 3px 14.2px; text-align: left;">I
+                        Cookie possono essere utilizzati per finalità di pubblicità e marketing online (inclusi film che
+                        pensiamo ti piacerebbe vedere), inclusi gli annunci pubblicitari personalizzati via e-mail,
+                        online o tramite piattaforme di social media. Per raggiungere questo obiettivo, condividiamo i
+                        tuoi dati personali con Movio Limited, una società che fornisce servizi di marketing a noi e ad
+                        altri nel settore cinematografico. I tuoi dati personali vengono quindi aggregati con altri dati
+                        e condivisi con altri fornitori di servizi ad-tech come Google e Facebook, per fornirti
+                        contenuti pertinenti.</p>
+                    <p class="p1" style=" margin: 0px 0px 3px 14.2px; text-align: left;">Tali
+                        fornitori di servizi possono usare dette tecnologie per aiutarci a offrirti i nostri contenuti e
+                        la nostra pubblicità e creare statistiche e analisi del sito anonime. Non consentiamo ad alcuno
+                        dei nostri fornitori di servizi di raccogliere le tue informazioni personali sui nostri siti o
+                        tramite i nostri servizi, app o strumenti per i loro scopi. Tali fornitori di servizi sono
+                        soggetti agli accordi di riservatezza stipulati con noi e ad altre limitazioni legali circa
+                        l'uso o la raccolta di qualsiasi informazione personale. L'uso dei Cookie di utenti è
+                        disciplinato dalle regole sulla privacy di tali soggetti terzi.</p>
+                    <p class="p1" style=" margin: 0px 0px 3px 14.2px; text-align: left;">Fatta
+                        eccezione per l'uso di tali tecnologie da parte dei nostri fornitori di servizi o altri soggetti
+                        terzi autorizzati, non accettiamo sui siti alcun contenuto di soggetti (ad esempio inserzioni,
+                        comunicazioni tra utenti, contatti diretti, commenti, recensioni e così via) per includere o
+                        usare i Cookie, web beacon, storage locali o tecnologie simili per monitorare o acquisire le tue
+                        informazioni personali.<span class="Apple-converted-space">&nbsp;</span></p>
+                    <p class="p1" style=" margin: 0px 0px 3px 14.2px; text-align: left;">Anche
+                        per tale categoria di Cookie, è possibile disattivare la funzionalità direttamente dalla
+                        specifica area.</p>
+                    <p class="p2"
+                        style=" margin-top: 0px; margin-right: 0px; margin-left: 14.2px; text-align: left;">
+                        Rifiutando i Cookie e web beacon di prima parte relativi alla pubblicità, visualizzerai comunque
+                        la nostra pubblicità, ma non sarà mirata ai tuoi interessi, come invece sarebbe se usassi i
+                        Cookie e i web beacon o le tecnologie correlate.</p>
+                    <p class="p1"
+                        style=" margin-right: 0px; margin-left: 14.2px; text-align: left;">Di
+                        seguito i Cookie di marketing di prima parte:<span
+                            style="font-weight: lighter; text-align: left;"></span></p>
+                    <p class="p1"
+                        style=" margin-right: 0px; margin-left: 14.2px; text-align: left;">
+                        <span style="font-weight: lighter; text-align: left;">&nbsp;<br>
+                        </span></p>
+                    <table border="1" cellspacing="0" cellpadding="0" align="left" width="462"
+                        style=" height: 21px; width: 466px; margin-right: 4.8pt; margin-left: 4.8pt;">
+                        <tbody>
+                            <tr style="height: 20.3pt;">
+                                <td
+                                    style="height: 20.3pt; width: 82.45pt; padding: 0cm; border-width: 1pt; border-style: inset inset solid; border-top-color: initial; border-right-color: initial; border-bottom-color: #c2c2c2; border-left-color: initial; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;">Nome Cookie</p>
+                                </td>
+                                <td
+                                    style="height: 20.3pt; width: 117.4pt; padding: 0cm; border-top: 1pt inset; border-right: 1pt inset; border-bottom: 1pt solid #c2c2c2; border-left: none; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;">Tipologia</p>
+                                </td>
+                                <td
+                                    style="height: 20.3pt; width: 147pt; padding: 0cm; border-top: 1pt inset; border-right: 1pt inset; border-bottom: 1pt solid #c2c2c2; border-left: none; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;">Descrizione</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width: 82.45pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid #c2c2c2; border-left: 1pt inset; text-align: left;">
+                                    <p class="p1" style="margin-right: 0px; margin-left: 2.9px; text-align: center;">
+                                        Movio Limited</p>
+                                </td>
+                                <td
+                                    style="width: 117.4pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid #c2c2c2; border-left: none; text-align: left;">
+                                    <p class="p1" style="margin-right: 0px; margin-left: 2.9px; text-align: center;">
+                                        Profilazione / pubblicitario</p>
+                                </td>
+                                <td
+                                    style="width: 147pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid #c2c2c2; border-left: none; text-align: left;">
+                                    <p class="p1" style="margin-right: 0px; margin-left: 2.9px; text-align: center;">
+                                        Servizio di advertising Remarketing e behavioral targeting</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width: 82.45pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid #c2c2c2; border-left: 1pt inset; text-align: left;">
+                                </td>
+                                <td
+                                    style="width: 117.4pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid #c2c2c2; border-left: none; text-align: left;">
+                                </td>
+                                <td
+                                    style="width: 147pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid #c2c2c2; border-left: none; text-align: left;">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p class="p1"
+                        style=" margin-right: 0px; margin-bottom: 3px; margin-left: 14.2px; text-align: left;">
+                        <span class="s1">“<strong>Cookie per ottimizzazione del marketing</strong>” di terze
+                            parti</span></p>
+                    <p class="p1" style=" margin: 0px 0px 3px 14.2px; text-align: left;">
+                        Possiamo usare Cookie e web beacon di terze parti per proporre contenuti, incluse pubblicità
+                        rilevanti per gli interessi dell'utente, sui nostri siti o su siti terzi.</p>
+                    <p class="p1" style=" margin: 0px 0px 3px 14.2px; text-align: left;">Ciò
+                        include l'uso di tecnologie per valutare meglio l'utilità di pubblicità e contenuti presentati
+                        all'utente, ad esempio monitorando se ha selezionato o meno un annuncio pubblicitario.</p>
+                    <p class="p1" style=" margin: 0px 0px 3px 14.2px; text-align: left;">
+                        Cookie di targeting possono essere impostati attraverso il nostro sito dai nostri partner
+                        pubblicitari, ad esempio The Walt Disney Company tramite il suo Cookie Oracle BluKai. Possono
+                        essere utilizzati da tali società per creare un profilo dei tuoi film e interessi preferiti e
+                        mostrarti annunci pubblicitari pertinenti su altri siti. Non memorizzano alcuna informazione di
+                        identificazione personale, ma si basano sull'identificazione univoca del browser e del
+                        dispositivo internet.</p>
+                    <p class="p1" style=" margin: 0px 0px 3px 14.2px; text-align: left;">Il
+                        diniego del consenso all’utilizzo dei Cookie di profilazione e marketing di terze parti non
+                        interferirà sulla possibilità di accedere al Sito, ma permetterà una pubblicità meno mirata.</p>
+                    <p class="p2"
+                        style=" margin-top: 0px; margin-right: 0px; margin-left: 14.2px; text-align: left;">
+                        Di seguito i Cookie di marketing di prima parte:</p>
+                    <p class="p1" style=" margin-right: 0px; margin-left: 14.2px;">
+                        <span>&nbsp;</span></p>
+                    <table border="1" cellspacing="0" cellpadding="0" align="left" width="462"
+                        style="height: 21px; width: 466px; margin-right: 4.8pt; margin-left: 4.8pt;">
+                        <tbody>
+                            <tr style="height: 20.3pt;">
+                                <td
+                                    style="height: 20.3pt; width: 82.45pt; padding: 0cm; border-width: 1pt; border-style: inset inset solid; border-top-color: initial; border-right-color: initial; border-bottom-color: #c2c2c2; border-left-color: initial; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;">Nome Cookie</p>
+                                </td>
+                                <td
+                                    style="height: 20.3pt; width: 117.4pt; padding: 0cm; border-top: 1pt inset; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: none; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;">Tipologia</p>
+                                </td>
+                                <td
+                                    style="height: 20.3pt; width: 147pt; padding: 0cm; border-top: 1pt inset; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: none; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;">Descrizione</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width: 82.45pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ;border-left: 1pt inset; text-align: left;">
+                                    <p class="p1" style="margin-right: 0px; margin-left: 2.9px; text-align: center;">
+                                        Google Adwords remarketing</p>
+                                </td>
+                                <td
+                                    style="width: 117.4pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid; border-left: none; text-align: left;">
+                                    <p class="p1" style="margin-right: 0px; margin-left: 2.9px; text-align: center;">
+                                        Profilazione / pubblicitario</p>
+                                </td>
+                                <td
+                                    style="width: 147pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: none; text-align: left;">
+                                    <p class="p1" style="margin-right: 0px; margin-left: 2.9px; text-align: center;">
+                                        Servizio di advertising Remarketing e behavioral targeting</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width: 82.45pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: 1pt inset; text-align: left;">
+                                </td>
+                                <td
+                                    style="width: 117.4pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: none; text-align: left;">
+                                </td>
+                                <td
+                                    style="width: 147pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: none; text-align: left;">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style="margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p class="p1"
+                        style="margin-right: 0px; margin-bottom: 3px; margin-left: 14.2px; text-align: justify;">
+                        <span class="s1">&nbsp;</span></p>
+                    <p class="p1"
+                        style=" margin-right: 0px; margin-bottom: 3px; margin-left: 14.2px; text-align: justify;">
+                        <span class="s1">“<strong>Cookie dei social media</strong>”</span></p>
+                    <p class="p1" style=" margin: 0px 0px 3px 14.2px; text-align: justify;">
+                        Questi Cookie sono impostati da una serie di servizi di social media che abbiamo aggiunto al
+                        sito web per consentire di condividere i nostri contenuti con i tuoi amici e connessioni.</p>
+                    <p class="p1" style=" margin: 0px 0px 3px 14.2px; text-align: justify;">
+                        Sono in grado di monitorare il tuo browser in altri siti e di creare un profilo dei tuoi
+                        interessi. Ciò potrebbe avere un impatto sul contenuto e messaggi visualizzati in altri siti Web
+                        che visiti.</p>
+                    <p class="p2"
+                        style=" margin-top: 0px; margin-right: 0px; margin-left: 14.2px; text-align: justify;">
+                        Se non si accettano questi Cookie, non è possibile utilizzare o visualizzare questi strumenti di
+                        condivisione.</p>
+                    <p class="p1" style=" margin-right: 0px; margin-left: 14.2px;">&nbsp;</p>
+                    <table border="1" cellspacing="0" cellpadding="0" align="left" width="462"
+                        style=" height: 21px; width: 466px; margin-right: 4.8pt; margin-left: 4.8pt;">
+                        <tbody>
+                            <tr style="height: 20.3pt;">
+                                <td
+                                    style="height: 20.3pt; width: 82.45pt; padding: 0cm; border-width: 1pt; border-style: inset inset solid; border-top-color: initial; border-right-color: initial; border-bottom-color: #c2c2c2; border-left-color: initial; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;">Nome Cookie</p>
+                                </td>
+                                <td
+                                    style="height: 20.3pt; width: 117.4pt; padding: 0cm; border-top: 1pt inset; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: none; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;">Tipologia</p>
+                                </td>
+                                <td
+                                    style="height: 20.3pt; width: 147pt; padding: 0cm; border-top: 1pt inset; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: none; text-align: left;">
+                                    <p style="margin: 0cm 2.85pt 0.0001pt; text-align: center;">Descrizione</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width: 82.45pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: 1pt inset; text-align: left;">
+                                    <p class="p1" style="margin-right: 0px; margin-left: 2.9px; text-align: center;">
+                                        Facebook remarketing</p>
+                                </td>
+                                <td
+                                    style="width: 117.4pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: none; text-align: left;">
+                                    <p class="p1" style="margin-right: 0px; margin-left: 2.9px; text-align: center;">
+                                        Profilazione / pubblicitario</p>
+                                </td>
+                                <td
+                                    style="width: 147pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: none; text-align: left;">
+                                    <p class="p1" style="margin-right: 0px; margin-left: 2.9px; text-align: center;">
+                                        Servizio di advertising Remarketing e behavioral targeting</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width: 82.45pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: 1pt inset; text-align: left;">
+                                    <p class="p1" style="margin-right: 0px; margin-left: 2.9px; text-align: center;">
+                                        Facebook Custom Audience</p>
+                                </td>
+                                <td
+                                    style="width: 117.4pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid; border-left: none; text-align: center;">
+                                    <p class="p1" style="margin-right: 0px; margin-left: 2.9px; text-align: center;">
+                                        Profilazione/ pubblicitario</p>
+                                </td>
+                                <td
+                                    style="width: 147pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: none; text-align: center;">
+                                    <p class="p1" style="margin-right: 0px; margin-left: 2.9px; text-align: center;">
+                                        Servizio di advertising Remarketing e behavioral targeting</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width: 82.45pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: 1pt inset; text-align: center;">
+                                    &nbsp;TikTok</td>
+                                <td
+                                    style="width: 117.4pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid; border-left: none; text-align: center;">
+                                    <p class="p1" style="margin-right: 0px; margin-left: 2.9px; text-align: center;">
+                                        Profilazione/ pubblicitario</p>
+                                </td>
+                                <td
+                                    style="width: 147pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid ; border-left: none; text-align: center;">
+                                    &nbsp;
+                                    <p class="p1" style="margin-right: 0px; margin-left: 2.9px; text-align: center;">
+                                        Servizio di advertising Remarketing e behavioral targeting</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="width: 82.45pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid; border-left: 1pt inset; text-align: left;">
+                                </td>
+                                <td
+                                    style="width: 117.4pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid; border-left: none; text-align: left;">
+                                </td>
+                                <td
+                                    style="width: 147pt; padding: 0cm; border-top: none; border-right: 1pt inset; border-bottom: 1pt solid; border-left: none; text-align: left;">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style="margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style= "margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;">&nbsp;</p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;"><strong>&nbsp;</strong></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;"><strong>&nbsp;</strong></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;"><strong>&nbsp;</strong></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;"><strong>&nbsp;</strong></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;"><strong>&nbsp;</strong></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;"><strong>&nbsp;</strong></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;"><strong>&nbsp;</strong></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt;"><strong>&nbsp;</strong></p>
+                    <p style=" margin: 0cm 14.2pt 0.0001pt; text-align: left;"><strong>&nbsp;<br>
+                        </strong><strong style="text-align: justify;"><br>
+                            Per ulteriori informazioni sui Cookie di soggetti terzi relativi alla pubblicità e su come
+                            disattivarli, visita il seguente sito web: www.youronlinechoices.com</strong><span
+                            style="font-weight: lighter;">&nbsp;</span><strong><br>
+                        </strong></p>
+                    <p style="margin: 0cm 14.2pt 0.0001pt; text-align: left;"><span><br>
+                            Per ogni ulteriore informazione sui cookie contattaci scrivendo a: </span><a
+                            href="mailto:getioneprivacy@cinema.it" style="color: blue;"><strong><em><span
+                                        style="color: windowtext;">gestioneprivacy@somniacinema.it</span></em></strong></a>
+                    </p>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="container expand-small">
+
+        </div>
+        <div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-BLACK text-muted GY-5">
+        <!-- Section: Social media -->
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+            <!-- Left -->
+            <div class="me-1 d-none d-lg-block">
+            </div>
+            <!-- Left -->
+
+            <!-- Right -->
+            <div>
+                <a href="" class="me-4 link-secondary">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="" class="me-4 link-secondary">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="" class="me-4 link-secondary">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <i class="fas fa-gem me-3 text-secondary"></i>Somnia Cinema
+                        </h6>
+                        <p>
+                            Chi siamo
+                        </p>
+                        <p>
+                            Lavora con noi
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Note Legali
+                        </h6>
+                        <p>
+                            <a href="Privacy.html" class="text-reset">Privacy Policy</a>
+                        </p>
+                        <p>
+                            <a href="Cookie.html" class="text-reset">Cookie Policy</a>
+                        </p>
+                        <p>
+                            <a href="Condizioni.html" class="text-reset">Condizioni di utilizzo</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Useful links
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Pricing</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Help</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">FAQ</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                        <p><i class="fas fa-home me-3 text-secondary"></i> Via Domodossola 42, Torino</p>
+                        <p>
+                            <i class="fas fa-envelope me-3 text-secondary"></i>
+                            info@somniacinema.com
+                        </p>
+                        <p><i class="fas fa-phone me-3 text-secondary"></i> +32 3920043667</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <div class="row">
+                    <div id="teamKino">
+                        <img src="https://cdn.discordapp.com/attachments/1025133315637915648/1038024954538643516/logo_tk.png"
+                            height="100vw" alt="" class="center">
+                    </div>
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+            © 2022 Copyright:
+            <a class="text-reset" href="https://mdbootstrap.com/">Somnia Cinema</a>
+            <br>
+            <a>A product by Team Kino</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+
+    <!-- Modal Login -->
+    <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="pb-5">
+                        <div id="formLogin">
+                            <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                            <p class="text-white-50 mb-5">Inserire email e password!</p>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="email" id="emailLogin" class="form-control form-control-lg" />
+                                <label class="form-label" for="emailLogin">Email</label>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="password" id="passwordLogin" class="form-control form-control-lg"
+                                    autocomplete="off" />
+                                <label class="form-label" for="passwordLogin">Password</label>
+                            </div>
+
+                            <p class="small pb-lg-2"><a class="text-white-50" href="#!" data-mdb-toggle="modal"
+                                    data-mdb-target="#modalRecuperaPassword">Dimenticato la password?</a></p>
+
+                            <button class="btn btn-outline-light btn-lg px-5" type="submit"
+                                id="submitLogin">Login</button>
+
+                            <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                                <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                                <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                                <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="">Non hai un account? <a href="#!" class="text-white-50 fw-bold"
+                                data-mdb-toggle="modal" data-mdb-target="#modalRegister">Registrati</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Forgot Password -->
+    <div class="modal fade" id="modalRecuperaPassword" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="pb-5">
+
+                        <h2 class="fw-bold mb-2 text-uppercase">Recupera password</h2>
+                        <p class="text-white-50 mb-5">Inserire email!</p>
+
+                        <div class="form-outline form-white mb-4">
+                            <input type="email" id="emailLogin" class="form-control form-control-lg" />
+                            <label class="form-label" for="emailLogin">Email</label>
+                        </div>
+
+                        <button class="btn btn-outline-light btn-lg px-5" type="submit"
+                            id="submitRecupera">Recupera</button>
+
+                        <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                            <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                            <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                            <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="">Non hai un account? <a href="#!" class="text-white-50 fw-bold"
+                                data-mdb-toggle="modal" data-mdb-target="#modalRegister">Registrati</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Login -->
+    <div class="modal fade" id="modalRegister" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="pb-5">
+                        <div id="formRegister">
+                            <h2 class="fw-bold mb-2 text-uppercase">Registrazione</h2>
+                            <p class="text-white-50 mb-5">Inserire i dati per completare la registrazione!</p>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="email" id="emailRegister" class="form-control form-control-lg" />
+                                <label class="form-label" for="emailRegister">Email</label>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="text" id="usernameRegister" class="form-control form-control-lg" />
+                                <label class="form-label" for="usernameRegister">Username</label>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="date" id="dateRegister" class="form-control form-control-lg" />
+                                <label class="form-label" for="dateRegister">Data di nascità</label>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="password" id="passwordRegister" class="form-control form-control-lg" />
+                                <label class="form-label" for="passwordRegister">Password</label>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="password" id="passwordRegisterConfirm"
+                                    class="form-control form-control-lg" />
+                                <label class="form-label" for="passwordRegisterConfirm">Conferma Password</label>
+                            </div>
+
+                            <div class="form-check text-start">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Accetti i termini e le condizioni.
+                                </label>
+                            </div>
+
+                            <div class="container mt-3">
+                                <button class="btn btn-outline-light btn-lg px-5" type="submit"
+                                    id="submitRegister">Registrati</button>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                            <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                            <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                            <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                        </div>
+                    </div>
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL FORM SUCCESS LOGIN/REGISTER -->
+    <div class="modal fade" id="modalRisposta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body text-center rounded-4" id="modaleRisposta">
+                    <h5 class="modal-title" id="contentModalRisposta"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

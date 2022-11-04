@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: black !important;">
+            <!-- Container wrapper -->
+            <div class="container mt-3 mb-3">
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                    <!-- Navbar brand -->
+                    <div>
+                        <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                            <img src="img/logo.png" height="auto" width="230px" alt="MDB Logo" loading="lazy" />
+                        </a>
+                    </div>
+                    <!-- Left links -->
+                    <div>
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+                            <li class="nav-item mx-2">
+                                <a class="nav-link sezione" href="index.html">Biglietteria</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link sezione" href="classifica.html">Classifica</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link sezione" href="News&Offerte.html">News</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link sezione" href="#">Coming soon</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <p style="color: black">asdasdasdasd</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div></div>
+                    <!-- Left links -->
+                </div>
+                <!-- Collapsible wrapper -->
+
+                <!-- Right elements -->
+                <div class="d-flex align-items-center">
+                    <!-- Notifications -->
+                    <div class="dropdown" style="display:none">
+                        <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
+                            role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item elemento-tendina" href="#">Some news</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item elemento-tendina" href="#">Another news</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item elemento-tendina" href="#">Something else here</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Avatar -->
+                    <div>
+                        <button id="btnLogin" style="display: block;" type="button" class="btn btn-outline-warning me-3"
+                            data-mdb-toggle="modal" data-mdb-target="#modalLogin">Login</button>
+                        <div id="containerImg" class="dropdown  me-3" style="display: none;">
+                            <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
+                                id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown"
+                                aria-expanded="false">
+                                <img id="imgProfilo" src="img/avatar/profilo1.png" class="rounded-circle" height="35"
+                                    alt="Black and White Portrait of a Man" loading="lazy" />
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                                <li>
+                                    <a id="clickProfilo" class="dropdown-item elemento-tendina"
+                                        href="profilo.html">Profilo</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item elemento-tendina" href="#">Impostazioni</a>
+                                </li>
+                                <li>
+                                    <a id="btnLogout" class="dropdown-item elemento-tendina" href="#">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Icon -->
+                    <a class="text-reset" href="#">
+                        <img src="img/icona_carrello.png" alt="" width="77re">
+                    </a>
+                </div>
+                <!-- Right elements -->
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+    </header>
+
+    <!-- RIGHE E COLONNE NEWS -->
+    <main id="main" role="main">
+        <h1 class="sr-only">Privacy policy</h1>
+
+        <script type="text/javascript">
+            if (dataLayer) dataLayer.push(JSON.parse("{\"pageCategory1\":\"site\",\"pageCategory2\":\"info\",\"userLoggedIn\":\"f\",\"userId\":\"na\",\"userSex\":\"na\",\"userAge\":\"na\",\"userRegisterDate\":null,\"venue\":\"Torino\",\"productId\":\"na\",\"productTitle\":\"na\",\"productType\":\"na\",\"productGenres\":null,\"productDistributor\":\"na\"}"));
+
+        </script>
+
+        </div>
+        <div id="article-content-area" class="generic-content content-light content-light--solid">
+
+            <div class="container container-tiny generic-content__text written-content">
+                <div class="wysiwyg">
+                    <p style="text-align: center;"><span style="text-align: center;"><strong>&nbsp;<span
+                                    style="text-decoration: underline; font-size: 19px;">PRIVACY
+                                    POLICY</span></strong></span></p>
+                    <p style="text-align: left;">&nbsp;</p>
+                    <p><span>Le seguenti norme sulla privacy - da intendersi rese anche quale informativa ai sensi
+                            dell'art. 13 del Regolamento europeo 2016/679 “General Data Protection Regulation” - hanno
+                            lo scopo di descrivere le procedure di raccolta e utilizzo dei dati personali attraverso
+                            questo sito internet e sono rivolte agli utenti e ai fruitori dei servizi web di “The Somnia
+                            Cinema”, accessibili per via telematica a partire dall'indirizzo: </span></p>
+                    <p style="text-align: left;"><a href="">www.somniacinema.it</a></p>
+                    <p><span>corrispondente alla pagina iniziale del sito ufficiale del Gruppo The Somnia Cinema.</span>
+                    </p>
+                    <p><span>&nbsp;</span></p>
+                    <p><span></span><span style="font-size: 19px; font-weight: lighter; color: #F18E00;">Titolare del
+                            trattamento dati e DPO e Responsabili esterni</span></p>
+                    <p class="p1" style="margin-right: 0px; margin-bottom: 12px; margin-left: 0px;"><span
+                            class="s1">Titolare del trattamento dei dati è The Somnia Cinema 1 SpA (di seguito il
+                            “Titolare” o la “Società”).<span class="Apple-converted-space">&nbsp;</span></span></p>
+                    <p class="p1" style="margin: 0px 0px 12px;"><span class="s1">Il Titolare ha designato Data
+                            Protection Officer (di seguito “DPO”) il Dott. Cosimo Calabrese, contattabile, per tutte le
+                            questioni relative al trattamento dei tuoi dati personali e all'esercizio dei tuoi diritti
+                            previsti dal GDPR, al seguente indirizzo di posta elettronica:<span
+                                class="Apple-converted-space">&nbsp;</span></span><a href="mailto:dpo@somniacinema.it"
+                            style="font-weight: lighter; text-align: justify; font-size: small;">dpo@somniacinema.it</a><span
+                            style="font-weight: lighter; text-align: justify; font-size: small;">.</span></p>
+                    <p class="p1"
+                        style="margin-right: 0px; margin-bottom: 12px; margin-left: 0px;">
+                        <span class="s1">Sono stati nominati Responsabili esterni per lo svolgimento di servizi digitali
+                            ed informatici. Un elenco dei Responsabili nominati è presente presso il Titolare del
+                            trattamento.<span class="Apple-converted-space">&nbsp;</span></span>
+                    </p>
+                    <p class="p1"
+                        style=" margin-right: 0px; margin-bottom: 12px; margin-left: 0px;">
+                        &nbsp;</p>
+                    <p><span style="text-align: justify; font-weight: lighter; font-size: 18px; color: #F18E00;">
+                            Oggetto e tipologia del trattamento dati effettuato</span></p>
+                    <p><span>Il Titolare tratta i dati personali, esclusivamente di natura non sensibile, comunicati
+                            dall'interessato tramite il sito internet in fase di: </span></p>
+                    <p><strong> </strong></p>
+                    <div class="page" title="Page 1"><strong>
+                            <div class="section">
+                                <div class="layoutArea">
+                                    <div class="column">
+                                        <p> </p>
+                                        <div class="page" title="Page 1">
+                                            <div class="section" >
+                                                <div class="layoutArea">
+                                                    <div class="column">
+                                                        <ul style="list-style-type: none;">
+                                                            <li>
+                                                                <p><span>- &nbsp;“Registrazione”; </span></p>
+                                                            </li>
+                                                            <li>
+                                                                <p><span>- &nbsp;acquisto biglietto; </span></p>
+                                                            </li>
+                                                            <li>
+                                                                <p><span>- &nbsp;adesione alla “SomniCards”; </span>
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p><span>- &nbsp;“Contattaci”;</span></p>
+                                                            </li>
+                                                            <li>
+                                                                <p><span>- &nbsp;“Lavora con noi”;</span></p>
+                                                            </li>
+                                                            <li>
+                                                                <p><span><br>
+                                                                        compilando gli appositi form e rilasciando i
+                                                                        consensi al trattamento dati personali
+                                                                        specificatamente richiesti.</span><span></span>
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p><span>&nbsp;</span></p>
+                                                            </li>
+                                                            <li>
+                                                                <p class="p1"
+                                                                    style=" margin-right: 0px; margin-bottom: 12px; margin-left: 0px;">
+                                                                    <span class="s1">Oltre a questi dati, liberamente
+                                                                        immessi dall'utente sul sito, potrebbero essere
+                                                                        trattati anche dati di navigazione, raccolti a
+                                                                        seguito dell'utilizzo dei nostri servizi da
+                                                                        parte dell'utente e, in particolare:</span>
+                                                                </p>
+                                                            </li>
+                                                        </ul>
+                                                        <ul style="list-style-type: none;">
+                                                            <li>
+                                                                <p><span>- &nbsp;informazioni sul dispositivo con cui
+                                                                        l'utente si connette; </span></p>
+                                                            </li>
+                                                            <li>
+                                                                <p><span>- &nbsp;informazioni specifiche del dispositivo
+                                                                        (ad esempio il tipo di dispositivo, informazioni
+                                                                        sulla rete mobile); </span></p>
+                                                            </li>
+                                                            <li>
+                                                                <p><span>- &nbsp;Informazioni sui log. Durante
+                                                                        l'utilizzo da parte dell'utente dei nostri
+                                                                        servizi o la visualizzazione di contenuti
+                                                                        forniti dal Titolare, potremmo raccogliere e
+                                                                        memorizzare automaticamente alcune informazioni
+                                                                        nei log del server. Queste informazioni
+                                                                        potrebbero comprendere: dati sulla modalità di
+                                                                        utilizzo del nostro servizio, come le query di
+                                                                        ricerca; informazioni sui dati della connessione
+                                                                        a internet quali indirizzo IP e tutti i dati ad
+                                                                        esso collegati; informazioni sugli eventi del
+                                                                        dispositivo quali attività di sistema,
+                                                                        impostazioni hardware, tipo di browser e lingua,
+                                                                        data e ora delle richieste e degli URL di
+                                                                        riferimento; cookie che potrebbero identificare
+                                                                        in modo univoco il browser o l'account
+                                                                        dell'utente. </span></p>
+                                                                <p class="p1"
+                                                                    style=" margin-right: 0px; margin-bottom: 12px; margin-left: 0px;">
+                                                                    <span class="s1">Noi e i nostri partner potremmo
+                                                                        utilizzare diverse tecnologie per raccogliere e
+                                                                        memorizzare informazioni quando viene visitata
+                                                                        la pagina web che potrebbero prevedere l'invio
+                                                                        di uno o più cookie o identificatori anonimi al
+                                                                        dispositivo dell'utente.<span
+                                                                            class="Apple-converted-space">&nbsp;</span></span>Leggi
+                                                                    la <a
+                                                                        href="~/link.aspx?_id=73EEA62F3FA94C1AA08A37C0E178EC25&amp;_z=z">Cookie
+                                                                        policy</a>.
+                                                                </p>
+                                                            </li>
+                                                        </ul>
+                                                        <p class="p1"
+                                                            style="margin-right: 0px; margin-bottom: 12px; margin-left: 0px;">
+                                                            &nbsp;</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </strong></div>
+                    <span style="font-size: 19px; color: #F18E00;">
+                        Finalità del trattamento<br>
+                    </span>
+                    <p class="p1"
+                        style="margin-right: 0px; margin-bottom: 12px; margin-left: 0px;">
+                        <span class="s1">I dati di navigazione saranno utilizzati al fine di ricavare informazioni
+                            statistiche anonime sull'uso della pagina web.</span>
+                    </p>
+                    <p><span>Gli altri dati personali, volontariamente forniti al Titolare, saranno trattati - anche
+                            senza l'espresso consenso dell'interessato ed in conformità all'art. 6 lett. b, c ed f del
+                            GDPR (basi giuridiche del trattamento) - per le seguenti finalità:</span></p>
+                    <p><span></span><span style="background-color: #000000; font-weight: lighter;">art. 6 lett. b,
+                            esecuzione di un contratto o di un servizio richiesto dall'interessato:</span><span
+                            class="Apple-converted-space"
+                            style="font-weight: lighter;">&nbsp;</span></p>
+                    <div class="page" title="Page 2">
+                        <div class="section">
+                            <div class="layoutArea">
+                                <div class="column">
+                                    <ul style="list-style-type: none;">
+                                        <li>
+                                            <ul class="ul1" style="list-style-type: none;">
+                                                <li class="li1" style="margin: 0px 0px 12px;"><span class="s1"></span>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="li1" style="margin: 0px;"><span class="s1"
+                                               >- &nbsp;fornire il servizio di
+                                                vendita biglietti;<span
+                                                    class="Apple-converted-space">&nbsp;</span></span></li>
+                                        <li class="li1" style="margin: 0px;"><span class="s1"
+                                                >- &nbsp;successiva gestione dei
+                                                biglietti acquistati;<span
+                                                    class="Apple-converted-space">&nbsp;</span></span></li>
+                                        <li class="li1" style="margin: 0px;"><span class="s1"
+                                                >- &nbsp;riscontrare le richieste
+                                                avanzate dall'interessato;<span
+                                                    class="Apple-converted-space">&nbsp;</span></span></li>
+                                        <li class="li2" style=" margin: 0px;"><span
+                                                class="s3">- &nbsp;inviare comunicazioni di servizio, anche con
+                                                riferimento a modifiche di termini contrattuali, contenuti, condizioni e
+                                                politiche adottate;</span></li>
+                                    </ul>
+                                    <p class="li2" style="margin: 0px;"><span
+                                            class="s3">&nbsp;</span></p>
+                                    <p class="li2" style="margin: 0px;"><span
+                                            class="s3"></span><span style="font-weight: lighter;">art. 6 lett. c.,
+                                            esecuzione di un obbligo di legge:</span></p>
+                                    <p class="p1"
+                                        style=" margin-right: 0px; margin-left: 36px;"><span
+                                            class="s1">- adempiere agli obblighi derivanti dalla legge, da regolamenti,
+                                            dalla normativa comunitaria o da un ordine dell'Autorità;</span></p>
+                                    <p class="p1"
+                                        style=" margin-right: 0px; margin-bottom: 12px;"><span
+                                            class="s1">art, 6 lett. f., interesse legittimo del Titolare del
+                                            trattamento:<span class="Apple-converted-space"></span></span></p>
+                                    <ul class="ul1" style="list-style-type: none;">
+                                        <li class="li1" style="margin: 0px;"><span class="s1">- &nbsp;prevenire o
+                                                scoprire attività fraudolente o abusive nei confronti del sito web;<span
+                                                    class="Apple-converted-space">&nbsp;</span></span></li>
+                                        <li class="li1" style="margin: 0px;"><span class="s1">- &nbsp;esercitare ogni
+                                                altro diritto del Titolare, come il diritto di difesa in giudizio,
+                                                nonché ogni</span><span class="s2"> </span><span class="s1">altro
+                                                trattamento compatibile con le predette finalità.<span
+                                                    class="Apple-converted-space">&nbsp;</span></span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="p1"
+                        style=" margin-right: 0px; margin-bottom: 12px; margin-left: 0px;">
+                        <span class="s1">I medesimi dati saranno invece trattati, solo previo libero e specifico
+                            consenso dell'interessato, per finalità di comunicazione commerciale e marketing e per
+                            informare su progetti, iniziative, proposte di The Somnia Cinema</span>
+                    </p>
+                    <p class="p1"
+                        style=" margin-right: 0px; margin-bottom: 12px; margin-left: 0px;">
+                        <span class="Apple-converted-space">&nbsp;</span>
+                    </p>
+                    <p class="p1"
+                        style=" margin-right: 0px; margin-bottom: 12px; margin-left: 0px;">
+                        <span class="Apple-converted-space"></span>
+                    </p>
+                    <p><span style="font-size: 18px; color: #F18E00;">Durata del trattamento</span></p>
+                    <p class="p1" style="margin-right: 0px; margin-bottom: 12px; margin-left: 0px;"><span class="s1"
+                            style="background-color: #000000;">I dati personali saranno trattati per il tempo necessario
+                            a conseguire gli scopi per i quali sono stati raccolti. Si evidenzia in particolare che i
+                            dati di navigazione verranno cancellati entro 2 anni dalla loro elaborazione.<span
+                                class="Apple-converted-space">&nbsp;</span></span></p>
+                    <p class="p2" style=" margin: 0px 0px 12px;"><span class="s2">In ogni caso
+                            è fatto salvo un periodo di conservazione superiore, ove richiesto da norme di legge o
+                            regolamento</span></p>
+                    <p class="p2" style=" margin: 0px 0px 12px;"><span
+                            class="Apple-converted-space">&nbsp;</span></p>
+                    <p class="p2" style=" margin: 0px 0px 12px;"><span
+                            class="Apple-converted-space"></span></p>
+                    <p><span style="font-size: 18px; color: #F18E00;">Comunicazione e trasferimento dei dati<br>
+                        </span></p>
+                    <p class="p1" style="margin-right: 0px; margin-bottom: 12px; margin-left: 0px;"><span class="s1"
+                            >I dati potranno essere comunicati a soggetti pubblici e
+                            privati, persone fisiche e/o giuridiche (studi di consulenza legale, amministrativa e
+                            fiscale, eventuali società informatiche ed altri) nei cui confronti la comunicazione sia
+                            necessaria per il perseguimento di finalità contrattuali, amministrative, contabili, nonché
+                            per garantire agli interessati l'utilizzo e la fruizione del sito web.<span
+                                class="Apple-converted-space">&nbsp;</span></span></p>
+                    <p class="p1" style="margin: 0px 0px 12px;"><span class="s1">I
+                            dati potranno essere comunicati altresì ad altri soggetti, quando la comunicazione sia
+                            prevista o imposta dalla legge.<span class="Apple-converted-space">&nbsp;</span></span></p>
+                    <p class="p2" style=" margin: 0px 0px 12px;"><span class="s2">I dati
+                            personali saranno trattati all'interno del territorio dell'Unione Europea. Qualora per
+                            questioni di natura tecnica e/o operativa si renda necessario avvalersi di soggetti ubicati
+                            al di fuori dell'Unione Europea, si garantisce sin d'ora che il trasferimento a tali
+                            soggetti, limitatamente allo svolgimento di specifiche attività di Trattamento, sarà
+                            effettuato in conformità a quanto previsto dal GDPR.</span></p>
+                    <p class="p2" style=" margin: 0px 0px 12px;"><span
+                            class="Apple-converted-space">&nbsp;</span></p>
+                    <p class="p2" style=" margin: 0px 0px 12px;"><span
+                            class="Apple-converted-space"></span></p>
+                    <p><span style="font-size: 18px; color: #F18E00;">Diritti degli interessati<br>
+                        </span></p>
+                    <p><span>Ai sensi degli artt. 13, 15-22 del GDPR, l'interessato ha il diritto, in particolare:
+                        </span></p>
+                    <p><span></span></p>
+                    <div class="page" title="Page 2">
+                        <div class="section">
+                            <div class="layoutArea">
+                                <div class="column">
+                                    <ul style="list-style-type: none;">
+                                        <li>
+                                            <p><span>- &nbsp;</span><span>di ottenere la conferma che sia o meno in
+                                                    corso un trattamento di dati personali che</span><span> lo
+                                                    riguardano; </span> </p>
+                                        </li>
+                                        <li>
+                                            <p><span>- &nbsp;</span><span>di ottenere l'accesso ai dati e alle seguenti
+                                                    informazioni (finalità del trattamento,</span><span> categorie di
+                                                    dati personali, destinatari e/o categorie di destinatari, periodo di
+                                                    conservazione); </span></p>
+                                        </li>
+                                        <li>
+                                            <p><span>- &nbsp;</span><span>di ottenere la rettifica o integrazione dei
+                                                    dati personali inesatti che lo riguardano; </span></p>
+                                        </li>
+                                        <li>
+                                            <p><span>- &nbsp;</span><span>di ottenere la cancellazione dei dati
+                                                    personali che lo riguardano nei casi previsti</span><span> dall'art.
+                                                    18 GDPR; </span> </p>
+                                        </li>
+                                        <li>
+                                            <p><span>- &nbsp;</span><span>di ottenere che i dati personali che lo
+                                                    riguardano siano solo conservati senza che di</span><span> essi sia
+                                                    fatto altro uso nei seguenti casi previsti dall'art. 18 GDPR;
+                                                </span> </p>
+                                        </li>
+                                        <li>
+                                            <p><span>- &nbsp;</span><span>di ricevere in un formato di uso comune,
+                                                    leggibile da dispositivo automatico e interoperabile, i dati
+                                                    personali che lo riguardano trattati con mezzi automatizzati,
+                                                    se</span><span> essi sono trattati in forza di contratto o sulla
+                                                    base del suo consenso.</span><br>
+                                                <span> </span>
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p><span style="font-weight: lighter;">Infine, l'interessato ha diritto di rivolgersi all'Autorità
+                            di controllo per presentare reclamo.</span><span class="Apple-converted-space"
+                            style="font-weight: lighter;">&nbsp;</span></p>
+                    <p class="p1" style="margin: 0px 0px 12px;"><span class="s1">Per qualsiasi richiesta o
+                            comunicazione, ovvero per esercitare i Suoi diritti, può contattare il Titolare del
+                            trattamento inviando una e-mail: <strong><em><a
+                                        href="">gestioneprivacy@somniacinema.it<span
+                                            class="Apple-converted-space"></span></a></em></strong></span></p>
+                    <p class="p1" style="margin: 0px 0px 12px;">&nbsp;</p>
+                    <p><span style="font-size: 18px; color: #F18E00;">Modifiche alla presente informativa</span></p>
+                    <p><span >
+                        </span></p>
+                    <div>
+                        <div class="page" title="Page 2">
+                            <div class="section" >
+                                <div class="layoutArea">
+                                    <div class="column">
+                                        <p><span>Il Titolare si riserva la facoltà di aggiornare in qualsiasi momento
+                                                la presente informativa. Si consiglia, pertanto, di procedere a
+                                                periodiche verifiche, al fine di essere aggiornati sulla privacy policy
+                                                della Società. In caso di modifiche sostanziali alla politica, verrà
+                                                pubblicato un avviso sul Sito, insieme alla Politica sulla privacy
+                                                aggiornata </span></p>
+                                        <p><span></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="container expand-small">
+
+        </div>
+        <div>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-BLACK text-muted GY-5">
+        <!-- Section: Social media -->
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+            <!-- Left -->
+            <div class="me-1 d-none d-lg-block">
+            </div>
+            <!-- Left -->
+
+            <!-- Right -->
+            <div>
+                <a href="" class="me-4 link-secondary">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="" class="me-4 link-secondary">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="" class="me-4 link-secondary">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <i class="fas fa-gem me-3 text-secondary"></i>Somnia Cinema
+                        </h6>
+                        <p>
+                            Chi siamo
+                        </p>
+                        <p>
+                            Lavora con noi
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Note Legali
+                        </h6>
+                        <p>
+                            <a href="Privacy.html" class="text-reset">Privacy Policy</a>
+                        </p>
+                        <p>
+                            <a href="Cookie.html" class="text-reset">Cookie Policy</a>
+                        </p>
+                        <p>
+                            <a href="Condizioni.html" class="text-reset">Condizioni di utilizzo</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Useful links
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Pricing</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Help</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">FAQ</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                        <p><i class="fas fa-home me-3 text-secondary"></i> Via Domodossola 42, Torino</p>
+                        <p>
+                            <i class="fas fa-envelope me-3 text-secondary"></i>
+                            info@somniacinema.com
+                        </p>
+                        <p><i class="fas fa-phone me-3 text-secondary"></i> +32 3920043667</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <div class="row">
+                    <div id="teamKino">
+                        <img src="https://cdn.discordapp.com/attachments/1025133315637915648/1038024954538643516/logo_tk.png"
+                            height="100vw" alt="" class="center">
+                    </div>
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+            © 2022 Copyright:
+            <a class="text-reset" href="https://mdbootstrap.com/">Somnia Cinema</a>
+            <br>
+            <a>A product by Team Kino</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+
+    <!-- Modal Login -->
+    <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="pb-5">
+                        <div id="formLogin">
+                            <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                            <p class="text-white-50 mb-5">Inserire email e password!</p>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="email" id="emailLogin" class="form-control form-control-lg" />
+                                <label class="form-label" for="emailLogin">Email</label>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="password" id="passwordLogin" class="form-control form-control-lg"
+                                    autocomplete="off" />
+                                <label class="form-label" for="passwordLogin">Password</label>
+                            </div>
+
+                            <p class="small pb-lg-2"><a class="text-white-50" href="#!" data-mdb-toggle="modal"
+                                    data-mdb-target="#modalRecuperaPassword">Dimenticato la password?</a></p>
+
+                            <button class="btn btn-outline-light btn-lg px-5" type="submit"
+                                id="submitLogin">Login</button>
+
+                            <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                                <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                                <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                                <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="">Non hai un account? <a href="#!" class="text-white-50 fw-bold"
+                                data-mdb-toggle="modal" data-mdb-target="#modalRegister">Registrati</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Forgot Password -->
+    <div class="modal fade" id="modalRecuperaPassword" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="pb-5">
+
+                        <h2 class="fw-bold mb-2 text-uppercase">Recupera password</h2>
+                        <p class="text-white-50 mb-5">Inserire email!</p>
+
+                        <div class="form-outline form-white mb-4">
+                            <input type="email" id="emailLogin" class="form-control form-control-lg" />
+                            <label class="form-label" for="emailLogin">Email</label>
+                        </div>
+
+                        <button class="btn btn-outline-light btn-lg px-5" type="submit"
+                            id="submitRecupera">Recupera</button>
+
+                        <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                            <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                            <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                            <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="">Non hai un account? <a href="#!" class="text-white-50 fw-bold"
+                                data-mdb-toggle="modal" data-mdb-target="#modalRegister">Registrati</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Login -->
+    <div class="modal fade" id="modalRegister" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="pb-5">
+                        <div id="formRegister">
+                            <h2 class="fw-bold mb-2 text-uppercase">Registrazione</h2>
+                            <p class="text-white-50 mb-5">Inserire i dati per completare la registrazione!</p>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="email" id="emailRegister" class="form-control form-control-lg" />
+                                <label class="form-label" for="emailRegister">Email</label>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="text" id="usernameRegister" class="form-control form-control-lg" />
+                                <label class="form-label" for="usernameRegister">Username</label>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="date" id="dateRegister" class="form-control form-control-lg" />
+                                <label class="form-label" for="dateRegister">Data di nascità</label>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="password" id="passwordRegister" class="form-control form-control-lg" />
+                                <label class="form-label" for="passwordRegister">Password</label>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <input type="password" id="passwordRegisterConfirm"
+                                    class="form-control form-control-lg" />
+                                <label class="form-label" for="passwordRegisterConfirm">Conferma Password</label>
+                            </div>
+
+                            <div class="form-check text-start">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Accetti i termini e le condizioni.
+                                </label>
+                            </div>
+
+                            <div class="container mt-3">
+                                <button class="btn btn-outline-light btn-lg px-5" type="submit"
+                                    id="submitRegister">Registrati</button>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                            <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                            <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                            <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                        </div>
+                    </div>
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL FORM SUCCESS LOGIN/REGISTER -->
+    <div class="modal fade" id="modalRisposta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body text-center rounded-4" id="modaleRisposta">
+                    <h5 class="modal-title" id="contentModalRisposta"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
