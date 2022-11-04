@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream</title>
+    <link rel="stylesheet" href="css/styleadmin.css">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: black !important;">
+            <!-- Container wrapper -->
+            <div class="container mt-3 mb-3">
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                    <!-- Navbar brand -->
+                    <div>
+                        <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                            <img src="img/logo.png" height="auto" width="230px" alt="MDB Logo" loading="lazy" />
+                        </a>
+                    </div>
+                    <!-- Left links -->
+                    <div>
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+                            <li class="nav-item mx-2">
+                                <a class="nav-link sezione" href="#">Biglietteria</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link sezione" href="#">Classifica</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link sezione" href="#">News</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link sezione" href="#">Coming soon</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <p style="color: black">asdasdasdasd</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div></div>
+                    <!-- Left links -->
+                </div>
+                <!-- Collapsible wrapper -->
+
+                <!-- Right elements -->
+                <div class="d-flex align-items-center">
+                    <!-- Notifications -->
+                    <div class="dropdown" style="display:none">
+                        <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
+                            role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item elemento-tendina" href="#">Some news</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item elemento-tendina" href="#">Another news</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item elemento-tendina" href="#">Something else here</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Avatar -->
+                    <!--<div>
+                        <button id="btnLogout" type="button" class="btn btn-outline-warning me-3">Logout</button>
+                    </div>-->
+
+
+                    <!-- Icon -->
+                    <a class="text-reset" href="#">
+                        <img src="img/icona_carrello.png" alt="" width="77re">
+                    </a>
+                </div>
+                <!-- Right elements -->
+                <div class="dropdown">
+                    <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
+                        id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                        <img src="img/avatar/profilo3.png" class="rounded-circle" height="35"
+                            alt="Black and White Portrait of a Man" loading="lazy" />
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                        <li>
+                            <a class="dropdown-item elemento-tendina" href="#">My profile</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item elemento-tendina" href="#">Settings</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item elemento-tendina" href="#">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Container wrapper -->
+
+        </nav>
+        <!-- Navbar -->
+
+    </header>
+    <h1>ADMIN PANEL</h1>
+    <div class="row">
+        <div class="col">
+            <!-- button lista film -->
+
+            <div class="col">
+                <button type="button" class="btn" id="bt-1" data-bs-toggle="modal" data-bs-target="#modalFilm">
+                    Lista Film
+                </button>
+            </div>
+        </div>
+        <!-- button lista prenotazioni -->
+        <div class="col">
+            <button type="button" class="btn" id="bt-1" data-bs-toggle="modal" data-bs-target="#modalPrenotazioni">
+                Lista Prenotazioni
+            </button>
+        </div>
+        <!-- button tema -->
+        <div class="col">
+            <button type="button" class="btn" id="bt-1" data-bs-toggle="modal" data-bs-target="#modalTema">
+                Cambia Tema
+            </button>
+        </div>
+
+    </div>
+    <!-- Modal Prenotazioni -->
+    <div class="modal fade" id="modalPrenotazioni" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Lista Prenotazioni</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modalTXT1">
+                        <div class="row">
+                            <div class="col" id="idPrenotazione">
+                                ID
+                            </div>
+                            <div class="col" id="username">
+                                USERNAME
+                            </div>
+                            <div class="col" id="titoloFilm">
+                                FILM
+                            </div>
+                        </div>
+                        <div class="modalTXT2">
+                        <div class="row">
+                        <div class="col" id="idPrenotazione">
+                            10201
+                        </div>
+                        <div class="col" id="username">
+                            samucard
+                        </div>
+                        <div class="col" id="titoloFilm">
+                            Black Adam
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary">Aggiungi</button>
+                    <button type="button" class="btn btn-primary">Elimina</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Film -->
+    <div class="modal fade" id="modalFilm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalFilm">Lista Film</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row" id="titolo">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                            </label>
+                            <td>Black Adam</td>
+                        </div>
+                    </div>
+                    <div class="row" id="titolo">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                            </label>
+                            <td>Black Adam</td>
+                        </div>
+                    </div>
+                    <div class="row" id="titolo">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                            </label>
+                            <td>Black Adam</td>
+                        </div>
+                    </div>
+                    <div class="row" id="titolo">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                            </label>
+                            <td>Black Adam</td>
+                        </div>
+                    </div>
+                    <div class="row" id="titolo">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                            </label>
+                            <td>Black Adam</td>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Elimina </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <!-- Modal Thema -->
+    <div class="modal fade" id="modalTema" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Lista Temi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row" id="titolo">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                            </label>
+                            <td>Standard</td>
+                        </div>
+                    </div>
+                    <div class="row" id="titolo">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                            </label>
+                            <td>Natale</td>
+                        </div>
+                    </div>
+                    <div class="row" id="titolo">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                            </label>
+                            <td>Halloween</td>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Salva</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-BLACK text-muted GY-5">
+        <!-- Section: Social media -->
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+            <!-- Left -->
+            <div class="me-1 d-none d-lg-block">
+            </div>
+            <!-- Left -->
+
+            <!-- Right -->
+            <div>
+                <a href="" class="me-4 link-secondary">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="" class="me-4 link-secondary">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="" class="me-4 link-secondary">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <i class="fas fa-gem me-3 text-secondary"></i>Somnia Cinema
+                        </h6>
+                        <p>
+                            Dove i tuoi sogni diventano realtà
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Products
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Angular</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">React</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Useful links
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Pricing</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Help</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                        <p><i class="fas fa-home me-3 text-secondary"></i> Via Domodossola 42, Torino</p>
+                        <p>
+                            <i class="fas fa-envelope me-3 text-secondary"></i>
+                            info@somniacinema.com
+                        </p>
+                        <p><i class="fas fa-phone me-3 text-secondary"></i> +32 3920043667</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+            © 2022 Copyright:
+            <a class="text-reset" href="https://mdbootstrap.com/">SOMNIA CINEMA</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

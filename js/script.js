@@ -108,10 +108,10 @@ $(document).ready(function () {
     (async () => {
         if (window.location.href.indexOf("/profilo.html") > -1) {
             $.cookie("username", new URLSearchParams(window.location.search))
-            if($.cookie("profilo") != null & $.cookie("profilo") != ""){
+            if ($.cookie("profilo") != null & $.cookie("profilo") != "") {
                 info = JSON.parse($.cookie("profilo"));
             }
-            infoOspite = await getUserInfoUsername($.cookie("username").substring(0, $.cookie("username").length - 1));  
+            infoOspite = await getUserInfoUsername($.cookie("username").substring(0, $.cookie("username").length - 1));
             impostaPaginaUtente();
             if (checkCookieTime()) {
                 checkModificaProfiloPossibile();
@@ -189,14 +189,14 @@ $(document).ready(function () {
     }
 
     async function getUserInfo(email) {
-        info= await getUserInfoByEmail(email);
+        info = await getUserInfoByEmail(email);
         console.log("denrtro" + info);
         console.log("asd1" + $.cookie("profilo"))
         return info;
         //return JSON.parse($.cookie("profilo"));
     };
 
-    async function getUserInfoByEmail(email){
+    async function getUserInfoByEmail(email) {
         info = null;
         await $.get('http://localhost:8080/api/email/' + email, function (response) {
             let uInfo = {
@@ -500,7 +500,7 @@ $(document).ready(function () {
     //prova a vedere se l'utente che modifica il profilo è lo stesso utente del profilo che si visualizza
     function checkModificaProfiloPossibile() {
         //info = $.cookie("profilo");
-        console.log("asd"+infoOspite);
+        console.log("asd" + infoOspite);
         console.log(info);
         if (info != null & info != "" & infoOspite != null) {
             //info = JSON.parse(info);
@@ -634,11 +634,17 @@ $(document).ready(function () {
 
     //PRENOTAZIONI////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     $('#iconaCarello').click(function () {
-        if (checkCookieTime()) {
-            window.location = "http://127.0.0.1:5500/prenotazioni.html"
+        window.location = "http://127.0.0.1:5500/prenotazioni.html"       
+    });
 
+    (async ()=>{
+        if(window.location == "http://127.0.0.1:5500/prenotazioni.html"){
+            console.log(extractPayload($.cookie("jwt"))[0])
+            info = await getUserInfoByEmail(extractPayload($.cookie("jwt"))[0]);
+            let prenotazioniUtenteComplete = await trovaPrenotazioniComplete(info.prenotazioni);
+            appendPrenotazioni(prenotazioniUtenteComplete);
         }
-    })
+    })();
 
     async function getProiezioni() {
         let proiezioni = null;
@@ -652,28 +658,86 @@ $(document).ready(function () {
         let films = await getFilm();
         let prenotazioniUtenteComplete = [];
         let posti = await getPosti();
+        let sale = await getSale();
         let c = 0;
         for (let prenotazione of prenotazioni) {
             for (film of films) {
-                for (proiezione of film.proiezione) {
+                //console.log(film)
+                //console.log(film.proiezioni)
+                for (proiezione of film.proiezioni) {
                     for (prenot of proiezione.prenotazioni) {
                         if (prenot.id == prenotazione.id) {
-                            let numPosto = await trovaNumeroPosto(posti,prenotazione)
-                            let prenotazioneCompleta = {
-                                nomeFilm: film.nome,
-                                imgFilm: film.img,
-                                dataFilm: proezione.data,
-                                oraFilm: proiezione.oraInizio,
-                                numPosto: numPosto
+                            for (let sala of sale) {
+                                for (proiez of sala.proiezioni) {
+                                    if (proiez.id == proiezione.id) {
+                                        let numPosto = await trovaNumeroPosto(posti, prenotazione)
+                                        let prenotazioneCompleta = {
+                                            nomeFilm: film.nome,
+                                            imgFilm: film.img,
+                                            dataFilm: proiezione.data,
+                                            oraFilm: proiezione.oraInizio,
+                                            numPosto: numPosto,
+                                            numSala: sala.id,
+                                            idPrenotazione: prenot.id,
+                                            valutazione: prenot.valutazione
+                                        }
+                                        prenotazioniUtenteComplete[c] = prenotazioneCompleta;
+                                        c++;
+                                    }
+                                }
+
                             }
-                            prenotazioniUtenteComplete[c] = prenotazioneCompleta;
-                            c++;
                         }
                     }
                 }
             }
         }
+        console.log("prenotazioni complete:" + prenotazioniUtenteComplete)
         return prenotazioniUtenteComplete;
+    }
+
+    function appendPrenotazioni(prenotazioniCompleta) {
+        let result = '<div class="row mt-3">';
+        let c = 0;
+        for (let prenot of prenotazioniCompleta) {
+            if (c != 0 & c % 3 == 0) {
+                result += '</div><div class="row mt-3">'
+            }
+            result += '<div class="col"><div class="card" style="max-width: 25rem;"><img src="' + prenot.imgFilm + '" class="card-img-top" alt="Fissure in Sandstone" /><div class="card-body row"><h4 class="card-title">' + prenot.nomeFilm + '</h4>'
+            result += '<div class="col text-start"><h5 class="mt-2"><i class="far fa-calendar-alt"></i> ' + prenot.dataFilm + '</h5><h5 class="mt-2"><i class="far fa-clock"></i> ' + prenot.oraFilm + '</h5><h5 class="mt-2"><i class="fas fa-person-booth" style="color: white;"></i> Sala: ' + prenot.numSala + '</h5><h5 class="mt-2"><i class="fa-solid fa-chair" style="color: white;"></i> Posto: ' + prenot.numPosto + '</h5></div>'
+            result += '<div class="col"><img class="mt-2 mb-3" src="img/qr.png" alt="" style="max-width: 110px;"></div><div class="rating pb-0"> <input class="valuta" data-film="'+prenot.idPrenotazione+'" type="radio" name="rating" value="5" id="5"><label for="5">☆</label><input class="valuta" data-film="'+prenot.idPrenotazione+'" type="radio" name="rating" value="4" id="4"><label for="4">☆</label>'
+            result += '<input class="valuta" data-film="'+prenot.idPrenotazione+'" type="radio" name="rating" value="3" id="3"><label for="3">☆</label><input class="valuta" data-film="'+prenot.idPrenotazione+'" type="radio" name="rating" value="2" id="2"><label for="2">☆</label><input class="valuta" data-film="'+prenot.idPrenotazione+'" type="radio" name="rating" value="1" id="1"><label for="1">☆</label></div></div></div></div>'
+            c++;
+        }
+        result += '</div>';
+        $('#containerPrenotazioni').empty();
+        $('#containerPrenotazioni').append(result);
+    }
+
+    function giveValutazione(voto, idPrenotazione){
+        let valutazione = {
+            valutazione: voto
+        }
+        $.ajax({
+            url: 'http://localhost:8080/user/api/prenotazione/update/' + idPrenotazione,
+            contentType: 'application/json;charset=UTF-8',
+            type: 'PUT',
+            data: JSON.stringify(valutazione),
+            success: async function (data) {
+                modalRisposta("Valutazione assegnata");
+            },
+            error: async function () {
+                modalRisposta("Si è verificato un errore, riprovare piu' tardi.");
+            }
+        });
+    }
+
+    async function getSale() {
+        let sale = null;
+        await $.get('http://localhost:8080/api/sala', function (response) {
+            sale = response;
+        });
+        return sale;
     }
 
     async function getPosti() {
@@ -695,22 +759,12 @@ $(document).ready(function () {
     function trovaNumeroPosto(posti, prenotazione) {
         for (let posto of posti) {
             for (let prenot of posto.prenotazioni) {
-                if(prenotazione.id == prenot.id){
+                if (prenotazione.id == prenot.id) {
                     return posto.numeroPosto;
                 }
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
     //FINE PRENOTAZIONI////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -776,11 +830,6 @@ $(document).ready(function () {
             }
         })
     })
-
-
-
-
-
 
 
     function modalRisposta(risposta) {
