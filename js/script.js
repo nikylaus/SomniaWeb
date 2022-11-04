@@ -634,11 +634,11 @@ $(document).ready(function () {
 
     //PRENOTAZIONI////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     $('#iconaCarello').click(function () {
-        window.location = "http://127.0.0.1:5500/prenotazioni.html"       
+        window.location = "http://127.0.0.1:5500/prenotazioni.html"
     });
 
-    (async ()=>{
-        if(window.location == "http://127.0.0.1:5500/prenotazioni.html"){
+    (async () => {
+        if (window.location == "http://127.0.0.1:5500/prenotazioni.html") {
             console.log(extractPayload($.cookie("jwt"))[0])
             info = await getUserInfoByEmail(extractPayload($.cookie("jwt"))[0]);
             let prenotazioniUtenteComplete = await trovaPrenotazioniComplete(info.prenotazioni);
@@ -705,8 +705,8 @@ $(document).ready(function () {
             }
             result += '<div class="col"><div class="card" style="max-width: 25rem;"><img src="' + prenot.imgFilm + '" class="card-img-top" alt="Fissure in Sandstone" /><div class="card-body row"><h4 class="card-title">' + prenot.nomeFilm + '</h4>'
             result += '<div class="col text-start"><h5 class="mt-2"><i class="far fa-calendar-alt"></i> ' + prenot.dataFilm + '</h5><h5 class="mt-2"><i class="far fa-clock"></i> ' + prenot.oraFilm + '</h5><h5 class="mt-2"><i class="fas fa-person-booth" style="color: white;"></i> Sala: ' + prenot.numSala + '</h5><h5 class="mt-2"><i class="fa-solid fa-chair" style="color: white;"></i> Posto: ' + prenot.numPosto + '</h5></div>'
-            result += '<div class="col"><img class="mt-2 mb-3" src="img/qr.png" alt="" style="max-width: 110px;"></div><div class="rating pb-0"> <input class="valuta" data-film="'+prenot.idPrenotazione+'" type="radio" name="rating" value="5" id="5"><label for="5">☆</label><input class="valuta" data-film="'+prenot.idPrenotazione+'" type="radio" name="rating" value="4" id="4"><label for="4">☆</label>'
-            result += '<input class="valuta" data-film="'+prenot.idPrenotazione+'" type="radio" name="rating" value="3" id="3"><label for="3">☆</label><input class="valuta" data-film="'+prenot.idPrenotazione+'" type="radio" name="rating" value="2" id="2"><label for="2">☆</label><input class="valuta" data-film="'+prenot.idPrenotazione+'" type="radio" name="rating" value="1" id="1"><label for="1">☆</label></div></div></div></div>'
+            result += '<div class="col"><img class="mt-2 mb-3" src="img/qr.png" alt="" style="max-width: 110px;"></div><div class="rating pb-0"> <input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="5" id="5'+c+'"><label for="5'+c+'">☆</label><input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="4" id="4'+c+'"><label for="4'+c+'">☆</label>'
+            result += '<input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="3" id="3'+c+'"><label for="3'+c+'">☆</label><input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="2" id="2+c+"><label for="2'+c+'">☆</label><input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="1" id="1'+c+'"><label for="1'+c+'">☆</label></div></div></div></div>'
             c++;
         }
         result += '</div>';
@@ -714,7 +714,18 @@ $(document).ready(function () {
         $('#containerPrenotazioni').append(result);
     }
 
-    function giveValutazione(voto, idPrenotazione){
+
+    $('body').on("click", '.valuta', function () {
+        alert("asd")
+        let voto = $(this).val();
+        let idPrenotazione = $(this).attr("data-film");
+        console.log(idPrenotazione);
+        setValutazione(voto, idPrenotazione);
+    })
+
+
+    //assegna valutazione
+    function setValutazione(voto, idPrenotazione) {
         let valutazione = {
             valutazione: voto
         }
@@ -724,10 +735,10 @@ $(document).ready(function () {
             type: 'PUT',
             data: JSON.stringify(valutazione),
             success: async function (data) {
-                modalRisposta("Valutazione assegnata");
+                modalRisposta("Valutazione assegnata" + data.valutazione);
             },
             error: async function () {
-                modalRisposta("Si è verificato un errore, riprovare piu' tardi.");
+                modalRisposta("sdfSi è verificato un errore, riprovare piu' tardi.");
             }
         });
     }
