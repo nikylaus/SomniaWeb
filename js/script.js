@@ -1,11 +1,10 @@
 $(document).ready(function () {
-    console.log($.cookie("jwt"))
     $.cookie("profilo", "");
     //HOMEPAGE FILM+PAGINA FILM////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    $('#containerFilmSala',).on('mouseenter', ".content", function () {
+    $('body',).on('mouseenter', ".content", function () {
         $(this).addClass('transition');
     });
-    $('#containerFilmSala').on('mouseleave', ".content", function () {
+    $('body').on('mouseleave', ".content", function () {
         $(this).removeClass('transition');
     });
     //popolazione film homepage
@@ -25,7 +24,7 @@ $(document).ready(function () {
                             }
                             result += '</div><div class="row mt-5">';
                         }
-                        result += '<div class="col-md"><div class="text-center"><a href="#"><img data-id="' + film.id + '" src="' + film.img + '"alt="" width="70%" class="content"></a><div class="mt-4"><a href="#" class="titolo-film">' + film.nome + '</a><p class="genere">' + film.genere + '</p></div></div></div>'
+                        result += '<div class="col-md"><div class="text-center"><a href="#"><img data-id="' + film.id + '" src="' + film.img + '"alt="" width="70%" class="content  contenitoreFilm"></a><div class="mt-4"><p class="titolo-film">' + film.nome + '</a><p class="genere">' + film.genere + '</p></div></div></div>'
                     }
                     counter++;
                 }
@@ -33,6 +32,31 @@ $(document).ready(function () {
                 $('#containerFilmSala').append(result);
             }
         })
+    })();
+
+    (() => {
+        if (location.pathname == "/comingsoon.html") {
+            $.get('http://localhost:8080/api/film', function (response) {
+                $('#containerFilmArrivo').empty();
+                listaFilm = response;
+                let result = '<h2>IN ARRIVO</h2><div class="row mt-3">';
+                let counter = 0;
+                for (let film of response) {
+                    if (film.condizione == "arrivo") {
+                        if (counter % 3 == 0) {
+                            if (counter == 3) {
+                                result += '<h2 class="mt-3 mb-4">DA NON PREDERE</h2>'
+                            }
+                            result += '</div><div class="row mt-5">';
+                        }
+                        result += '<div class="col-md"><div class="text-center"><a href="#"><img data-id="' + film.id + '" src="' + film.img + '"alt="" width="70%" class="content  contenitoreFilm"></a><div class="mt-4"><p class="titolo-film">' + film.nome + '</a><p class="genere">' + film.genere + '</p></div></div></div>'
+                        counter++;
+                    }
+                }
+                result += '</div>';
+                $('#containerFilmArrivo').append(result);
+            })
+        }
     })();
 
     async function riempiListaFilm() {
@@ -64,6 +88,9 @@ $(document).ready(function () {
             $('#img-banner2-film').attr("src", filmInfo.img2);
             $('#img-banner3-film').attr("src", filmInfo.img3);
             $('#url-pagina-film').attr("src", filmInfo.urlTrailer + '?rel=0&modestbranding=1&autohide=1&mute=0&showinfo=0&controls=1&autoplay=1');
+            if(filmInfo.condizione == "sala"){
+                $('#btnPrenota').show();
+            }
         }
     })();
 
@@ -93,8 +120,6 @@ $(document).ready(function () {
         return info;
     }
     //FINE HOMEPAGE FILM+PAGINA FILM////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
     let JWTHeader = {
         Authorization: 'Bearer ' + $.cookie('jwt')
@@ -151,6 +176,30 @@ $(document).ready(function () {
         }
     };
 
+    function checkCookieTimeOnly() {
+        jwtCookie = $.cookie("jwt");
+        if (jwtCookie != null && jwtCookie != "") {
+            let payloadData = extractPayload(jwtCookie);
+            let jwtData = new Date(payloadData[1] * 1000);
+            let data = new Date();
+            if (jwtData.getTime() > data.getTime()) {
+                return true;
+            } else {
+                $('#containerImg').hide();
+                $('#btnLogin').css("display", "block")
+                $.cookie('jwt', "");
+                info = null;
+                return false;
+            }
+        } else {
+            $('#containerImg').hide();
+            $('#btnLogin').css("display", "block")
+            $.cookie('jwt', "");
+            info = null;
+            return false;
+        }
+    }
+
     async function impostaProfiloEmail(email) {
         info = await getUserInfo(email);
         $('#btnLogin').hide()
@@ -159,7 +208,6 @@ $(document).ready(function () {
     }
 
     async function impostaProfilo() {
-        console.log(info)
         let infoDentro = JSON.parse(info);
         $('#btnLogin').hide()
         $('#imgProfilo').attr("src", "img/avatar/" + infoDentro.img)
@@ -190,8 +238,6 @@ $(document).ready(function () {
 
     async function getUserInfo(email) {
         info = await getUserInfoByEmail(email);
-        console.log("denrtro" + info);
-        console.log("asd1" + $.cookie("profilo"))
         return info;
         //return JSON.parse($.cookie("profilo"));
     };
@@ -243,33 +289,37 @@ $(document).ready(function () {
 
     //PRENOTAZIONE FILM////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     $('#btnPrenota').click(async function () {
-        let idFilm = $.cookie("filmId");
-        let film = await findFilmById(idFilm);
+        if (checkCookieTimeOnly()) {
+            let idFilm = $.cookie("filmId");
+            let film = await findFilmById(idFilm);
 
-        let data = new Date();
-        let ora = data.getHours() + ":" + data.getMinutes() + ":" + data.getSeconds();
-        let result = '<option value="">Seleziona proiezione</option>';
-        for (let proiezione of film.proiezioni) {
-            let dataProiezione = (new Date(proiezione.data))
-            if (dataProiezione > data) {
-                result += '<option data-id="' + proiezione.id + '">' + proiezione.data + ' ' + proiezione.oraInizio + '</option>'
-            } else if (dataProiezione == data) {
-                if (proiezione.oraInizio > ora) {
+            let data = new Date();
+            let ora = data.getHours() + ":" + data.getMinutes() + ":" + data.getSeconds();
+            let result = '<option value="">Seleziona proiezione</option>';
+            for (let proiezione of film.proiezioni) {
+                let dataProiezione = (new Date(proiezione.data))
+                if (dataProiezione > data) {
                     result += '<option data-id="' + proiezione.id + '">' + proiezione.data + ' ' + proiezione.oraInizio + '</option>'
+                } else if (dataProiezione == data) {
+                    if (proiezione.oraInizio > ora) {
+                        result += '<option data-id="' + proiezione.id + '">' + proiezione.data + ' ' + proiezione.oraInizio + '</option>'
+                    }
                 }
             }
+            $('#movie').empty();
+            $('.container1').empty();
+            $('#movie').append(result);
+            $('#modalePrenotazione').modal('show');
+        } else {
+            modalRisposta("Effettuare il login per prenotare",2);
         }
-        $('#movie').empty();
-        $('.container1').empty();
-        $('#movie').append(result);
-        $('#modalePrenotazione').modal('show');
     });
 
     $('#movie').change(async function () {
         let idProiezione = $('#movie option:selected').attr("data-id");
         let postiOccupati = await getPostiOccupatiProiezione(idProiezione);
-        console.log(postiOccupati);
-        riempiPosti(postiOccupati);
+        let idSala = await trovaSalaProiezione(idProiezione);
+        riempiPosti(postiOccupati, idSala);
     })
 
     async function getPostiOccupatiProiezione(idProiezione) {
@@ -282,7 +332,21 @@ $(document).ready(function () {
             proiezione = response;
         });
         let postiOccupati = trovaPostiOccupati(posti, proiezione)
+        proiezioneSelezionata = proiezione;
         return postiOccupati;
+    }
+
+    let proiezioneSelezionata = null;
+
+    async function trovaSalaProiezione(idProiez) {
+        let sale = await getSale();
+        for (let sala of sale) {
+            for (let proiezione of sala.proiezioni) {
+                if (proiezione.id == idProiez) {
+                    return sala.id;
+                }
+            }
+        }
     }
 
     function trovaPostiOccupati(posti, proiezione) {
@@ -301,24 +365,25 @@ $(document).ready(function () {
         return postiOccupati;
     }
 
-    function riempiPosti(postiOccupati) {
+    function riempiPosti(postiOccupati, idSala) {
         let result = '<div class="screen"></div><div class="row1">';
         for (let i = 1; i < 78; i++) {
+            let idPosto = (77 * (idSala - 1)) + i;
             let esiste = false;
             if (postiOccupati != []) {
                 esiste = postiOccupati.some(e => e == i);
             }
             if (i % 11 == 0) {
                 if (esiste) {
-                    result += '<div data-numero="' + i + '" class="seat occupied"></div></div><div class="row1">'
+                    result += '<div data-idPosto="' + idPosto + '" data-numero="' + i + '" class="seat occupied"></div></div><div class="row1">'
                 } else {
-                    result += '<div data-numero="' + i + '" class="seat"></div></div><div class="row1">'
+                    result += '<div data-idPosto="' + idPosto + '" data-numero="' + i + '" class="seat"></div></div><div class="row1">'
                 }
             } else {
                 if (esiste) {
-                    result += '<div data-numero="' + i + '" class="seat occupied"></div>';
+                    result += '<div data-idPosto="' + idPosto + '" data-numero="' + i + '" class="seat occupied"></div>';
                 } else {
-                    result += '<div data-numero="' + i + '" class="seat"></div>';
+                    result += '<div data-idPosto="' + idPosto + '" data-numero="' + i + '" class="seat"></div>';
                 }
             }
 
@@ -328,15 +393,85 @@ $(document).ready(function () {
         $('.container1').append(result);
     }
 
+    $('body').on('click', '#apriPagamento', function(){
+        if(selectedSeatsCount>0){
+            $('#quantitaBiglietti').html(selectedSeatsCount);
+            $('#totaleDaPagare').html(selectedSeatsCount*7 + "€")
+            $('#modalePrenotazione').modal("hide");
+            $('#modalPagamento').modal("show");
+        }
+    })
+
+    $('body').on("click", "#eseguiAcquisto", async function () {
+        if(checkPagamento()){
+            if (checkCookieTimeOnly()) {
+                for (let posto of postiSelezionati) {
+                    await prenotaFilm(posto)
+                }
+                modalRisposta("Prenotazione effettuata",1);
+            } else {
+                modalRisposta("Effettuare il login per prenotare",2);
+            }
+        } else {
+            modalRisposta("Ricontrollare i dati inseriti",2);
+        }
+    });
+
+    function checkPagamento(){
+        let nome = $('#nomePagamento').val().length > 1;
+        let cognome = $('#cognomePagamento').val().length> 1;
+        let nomeIntestatario = $('#nomeIntestatario').val().length > 3;
+        let numeroCarta = $('#numeroCarta').val().length > 15;
+        let scadenzaCarta = $('#scadenzaCarta').val().length > 3;
+        let cvvCarta = $('#cvvCarta').val().length > 1;
+        console.log(nome, cognome, nomeIntestatario, numeroCarta, scadenzaCarta, cvvCarta)
+        if(nome & cognome & nomeIntestatario & numeroCarta & scadenzaCarta & cvvCarta){
+            return true; 
+        }else {
+            return false;
+        }
+    }
+
+    async function getPostoById(id) {
+        let posto = null;
+        await $.get('http://localhost:8080/api/posto/' + id, function (response) {
+            posto = response;
+        });
+        return posto;
+    }
+
+    async function prenotaFilm(idPosto) {
+        let posto = await getPostoById(idPosto)
+        let params = {
+            idAccount: info.id,
+            idProiezione: proiezioneSelezionata.id,
+            idPosto: posto.id
+        }
+        await $.ajax({
+            url: 'http://localhost:8080/user/api/prenotazione/save',
+            contentType: 'application/json;charset=UTF-8',
+            type: 'POST',
+            data: JSON.stringify(params),
+            success: async function (data) {
+                await modalRisposta("Prenotazione effettuata",1);
+            },
+            error: async function () {
+                await modalRisposta("Si è verificato un problema, riprovare piu' tardi.",2);
+            }
+        });
+        $('#modalPagamento').modal('hide');
+    }
+
 
     //PRENOTAZIONE
-    if (window.location.path == "/film.html") {
+    if (location.pathname == "/film.html") {
         const container = document.querySelector('.container1');
         const seats = document.querySelectorAll('.row .seat:not(.occupied)');
         const count = $('#count');
-        console.log("count:" + count)
         const total = $('#total');
         const movieSelect = document.getElementById('movie');
+
+
 
         //Movie Select Event
         movieSelect.addEventListener('change', e => {
@@ -354,11 +489,20 @@ $(document).ready(function () {
         });
     }
 
+    let selectedSeatsCount;
+    let postiSelezionati = [];
     //Update total and count
     function updateSelectedCount() {
         //document.querySelectorAll('.row .seat.selected');
+        postiSelezionati = [];
         const selectedSeats = document.querySelectorAll('.row .seat.selected');
-        const selectedSeatsCount = selectedSeats.length - 1;
+        let c = 0;
+        $('.selected').each(function () {
+            postiSelezionati[c] = $(this).attr("data-idPosto")
+            c++
+        })
+
+        selectedSeatsCount = selectedSeats.length;
         //count.innerText = selectedSeatsCount;
         $("#count").empty();
         $("#count").append(selectedSeatsCount);
@@ -367,10 +511,6 @@ $(document).ready(function () {
         $("#total").empty();
         $("#total").append(totale);
     }
-
-
-
-
 
 
     //FINE PRENOTAZIONE FILM////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -421,7 +561,7 @@ $(document).ready(function () {
                 //result += '<div class="row mt-2"><div class="colProfiloUtente col-4 mt-5"><img id="imgFilm" src="' + film.img + '"></div><div class="colProfiloUtente col-3"><p id="nomeFilm1" class="ms-3">' + film.nome + '</p></div>'
                 //result += giveValutazione(prenotazione.valutazione)
                 //result += '<div class="col-1"><p>'+film.descrizione+ '</p></div></div>'
-                result += '<div class="col-lg my-3"><div class="card text-center" height="700px" style="max-width: 500px!important"><img src="' + film.img + '" class="card-img-top"/><div class="card-body"><h5 class="card-title">' + film.nome + '</h5><p class="card-text">' + film.descrizione + '</p>'
+                result += '<div class="col-lg my-3"><div class="card text-center h-100 parentCard" style="max-width: 500px!important"><img src="' + film.img + '" class="card-img-top"/><div class="card-body"><h5 class="card-title">' + film.nome + '</h5><p class="card-text">' + film.descrizione + '</p>'
                 result += giveValutazione(prenotazione.valutazione);
                 result += '</div></div></div>'
             }
@@ -468,7 +608,7 @@ $(document).ready(function () {
             for (let i = 1; i < 12; i++) {
                 result += '<a href=""><img class="cambiaImgProfilo immaginiProfiloUtenti" data-img="profilo' + i + '.png" src="img/avatar/profilo' + i + '.png" class="rounded-circle" height="250"/></a>'
             }
-            $('#modaleRisposta').append(result);
+            $('#modaleRisposta').append(result,1);
             $('#modalRisposta').modal('toggle');
         }
     });
@@ -481,17 +621,16 @@ $(document).ready(function () {
             let params = {
                 immagine: img
             }
-            console.log(JSON.stringify(params));
             await $.ajax({
                 url: 'http://localhost:8080/user/api/account/update/immagine/' + info.id,
                 contentType: 'application/json;charset=UTF-8',
                 type: 'PUT',
                 data: JSON.stringify(params),
                 success: async function (data) {
-                    await modalRisposta("Immagine cambiata");
+                    await modalRisposta("Immagine cambiata",1);
                 },
                 error: async function () {
-                    await modalRisposta("Immagine non cambiata, provare piu' tardi.");
+                    await modalRisposta("Immagine non cambiata, provare piu' tardi.",2);
                 }
             });
             location.reload();
@@ -500,13 +639,10 @@ $(document).ready(function () {
     //prova a vedere se l'utente che modifica il profilo è lo stesso utente del profilo che si visualizza
     function checkModificaProfiloPossibile() {
         //info = $.cookie("profilo");
-        console.log("asd" + infoOspite);
-        console.log(info);
         if (info != null & info != "" & infoOspite != null) {
             //info = JSON.parse(info);
             //alert(infoOspite);
             if (null != info) {
-                console.log(info.username, infoOspite.username)
                 if (info.username == infoOspite.username) {
                     $('#btnModificaDesc').css("display", "inline")
                     return true;
@@ -528,13 +664,12 @@ $(document).ready(function () {
             type: 'PUT',
             data: JSON.stringify(params),
             success: function (data) {
-                modalRisposta("Modifiche effettuate");
+                modalRisposta("Modifiche effettuate",1);
                 info.username = $('#cambiaUsername').val();
-                console.log(info.username)
                 window.location = "http://127.0.0.1:5500/profilo.html?" + $('#cambiaUsername').val();
             },
             error: function () {
-                modalRisposta("Qualcosa è andato storto");
+                modalRisposta("Qualcosa è andato storto",2);
             }
         });
     });
@@ -634,12 +769,15 @@ $(document).ready(function () {
 
     //PRENOTAZIONI////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     $('#iconaCarello').click(function () {
-        window.location = "http://127.0.0.1:5500/prenotazioni.html"
+        if (checkCookieTimeOnly()) {
+            window.location = "http://127.0.0.1:5500/prenotazioni.html"
+        } else {
+            modalRisposta("Effettuare il login",2);
+        }
     });
 
     (async () => {
-        if (window.location == "http://127.0.0.1:5500/prenotazioni.html") {
-            console.log(extractPayload($.cookie("jwt"))[0])
+        if (location.pathname == "/prenotazioni.html") {
             info = await getUserInfoByEmail(extractPayload($.cookie("jwt"))[0]);
             let prenotazioniUtenteComplete = await trovaPrenotazioniComplete(info.prenotazioni);
             appendPrenotazioni(prenotazioniUtenteComplete);
@@ -692,7 +830,6 @@ $(document).ready(function () {
                 }
             }
         }
-        console.log("prenotazioni complete:" + prenotazioniUtenteComplete)
         return prenotazioniUtenteComplete;
     }
 
@@ -705,8 +842,8 @@ $(document).ready(function () {
             }
             result += '<div class="col"><div class="card" style="max-width: 25rem;"><img src="' + prenot.imgFilm + '" class="card-img-top" alt="Fissure in Sandstone" /><div class="card-body row"><h4 class="card-title">' + prenot.nomeFilm + '</h4>'
             result += '<div class="col text-start"><h5 class="mt-2"><i class="far fa-calendar-alt"></i> ' + prenot.dataFilm + '</h5><h5 class="mt-2"><i class="far fa-clock"></i> ' + prenot.oraFilm + '</h5><h5 class="mt-2"><i class="fas fa-person-booth" style="color: white;"></i> Sala: ' + prenot.numSala + '</h5><h5 class="mt-2"><i class="fa-solid fa-chair" style="color: white;"></i> Posto: ' + prenot.numPosto + '</h5></div>'
-            result += '<div class="col"><img class="mt-2 mb-3" src="img/qr.png" alt="" style="max-width: 110px;"></div><div class="rating pb-0"> <input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="5" id="5'+c+'"><label for="5'+c+'">☆</label><input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="4" id="4'+c+'"><label for="4'+c+'">☆</label>'
-            result += '<input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="3" id="3'+c+'"><label for="3'+c+'">☆</label><input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="2" id="2+c+"><label for="2'+c+'">☆</label><input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="1" id="1'+c+'"><label for="1'+c+'">☆</label></div></div></div></div>'
+            result += '<div class="col"><img class="mt-2 mb-3" src="img/qr.png" alt="" style="max-width: 110px;"></div><div class="rating pb-0"> <input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="5" id="5' + c + '"><label for="5' + c + '">☆</label><input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="4" id="4' + c + '"><label for="4' + c + '">☆</label>'
+            result += '<input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="3" id="3' + c + '"><label for="3' + c + '">☆</label><input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="2" id="2+c+"><label for="2' + c + '">☆</label><input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="1" id="1' + c + '"><label for="1' + c + '">☆</label></div></div></div></div>'
             c++;
         }
         result += '</div>';
@@ -716,10 +853,8 @@ $(document).ready(function () {
 
 
     $('body').on("click", '.valuta', function () {
-        alert("asd")
         let voto = $(this).val();
         let idPrenotazione = $(this).attr("data-film");
-        console.log(idPrenotazione);
         setValutazione(voto, idPrenotazione);
     })
 
@@ -735,10 +870,10 @@ $(document).ready(function () {
             type: 'PUT',
             data: JSON.stringify(valutazione),
             success: async function (data) {
-                modalRisposta("Valutazione assegnata" + data.valutazione);
+                modalRisposta("Valutazione assegnata",1);
             },
             error: async function () {
-                modalRisposta("sdfSi è verificato un errore, riprovare piu' tardi.");
+                modalRisposta("Si è verificato un errore, riprovare piu' tardi.",2);
             }
         });
     }
@@ -788,28 +923,33 @@ $(document).ready(function () {
         let username = $('#usernameRegister').val();
         let dataNascita = $('#dateRegister').val();
         let pass = $('#passwordRegister').val();
-        let params = {
-            email: email,
-            username: username,
-            dataNascita: dataNascita,
-            pass: pass
-        }
-        $.ajax({
-            url: 'http://localhost:8080/api/auth/signup',
-            contentType: 'application/json;charset=UTF-8',
-            type: 'POST',
-            data: JSON.stringify(params),
-            success: function () {
-                resetForm("registerForm");
-                $('#modalRegister').modal('hide');
-                modalRisposta("Benvenuto su Somnia!")
-            },
-            error: function () {
-
+        let passConfirm = $('#passwordRegisterConfirm').val();
+        if (testRegisterForm(username, email, pass, passConfirm, "flexCheckDefault")) {
+            let params = {
+                email: email,
+                username: username,
+                dataNascita: dataNascita,
+                pass: pass
             }
+            $.ajax({
+                url: 'http://localhost:8080/api/auth/signup',
+                contentType: 'application/json;charset=UTF-8',
+                type: 'POST',
+                data: JSON.stringify(params),
+                success: function () {
+                    resetForm("registerForm");
+                    $('#modalRegister').modal('hide');
+                    modalRisposta("Benvenuto su Somnia!",1)
+                },
+                error: function () {
 
-        })
-    })
+                }
+
+            });
+        } else {
+            modalRisposta("Ricontrolla i campi inseriti e accettare i termini.",2);
+        }
+    });
 
     $('#submitLogin').click(function () {
         let email = $('#emailLogin').val();
@@ -828,22 +968,32 @@ $(document).ready(function () {
                 resetForm("formLogin");
                 $('#modalLogin').modal('toggle');
                 let token = response.accessToken;
-                console.log("token ricevuto = " + token);
                 $.cookie("jwt", token);
                 JWTHeader = updateHeader();
                 impostaProfiloEmail(extractPayload(token)[0]);
-                modalRisposta("Benvenuto su Somnia!")
+                modalRisposta("Benvenuto su Somnia!",1)
                 //location.reload(true);
             },
             error: function () {
                 $('modalLogin').modal('hide');
-                modalRisposta("Email o password errati!")
+                modalRisposta("Email o password errati!",2)
             }
         })
     })
 
+    $('#submitRecupera').click(function () {
+        $('#modalRecuperaPassword').modal("hide");
+    });
 
-    function modalRisposta(risposta) {
+
+    function modalRisposta(risposta, id) {
+        if(id != 1){
+            $('#modaleRisposta').css("background-color", "rgb(202, 136, 136)");
+            $('#modaleRisposta').css("color", "black");
+        } else {
+            $('#modaleRisposta').css("background-color", "#D6F0E0");
+            $('#modaleRisposta').css("color", "green");
+        }
         $('#contentModalRisposta').empty();
         $('#contentModalRisposta').append(risposta);
         $('#modalRisposta').modal('toggle');
@@ -869,11 +1019,103 @@ $(document).ready(function () {
 
 
 
-    //SCHEDA FILM////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //SECURITY MODALE LOGIN/ REGISTER////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function testRegisterForm(username, email, pass, passConfirm, idCheckbox) {
+        if (checkPasswordEquals(pass, passConfirm) && isEmail(email) & testUsername(username) & checkBoxIfChecked(idCheckbox)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function checkBoxIfChecked(id) {
+        return $('#' + id).is(':checked');
+    }
+
+    function testUsername(username) {
+        if (username.length > 4) {
+            $('#formUsernameRegister').css("display", "none");
+            return true;
+        } else {
+            $('#formUsernameRegister').removeClass();
+            $('#formUsernameRegister').addClass("note note-warning mb-3");
+            $('#formUsernameRegister').css("display", "block");
+            $('#formUsernameRegister').html("L'username deve contenere almeno 4 caratteri");
+            return false;
+        }
+    }
+
+    $('#usernameRegister').on("input", function () {
+        testUsername($('#usernameRegister').val());
+    })
+
+    $('#passwordRegister').on("input", function () {
+        checkPasswordStrength($('#passwordRegister').val());
+    })
+
+    $('#passwordRegisterConfirm').on("input", function () {
+        checkPasswordEquals($('#passwordRegister').val(), $('#passwordRegisterConfirm').val());
+    })
+
+    $('#emailRegister').on("input", function () {
+        isEmail($('#emailRegister').val());
+    })
+
+
+    function checkPasswordStrength(password) {
+        var number = /([0-9])/;
+        var alphabets = /([a-zA-Z])/;
+        var special_characters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+        password = password.trim();
+        if (password.length < 8) {
+            $('#formPasswordRegister').removeClass();
+            $('#formPasswordRegister').addClass("note note-danger mb-3");
+            $('#formPasswordRegister').css("display", "block");
+            $('#formPasswordRegister').html("La password deve centenere almeno 8 caratteri");
+        } else {
+            if (password.match(number) && password.match(alphabets) && password.match(special_characters)) {
+                $('#formPasswordRegister').css("display", "none");
+            }
+            else {
+                $('#formPasswordRegister').removeClass();
+                $('#formPasswordRegister').addClass("note note-warning mb-3");
+                $('#formPasswordRegister').css("display", "block");
+                $('#formPasswordRegister').html("La password deve contenere numeri, lettere e caratteri speciali");
+            }
+        }
+    }
 
 
 
-    //FINE SCHEDA FILM////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function checkPasswordEquals(password, confirmPassword) {
+        if (password.trim() == confirmPassword.trim()) {
+            $('#formConfermaPasswordRegister').css("display", "none");
+            return true;
+        } else {
+            $('#formConfermaPasswordRegister').removeClass();
+            $('#formConfermaPasswordRegister').addClass("note note-warning mb-3");
+            $('#formConfermaPasswordRegister').css("display", "block");
+            $('#formConfermaPasswordRegister').html("Le password non coincidono");
+            return false;
+        }
+
+    }
+
+    function isEmail(email) {
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if (regex.test(email)) {
+            $('#formEmailRegister').css("display", "none");
+        } else {
+            $('#formEmailRegister').removeClass();
+            $('#formEmailRegister').addClass("note note-warning mb-3");
+            $('#formEmailRegister').css("display", "block");
+            $('#formEmailRegister').html("L'email inserita non è valida");
+        }
+        return regex.test(email);
+    }
+
+
+    //FINE SECURITY MODALE LOGIN/ REGISTER////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 });
 
@@ -891,16 +1133,18 @@ function extractPayload(token) {
 
 function giveValutazione(valutazione) {
     switch (valutazione) {
+        case 0:
+            return '<div class="col colStella"><input type="radio" name="rate" id="valutazione1" data-idx="1" hidden><label class="stellaVuota labelProfiloutente" for="valutazione1"></label><input type="radio" name="rate" id="valutazione2" data-idx="2" hidden><label class="stellaVuota labelProfiloutente" for="valutazione2"></label><input type="radio" name="rate" id="valutazione3" data-idx="3" hidden><label class="stellaVuota labelProfiloutente" for="valutazione3"></label><input type="radio" name="rate" id="valutazione4" data-idx="4" hidden><label class="stellaVuota labelProfiloutente" for="valutazione4"></label><input type="radio" name="rate" id="valutazione5" data-idx="5" hidden><label class="stellaVuota labelProfiloutente" for="valutazione5"></label></div>'
         case 1:
-            return '<div><div class="colProfiloUtente col"><input type="radio" name="rate" id="valutazione1" data-idx="1" hidden><label class="stellaPiena labelProfiloutente" for="valutazione1"></label><input type="radio" name="rate" id="valutazione2" data-idx="2" hidden><label class="stellaVuota labelProfiloutente" for="valutazione2"></label><input type="radio" name="rate" id="valutazione3" data-idx="3" hidden><label class="stellaVuota labelProfiloutente" for="valutazione3"></label><input type="radio" name="rate" id="valutazione4" data-idx="4" hidden><label class="stellaVuota labelProfiloutente" for="valutazione4"></label><input type="radio" name="rate" id="valutazione5" data-idx="5" hidden><label class="stellaVuota labelProfiloutente" for="valutazione5"></label></div></div>'
+            return '<div class="col colStella"><input type="radio" name="rate" id="valutazione1" data-idx="1" hidden><label class="stellaPiena labelProfiloutente" for="valutazione1"></label><input type="radio" name="rate" id="valutazione2" data-idx="2" hidden><label class="stellaVuota labelProfiloutente" for="valutazione2"></label><input type="radio" name="rate" id="valutazione3" data-idx="3" hidden><label class="stellaVuota labelProfiloutente" for="valutazione3"></label><input type="radio" name="rate" id="valutazione4" data-idx="4" hidden><label class="stellaVuota labelProfiloutente" for="valutazione4"></label><input type="radio" name="rate" id="valutazione5" data-idx="5" hidden><label class="stellaVuota labelProfiloutente" for="valutazione5"></label></div>'
         case 2:
-            return '<div><div class="colProfiloUtente col"><input type="radio" name="rate" id="valutazione1" data-idx="1" hidden><label class="stellaPiena labelProfiloutente" for="valutazione1"></label><input type="radio" name="rate" id="valutazione2" data-idx="2" hidden><label class="stellaPiena labelProfiloutente" for="valutazione2"></label><input type="radio" name="rate" id="valutazione3" data-idx="3" hidden><label class="stellaVuota labelProfiloutente" for="valutazione3"></label><input type="radio" name="rate" id="valutazione4" data-idx="4" hidden><label class="stellaVuota labelProfiloutente" for="valutazione4"></label><input type="radio" name="rate" id="valutazione5" data-idx="5" hidden><label class="stellaVuota labelProfiloutente" for="valutazione5"></label></div></div>'
+            return '<div class="col colStella"><input type="radio" name="rate" id="valutazione1" data-idx="1" hidden><label class="stellaPiena labelProfiloutente" for="valutazione1"></label><input type="radio" name="rate" id="valutazione2" data-idx="2" hidden><label class="stellaPiena labelProfiloutente" for="valutazione2"></label><input type="radio" name="rate" id="valutazione3" data-idx="3" hidden><label class="stellaVuota labelProfiloutente" for="valutazione3"></label><input type="radio" name="rate" id="valutazione4" data-idx="4" hidden><label class="stellaVuota labelProfiloutente" for="valutazione4"></label><input type="radio" name="rate" id="valutazione5" data-idx="5" hidden><label class="stellaVuota labelProfiloutente" for="valutazione5"></label></div>'
         case 3:
-            return '<div><div class="colProfiloUtente col"><input type="radio" name="rate" id="valutazione1" data-idx="1" hidden><label class="stellaPiena labelProfiloutente" for="valutazione1"></label><input type="radio" name="rate" id="valutazione2" data-idx="2" hidden><label class="stellaPiena labelProfiloutente" for="valutazione2"></label><input type="radio" name="rate" id="valutazione3" data-idx="3" hidden><label class="stellaPiena labelProfiloutente" for="valutazione3"></label><input type="radio" name="rate" id="valutazione4" data-idx="4" hidden><label class="stellaVuota labelProfiloutente" for="valutazione4"></label><input type="radio" name="rate" id="valutazione5" data-idx="5" hidden><label class="stellaVuota labelProfiloutente" for="valutazione5"></label></div></div>'
+            return '<div class="col colStella"><input type="radio" name="rate" id="valutazione1" data-idx="1" hidden><label class="stellaPiena labelProfiloutente" for="valutazione1"></label><input type="radio" name="rate" id="valutazione2" data-idx="2" hidden><label class="stellaPiena labelProfiloutente" for="valutazione2"></label><input type="radio" name="rate" id="valutazione3" data-idx="3" hidden><label class="stellaPiena labelProfiloutente" for="valutazione3"></label><input type="radio" name="rate" id="valutazione4" data-idx="4" hidden><label class="stellaVuota labelProfiloutente" for="valutazione4"></label><input type="radio" name="rate" id="valutazione5" data-idx="5" hidden><label class="stellaVuota labelProfiloutente" for="valutazione5"></label></div>'
         case 4:
-            return '<div><div class="colProfiloUtente col"><input type="radio" name="rate" id="valutazione1" data-idx="1" hidden><label class="stellaPiena labelProfiloutente" for="valutazione1"></label><input type="radio" name="rate" id="valutazione2" data-idx="2" hidden><label class="stellaPiena labelProfiloutente" for="valutazione2"></label><input type="radio" name="rate" id="valutazione3" data-idx="3" hidden><label class="stellaPiena labelProfiloutente" for="valutazione3"></label><input type="radio" name="rate" id="valutazione4" data-idx="4" hidden><label class="stellaPiena labelProfiloutente" for="valutazione4"></label><input type="radio" name="rate" id="valutazione5" data-idx="5" hidden><label class="stellaVuota labelProfiloutente" for="valutazione5"></label></div></div>'
+            return '<div class="col colStella"><input type="radio" name="rate" id="valutazione1" data-idx="1" hidden><label class="stellaPiena labelProfiloutente" for="valutazione1"></label><input type="radio" name="rate" id="valutazione2" data-idx="2" hidden><label class="stellaPiena labelProfiloutente" for="valutazione2"></label><input type="radio" name="rate" id="valutazione3" data-idx="3" hidden><label class="stellaPiena labelProfiloutente" for="valutazione3"></label><input type="radio" name="rate" id="valutazione4" data-idx="4" hidden><label class="stellaPiena labelProfiloutente" for="valutazione4"></label><input type="radio" name="rate" id="valutazione5" data-idx="5" hidden><label class="stellaVuota labelProfiloutente" for="valutazione5"></label></div>'
         case 5:
-            return '<div><div class="colProfiloUtente col"><input type="radio" name="rate" id="valutazione1" data-idx="1" hidden><label class="stellaPiena labelProfiloutente" for="valutazione1"></label><input type="radio" name="rate" id="valutazione2" data-idx="2" hidden><label class="stellaPiena labelProfiloutente" for="valutazione2"></label><input type="radio" name="rate" id="valutazione3" data-idx="3" hidden><label class="stellaPiena labelProfiloutente" for="valutazione3"></label><input type="radio" name="rate" id="valutazione4" data-idx="4" hidden><label class="stellaPiena labelProfiloutente" for="valutazione4"></label><input type="radio" name="rate" id="valutazione5" data-idx="5" hidden><label class="stellaPiena labelProfiloutente" for="valutazione5"></label></div></div>'
+            return '<div class="col colStella"><input type="radio" name="rate" id="valutazione1" data-idx="1" hidden><label class="stellaPiena labelProfiloutente" for="valutazione1"></label><input type="radio" name="rate" id="valutazione2" data-idx="2" hidden><label class="stellaPiena labelProfiloutente" for="valutazione2"></label><input type="radio" name="rate" id="valutazione3" data-idx="3" hidden><label class="stellaPiena labelProfiloutente" for="valutazione3"></label><input type="radio" name="rate" id="valutazione4" data-idx="4" hidden><label class="stellaPiena labelProfiloutente" for="valutazione4"></label><input type="radio" name="rate" id="valutazione5" data-idx="5" hidden><label class="stellaPiena labelProfiloutente" for="valutazione5"></label></div>'
     }
 }
 
