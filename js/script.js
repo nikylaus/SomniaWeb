@@ -14,7 +14,7 @@ $(document).ready(function () {
             $('#containerFilmSala').empty();
             listaFilm = response;
             if (location.pathname == '/index.html') {
-                let result = '<h2>NUOVI ARRIVI</h2><div class="row mt-3">';
+                let result = '<div class="row"><div class="col text-start"><h2>NUOVI ARRIVI</h2></div><div class="col end-0 form-outline input-group"><input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" /><button type="button" class="btn h-75 btn-outline-warning">Cerca</button></div></div><div class="row mt-3">'
                 let counter = 0;
                 for (let film of response) {
                     if (film.condizione == "sala") {
@@ -292,12 +292,12 @@ $(document).ready(function () {
         if (checkCookieTimeOnly()) {
             let idFilm = $.cookie("filmId");
             let film = await findFilmById(idFilm);
-
             let data = new Date();
             let ora = data.getHours() + ":" + data.getMinutes() + ":" + data.getSeconds();
             let result = '<option value="">Seleziona proiezione</option>';
             for (let proiezione of film.proiezioni) {
                 let dataProiezione = (new Date(proiezione.data))
+                console.log(proiezione.oraInizio, ora);
                 if (dataProiezione > data) {
                     result += '<option data-id="' + proiezione.id + '">' + proiezione.data + ' ' + proiezione.oraInizio + '</option>'
                 } else if (dataProiezione == data) {
@@ -555,17 +555,19 @@ $(document).ready(function () {
         let c = 0;
         let result = '';
         for (let prenotazione of infoOspite.prenotazioni) {
-            if (c < 3) {
-                let idFilm = await findFilmId(prenotazione.id);
-                let film = await getFilmById(idFilm);
-                //result += '<div class="row mt-2"><div class="colProfiloUtente col-4 mt-5"><img id="imgFilm" src="' + film.img + '"></div><div class="colProfiloUtente col-3"><p id="nomeFilm1" class="ms-3">' + film.nome + '</p></div>'
-                //result += giveValutazione(prenotazione.valutazione)
-                //result += '<div class="col-1"><p>'+film.descrizione+ '</p></div></div>'
-                result += '<div class="col-lg my-3"><div class="card text-center h-100 parentCard" style="max-width: 500px!important"><img src="' + film.img + '" class="card-img-top"/><div class="card-body"><h5 class="card-title">' + film.nome + '</h5><p class="card-text">' + film.descrizione + '</p>'
-                result += giveValutazione(prenotazione.valutazione);
-                result += '</div></div></div>'
+            if (prenotazione.valutazione > 0){
+                if (c < 3) {
+                    let idFilm = await findFilmId(prenotazione.id);
+                    let film = await getFilmById(idFilm);
+                    //result += '<div class="row mt-2"><div class="colProfiloUtente col-4 mt-5"><img id="imgFilm" src="' + film.img + '"></div><div class="colProfiloUtente col-3"><p id="nomeFilm1" class="ms-3">' + film.nome + '</p></div>'
+                    //result += giveValutazione(prenotazione.valutazione)
+                    //result += '<div class="col-1"><p>'+film.descrizione+ '</p></div></div>'
+                    result += '<div class="col-lg my-3"><div class="card text-center h-100 parentCard" style="max-width: 500px!important"><img src="' + film.img + '" class="card-img-top"/><div class="card-body"><h5 class="card-title">' + film.nome + '</h5><p class="card-text" style="height: 8rem">' + film.descrizione + '</p>'
+                    result += giveValutazione(prenotazione.valutazione);
+                    result += '</div></div></div>'
+                }
+                c++;
             }
-            c++;
         }
         return result;
     }
@@ -830,33 +832,70 @@ $(document).ready(function () {
                 }
             }
         }
+        prenotazioniPronte = prenotazioniUtenteComplete;
         return prenotazioniUtenteComplete;
     }
+
+    
 
     function appendPrenotazioni(prenotazioniCompleta) {
         let result = '<div class="row mt-3">';
         let c = 0;
+        console.log("dentro append" + prenotazioniCompleta);
         for (let prenot of prenotazioniCompleta) {
+            console.log(prenot);
             if (c != 0 & c % 3 == 0) {
                 result += '</div><div class="row mt-3">'
             }
             result += '<div class="col"><div class="card" style="max-width: 25rem;"><img src="' + prenot.imgFilm + '" class="card-img-top" alt="Fissure in Sandstone" /><div class="card-body row"><h4 class="card-title">' + prenot.nomeFilm + '</h4>'
             result += '<div class="col text-start"><h5 class="mt-2"><i class="far fa-calendar-alt"></i> ' + prenot.dataFilm + '</h5><h5 class="mt-2"><i class="far fa-clock"></i> ' + prenot.oraFilm + '</h5><h5 class="mt-2"><i class="fas fa-person-booth" style="color: white;"></i> Sala: ' + prenot.numSala + '</h5><h5 class="mt-2"><i class="fa-solid fa-chair" style="color: white;"></i> Posto: ' + prenot.numPosto + '</h5></div>'
             result += '<div class="col"><img class="mt-2 mb-3" src="img/qr.png" alt="" style="max-width: 110px;"></div><div class="rating pb-0"> <input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="5" id="5' + c + '"><label for="5' + c + '">☆</label><input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="4" id="4' + c + '"><label for="4' + c + '">☆</label>'
-            result += '<input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="3" id="3' + c + '"><label for="3' + c + '">☆</label><input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="2" id="2+c+"><label for="2' + c + '">☆</label><input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="1" id="1' + c + '"><label for="1' + c + '">☆</label></div></div></div></div>'
+            result += '<input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="3" id="3' + c + '"><label for="3' + c + '">☆</label><input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="2" id="2'+ c +'"><label for="2' + c + '">☆</label><input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="1" id="1' + c + '"><label for="1' + c + '">☆</label></div></div></div></div>'
             c++;
         }
         result += '</div>';
+        console.log("fatto");
         $('#containerPrenotazioni').empty();
         $('#containerPrenotazioni').append(result);
     }
 
+    $('#ordinaPrenotazioni').click(async function(){
+        await ordinaPrenotazioni();
+        appendPrenotazioni(prenotazioniPronte);
+    });
+
+    let prenotazioniPronte;
+    async function ordinaPrenotazioni(){
+        prenotazioniPronte.sort( await function compare(a, b){
+            let dateA = new Date(a.dataFilm);
+            let dateB = new Date(b.dataFilm);
+            return dateB - dateA;
+        });
+    }
+
+    // function ordinaPrenotazioni(){
+    //     let temp;
+    //     let finito = [];
+    //     for (let i = 0; i < prenotazioniPronte.length; i++) {
+    //         for (let j = i+1; j<prenotazioniPronte.length; j++){
+    //             if(prenotazioniPronte[i].dataFilm > prenotazioniPronte[j].dataFilm){
+    //                 temp = finito[i];
+    //                 finito[i] = prenotazioniPronte[j]
+    //                 finito[j] = temp;
+    //                 console.log(finito[i]);
+    //                 console.log(finito[i] , finito[j], i)
+    //             }
+    //         }
+    //     }
+    //     console.log("dentro la ordin" + finito);
+    //     appendPrenotazioni(finito);
+    // };
 
     $('body').on("click", '.valuta', function () {
         let voto = $(this).val();
         let idPrenotazione = $(this).attr("data-film");
         setValutazione(voto, idPrenotazione);
-    })
+    });
 
 
     //assegna valutazione
@@ -958,6 +997,7 @@ $(document).ready(function () {
             email: email,
             pass: pass
         }
+        console.log("dentro");
         $.ajax({
             url: 'http://localhost:8080/api/auth/login',
             contentType: 'application/json;charset=UTF-8',
