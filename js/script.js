@@ -1,5 +1,8 @@
 $(document).ready(function () {
     $.cookie("profilo", "");
+
+    let idFilmDelete;
+
     //HOMEPAGE FILM+PAGINA FILM////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     $('body',).on('mouseenter', ".content", function () {
         $(this).addClass('transition');
@@ -584,7 +587,7 @@ $(document).ready(function () {
                             }
                         }
                     }
-                }
+                } getFilmBy
             }
         }
     }
@@ -641,6 +644,7 @@ $(document).ready(function () {
     //prova a vedere se l'utente che modifica il profilo è lo stesso utente del profilo che si visualizza
     function checkModificaProfiloPossibile() {
         //info = $.cookie("profilo");
+
         if (info != null & info != "" & infoOspite != null) {
             //info = JSON.parse(info);
             //alert(infoOspite);
@@ -1157,7 +1161,134 @@ $(document).ready(function () {
 
     //FINE SECURITY MODALE LOGIN/ REGISTER////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+    //ADMIN PANEL/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    $.get('http://localhost:8080/api/film', function (response) {
+        //console.log(response);
+        let listaFilms = response;
+        //console.log(listaPortate);
+        let selectContent = '';
+        for (film of listaFilms) {
+            selectContent += createInput(film);
+            //console.log(film);
+        }
+        //let deleteButton = '<div class="modal-footer"> <button type="button" class="btn btn-primary" id="deleteBtn">Elimina </button></div>';
+       //console.log('select content: ' + selectContent);
+        //$('.in').append('<td data-film = ></td>')
+        //$('#updatePortata').html(selectContent);
+        //console.log('opzioni = ' + selectContent);
+        $('#deleteFilm').append(selectContent);
+        //$('#deleteFilm').append(deleteButton);
+    });
+
+    $('body').on('click', '.eliminaFilmbtn', function (e) {
+        e.preventDefault();
+        let id = $(this).attr('data-id');
+        //preparazione dei dati da inviare al server
+        //let films = getFilm();
+        /*let params = {
+            id: films.id
+        };*/
+
+        $.ajax({
+            url: 'http://localhost:8080/admin/api/film/delete/' + id,
+            contentType: 'application/json;charset=UTF-8',
+            type: 'DELETE',
+            //data: JSON.stringify(params),
+            success: async function (data) {
+                await modalRisposta("Film eliminato");
+                // $('#modalRisposta').modal('show');
+            },
+            error: async function () {
+                await modalRisposta("Film non eliminato, provare piu' tardi.");
+                //$('#modalRisposta').modal('show');
+            }
+        });
+    });
+
+    $.get('http://localhost:8080/api/prenotazione', function(response){
+        let listaPrenotazioni = response;
+        console.log(listaPrenotazioni);
+        let input = '';
+        for(pren of listaPrenotazioni){
+           
+            input += createListPren(pren);
+        }
+        console.log(pren);
+        $('.pren').append(input);
+    })
+
+    $('body').on('click', '.eliminaPrenbtn', function (e) {
+        e.preventDefault();
+        let id = $(this).attr('data-id');
+        //preparazione dei dati da inviare al server
+        //let films = getFilm();
+        /*let params = {
+            id: films.id
+        };*/
+
+        $.ajax({
+            url: 'http://localhost:8080/admin/api/prenotazione/delete/' + id,
+            contentType: 'application/json;charset=UTF-8',
+            type: 'DELETE',
+            //data: JSON.stringify(params),
+            success: async function (data) {
+                await modalRisposta("Prenotazione eliminata");
+                // $('#modalRisposta').modal('show');
+            },
+            error: async function () {
+                await modalRisposta("Prenotazione non eliminata, provare piu' tardi.");
+                //$('#modalRisposta').modal('show');
+            }
+        });
+    });
+
+    $('.imp').click(function () {
+
+        location.href = 'admin.html';
+        //$('.nameFilm').append('Film');
+    })
+
+   $('#natale').click(function(){
+        $('#logoSomnia').attr('src', 'img/somnia_logonatale.png');
+
+    })
+
+    $('#pasqua').click(function(){
+        $('#logoSomnia').attr('src', 'img/logo_pasqua.png');
+
+    })
+
+    $('#standard').click(function(){
+        $('#logoSomnia').attr('src', 'img/logo.png');
+
+    })
+
+
+
+    
+
+    //FINE ADMIN PANEL/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 });
+
+
+
+//CREAZIONE LISTA FILM ADMIN PANEL/////////////////////////////////////////////////////////////////////////////////////////////////////
+function createInput(inputData) {
+    let input = '<div class="row">	<div class="form-check"><label class="form-check-label"for="flexRadioDefault1">' + inputData.nome + '</label> <div> <button type="button" class="  btn-outline-warning mb-2 eliminaFilmbtn" data-id="' + inputData.id + '">Elimina </button></div></div></div>';
+    //console.log('option = ' + option);
+    return input;
+}
+
+//CREAZIONE LISTA PRENOTAZIONI PER ELIMINAZIONE/////////////////////////////////////////////////////////////////////////7
+function createListPren(prenotazione){
+    let input = '<div class="modalTXT1"><div class="row"><div class="col">ID</div><div class="col">DATA</div><div class="col">VALUTAZIONE</div></div> <div> </div><div class="modalTXT2"><div class="row"><div class="col" id="idPrenotazione">' + prenotazione.id + '</div><div class="col" id="data">' + prenotazione.data + '</div> <div class="col" id="valutazione">' + prenotazione.valutazione + ' <div class="row mt-2"><button type="button" class="btn-outline-warning mb-10 eliminaPrenbtn" data-id="' + prenotazione.id + '">Elimina </button></div></div></div></div></div>'
+      
+    return input;
+}
 
 function extractPayload(token) {
     let array = token.split(".");
