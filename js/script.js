@@ -17,7 +17,7 @@ $(document).ready(function () {
             $('#containerFilmSala').empty();
             listaFilm = response;
             if (location.pathname == '/index.html') {
-                let result = '<div class="row"><div class="col text-start"><h2>NUOVI ARRIVI</h2></div><div class="col end-0 form-outline input-group"><input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" /><button type="button" class="btn h-75 btn-outline-warning">Cerca</button></div></div><div class="row mt-3">'
+                let result = '<div class="row"><div class="col text-start"><h2>NUOVI ARRIVI</h2></div><div class="col-2 mb-2 form-outline form-white">   <input type="text" id="searchBar" class="form-control" />   <label class="form-label" for="searchBar">Cerca</label> <hr class="mt-0"> </div></div><div class="row mt-3">'
                 let counter = 0;
                 for (let film of response) {
                     if (film.condizione == "sala") {
@@ -36,6 +36,11 @@ $(document).ready(function () {
             }
         })
     })();
+
+
+    
+
+    
 
     (() => {
         if (location.pathname == "/comingsoon.html") {
@@ -91,7 +96,7 @@ $(document).ready(function () {
             $('#img-banner2-film').attr("src", filmInfo.img2);
             $('#img-banner3-film').attr("src", filmInfo.img3);
             $('#url-pagina-film').attr("src", filmInfo.urlTrailer + '?rel=0&modestbranding=1&autohide=1&mute=0&showinfo=0&controls=1&autoplay=1');
-            if(filmInfo.condizione == "sala"){
+            if (filmInfo.condizione == "sala") {
                 $('#btnPrenota').show();
             }
         }
@@ -314,7 +319,7 @@ $(document).ready(function () {
             $('#movie').append(result);
             $('#modalePrenotazione').modal('show');
         } else {
-            modalRisposta("Effettuare il login per prenotare",2);
+            modalRisposta("Effettuare il login per prenotare", 2);
         }
     });
 
@@ -396,41 +401,41 @@ $(document).ready(function () {
         $('.container1').append(result);
     }
 
-    $('body').on('click', '#apriPagamento', function(){
-        if(selectedSeatsCount>0){
+    $('body').on('click', '#apriPagamento', function () {
+        if (selectedSeatsCount > 0) {
             $('#quantitaBiglietti').html(selectedSeatsCount);
-            $('#totaleDaPagare').html(selectedSeatsCount*7 + "€")
+            $('#totaleDaPagare').html(selectedSeatsCount * 7 + "€")
             $('#modalePrenotazione').modal("hide");
             $('#modalPagamento').modal("show");
         }
     })
 
     $('body').on("click", "#eseguiAcquisto", async function () {
-        if(checkPagamento()){
+        if (checkPagamento()) {
             if (checkCookieTimeOnly()) {
                 for (let posto of postiSelezionati) {
                     await prenotaFilm(posto)
                 }
-                modalRisposta("Prenotazione effettuata",1);
+                modalRisposta("Prenotazione effettuata", 1);
             } else {
-                modalRisposta("Effettuare il login per prenotare",2);
+                modalRisposta("Effettuare il login per prenotare", 2);
             }
         } else {
-            modalRisposta("Ricontrollare i dati inseriti",2);
+            modalRisposta("Ricontrollare i dati inseriti", 2);
         }
     });
 
-    function checkPagamento(){
+    function checkPagamento() {
         let nome = $('#nomePagamento').val().length > 1;
-        let cognome = $('#cognomePagamento').val().length> 1;
+        let cognome = $('#cognomePagamento').val().length > 1;
         let nomeIntestatario = $('#nomeIntestatario').val().length > 3;
         let numeroCarta = $('#numeroCarta').val().length > 15;
         let scadenzaCarta = $('#scadenzaCarta').val().length > 3;
         let cvvCarta = $('#cvvCarta').val().length > 1;
         console.log(nome, cognome, nomeIntestatario, numeroCarta, scadenzaCarta, cvvCarta)
-        if(nome & cognome & nomeIntestatario & numeroCarta & scadenzaCarta & cvvCarta){
-            return true; 
-        }else {
+        if (nome & cognome & nomeIntestatario & numeroCarta & scadenzaCarta & cvvCarta) {
+            return true;
+        } else {
             return false;
         }
     }
@@ -456,10 +461,10 @@ $(document).ready(function () {
             type: 'POST',
             data: JSON.stringify(params),
             success: async function (data) {
-                await modalRisposta("Prenotazione effettuata",1);
+                await modalRisposta("Prenotazione effettuata", 1);
             },
             error: async function () {
-                await modalRisposta("Si è verificato un problema, riprovare piu' tardi.",2);
+                await modalRisposta("Si è verificato un problema, riprovare piu' tardi.", 2);
             }
         });
         $('#modalPagamento').modal('hide');
@@ -558,7 +563,7 @@ $(document).ready(function () {
         let c = 0;
         let result = '';
         for (let prenotazione of infoOspite.prenotazioni) {
-            if (prenotazione.valutazione > 0){
+            if (prenotazione.valutazione > 0) {
                 if (c < 3) {
                     let idFilm = await findFilmId(prenotazione.id);
                     let film = await getFilmById(idFilm);
@@ -613,7 +618,7 @@ $(document).ready(function () {
             for (let i = 1; i < 12; i++) {
                 result += '<a href=""><img class="cambiaImgProfilo immaginiProfiloUtenti" data-img="profilo' + i + '.png" src="img/avatar/profilo' + i + '.png" class="rounded-circle" height="250"/></a>'
             }
-            $('#modaleRisposta').append(result,1);
+            $('#modaleRisposta').append(result, 1);
             $('#modalRisposta').modal('toggle');
         }
     });
@@ -632,10 +637,10 @@ $(document).ready(function () {
                 type: 'PUT',
                 data: JSON.stringify(params),
                 success: async function (data) {
-                    await modalRisposta("Immagine cambiata",1);
+                    await modalRisposta("Immagine cambiata", 1);
                 },
                 error: async function () {
-                    await modalRisposta("Immagine non cambiata, provare piu' tardi.",2);
+                    await modalRisposta("Immagine non cambiata, provare piu' tardi.", 2);
                 }
             });
             location.reload();
@@ -670,12 +675,12 @@ $(document).ready(function () {
             type: 'PUT',
             data: JSON.stringify(params),
             success: function (data) {
-                modalRisposta("Modifiche effettuate",1);
+                modalRisposta("Modifiche effettuate", 1);
                 info.username = $('#cambiaUsername').val();
                 window.location = "http://127.0.0.1:5500/profilo.html?" + $('#cambiaUsername').val();
             },
             error: function () {
-                modalRisposta("Qualcosa è andato storto",2);
+                modalRisposta("Qualcosa è andato storto", 2);
             }
         });
     });
@@ -778,7 +783,7 @@ $(document).ready(function () {
         if (checkCookieTimeOnly()) {
             window.location = "http://127.0.0.1:5500/prenotazioni.html"
         } else {
-            modalRisposta("Effettuare il login",2);
+            modalRisposta("Effettuare il login", 2);
         }
     });
 
@@ -840,7 +845,7 @@ $(document).ready(function () {
         return prenotazioniUtenteComplete;
     }
 
-    
+
 
     function appendPrenotazioni(prenotazioniCompleta) {
         let result = '<div class="row mt-3">';
@@ -854,7 +859,7 @@ $(document).ready(function () {
             result += '<div class="col"><div class="card" style="max-width: 25rem;"><img src="' + prenot.imgFilm + '" class="card-img-top" alt="Fissure in Sandstone" /><div class="card-body row"><h4 class="card-title">' + prenot.nomeFilm + '</h4>'
             result += '<div class="col text-start"><h5 class="mt-2"><i class="far fa-calendar-alt"></i> ' + prenot.dataFilm + '</h5><h5 class="mt-2"><i class="far fa-clock"></i> ' + prenot.oraFilm + '</h5><h5 class="mt-2"><i class="fas fa-person-booth" style="color: white;"></i> Sala: ' + prenot.numSala + '</h5><h5 class="mt-2"><i class="fa-solid fa-chair" style="color: white;"></i> Posto: ' + prenot.numPosto + '</h5></div>'
             result += '<div class="col"><img class="mt-2 mb-3" src="img/qr.png" alt="" style="max-width: 110px;"></div><div class="rating pb-0"> <input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="5" id="5' + c + '"><label for="5' + c + '">☆</label><input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="4" id="4' + c + '"><label for="4' + c + '">☆</label>'
-            result += '<input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="3" id="3' + c + '"><label for="3' + c + '">☆</label><input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="2" id="2'+ c +'"><label for="2' + c + '">☆</label><input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="1" id="1' + c + '"><label for="1' + c + '">☆</label></div></div></div></div>'
+            result += '<input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="3" id="3' + c + '"><label for="3' + c + '">☆</label><input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="2" id="2' + c + '"><label for="2' + c + '">☆</label><input class="valuta" data-film="' + prenot.idPrenotazione + '" type="radio" name="rating" value="1" id="1' + c + '"><label for="1' + c + '">☆</label></div></div></div></div>'
             c++;
         }
         result += '</div>';
@@ -863,14 +868,14 @@ $(document).ready(function () {
         $('#containerPrenotazioni').append(result);
     }
 
-    $('#ordinaPrenotazioni').click(async function(){
+    $('#ordinaPrenotazioni').click(async function () {
         await ordinaPrenotazioni();
         appendPrenotazioni(prenotazioniPronte);
     });
 
     let prenotazioniPronte;
-    async function ordinaPrenotazioni(){
-        prenotazioniPronte.sort( await function compare(a, b){
+    async function ordinaPrenotazioni() {
+        prenotazioniPronte.sort(await function compare(a, b) {
             let dateA = new Date(a.dataFilm);
             let dateB = new Date(b.dataFilm);
             return dateB - dateA;
@@ -913,10 +918,10 @@ $(document).ready(function () {
             type: 'PUT',
             data: JSON.stringify(valutazione),
             success: async function (data) {
-                modalRisposta("Valutazione assegnata",1);
+                modalRisposta("Valutazione assegnata", 1);
             },
             error: async function () {
-                modalRisposta("Si è verificato un errore, riprovare piu' tardi.",2);
+                modalRisposta("Si è verificato un errore, riprovare piu' tardi.", 2);
             }
         });
     }
@@ -982,7 +987,7 @@ $(document).ready(function () {
                 success: function () {
                     resetForm("registerForm");
                     $('#modalRegister').modal('hide');
-                    modalRisposta("Benvenuto su Somnia!",1)
+                    modalRisposta("Benvenuto su Somnia!", 1)
                 },
                 error: function () {
 
@@ -990,7 +995,7 @@ $(document).ready(function () {
 
             });
         } else {
-            modalRisposta("Ricontrolla i campi inseriti e accettare i termini.",2);
+            modalRisposta("Ricontrolla i campi inseriti e accettare i termini.", 2);
         }
     });
 
@@ -1015,12 +1020,12 @@ $(document).ready(function () {
                 $.cookie("jwt", token);
                 JWTHeader = updateHeader();
                 impostaProfiloEmail(extractPayload(token)[0]);
-                modalRisposta("Benvenuto su Somnia!",1)
+                modalRisposta("Benvenuto su Somnia!", 1)
                 //location.reload(true);
             },
             error: function () {
                 $('modalLogin').modal('hide');
-                modalRisposta("Email o password errati!",2)
+                modalRisposta("Email o password errati!", 2)
             }
         })
     })
@@ -1031,7 +1036,7 @@ $(document).ready(function () {
 
 
     function modalRisposta(risposta, id) {
-        if(id != 1){
+        if (id != 1) {
             $('#modaleRisposta').css("background-color", "rgb(202, 136, 136)");
             $('#modaleRisposta').css("color", "black");
         } else {
@@ -1075,6 +1080,46 @@ $(document).ready(function () {
     function checkBoxIfChecked(id) {
         return $('#' + id).is(':checked');
     }
+
+    let cRegister = 0;
+    $('body',).on('mouseenter', "#submitRegister", function () {
+        let email = $('#emailRegister').val();
+        let username = $('#usernameRegister').val();
+        let pass = $('#passwordRegister').val();
+        let passConfirm = $('#passwordRegisterConfirm').val();
+        if (testRegisterForm(username, email, pass, passConfirm, "flexCheckDefault")) {
+        } else {
+            if(cRegister%2==0){
+                setTimeout(function () {
+                    $('#submitRegister').css('transform', `translateX(100px)`)
+                }, 100)
+            } else {
+                setTimeout(function () {
+                    $('#submitRegister').css('transform', `translateX(-100px)`)
+                }, 100)
+            }
+            cRegister++;
+        }
+    });
+
+    let cLogin = 0;
+    $('body',).on('mouseenter', "#submitLogin", function () {
+        let email = $('#emailLogin').val().length > 2;
+        let pass = $('#passwordLogin').val().length > 2;
+        if (email & pass) {
+        } else {
+            if(cLogin%2==0){
+                setTimeout(function () {
+                    $('#submitLogin').css('transform', `translateX(100px)`)
+                }, 100)
+            } else {
+                setTimeout(function () {
+                    $('#submitLogin').css('transform', `translateX(-100px)`)
+                }, 100)
+            }
+            cLogin++;
+        }
+    });
 
     function testUsername(username) {
         if (username.length > 4) {
