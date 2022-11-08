@@ -15,12 +15,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
 </head>
 
-<body>
+<body style="height: 85rem;">
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: black !important;">
             <!-- Container wrapper -->
@@ -37,7 +38,8 @@
                     <!-- Navbar brand -->
                     <div>
                         <a class="navbar-brand mt-2 mt-lg-0" href="#">
-                            <img src="img/logo.png" id="logoSomnia" height="auto" width="230px" alt="MDB Logo" loading="lazy" />
+                            <img src="img/logo.png" id="logoSomnia" height="auto" width="230px" alt="MDB Logo"
+                                loading="lazy" />
                         </a>
                     </div>
                     <!-- Left links -->
@@ -53,7 +55,7 @@
                                 <a class="nav-link sezione" href="News&Offerte.html">News</a>
                             </li>
                             <li class="nav-item mx-2">
-                                <a class="nav-link sezione" href="#">Coming soon</a>
+                                <a class="nav-link sezione" href="comingsoon.html">Coming soon</a>
                             </li>
                             <li class="nav-item mx-2">
                                 <p style="color: black">asdasdasdasd</p>
@@ -88,8 +90,8 @@
                     </div>
                     <!-- Avatar -->
                     <div>
-                        <button id="btnLogin" style="display: block;" type="button" class="btn btn-outline-warning me-3" data-mdb-toggle="modal"
-                            data-mdb-target="#modalLogin">Login</button>
+                        <button id="btnLogin" style="display: block;" type="button" class="btn btn-outline-warning me-3"
+                            data-mdb-toggle="modal" data-mdb-target="#modalLogin">Login</button>
                         <div id="containerImg" class="dropdown  me-3" style="display: none;">
                             <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
                                 id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown"
@@ -99,10 +101,11 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                                 <li>
-                                    <a id="clickProfilo" class="dropdown-item elemento-tendina" href="profilo.html">Profilo</a>
+                                    <a id="clickProfilo" class="dropdown-item elemento-tendina"
+                                        href="profilo.html">Profilo</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item elemento-tendina imp" href="#">Impostazioni</a>
+                                    <a class="dropdown-item elemento-tendina imp" href="#">Admin</a>
                                 </li>
                                 <li>
                                     <a id="btnLogout" class="dropdown-item elemento-tendina" href="#">Logout</a>
@@ -156,36 +159,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body pren">
-                    <!--<div class="modalTXT1">
-                        <div class="row">
-                            <div class="col" id="idPrenotazione">
-                                ID
-                            </div>
-                            <div class="col" id="username">
-                                USERNAME
-                            </div>
-                            <div class="col" id="titoloFilm">
-                                FILM
-                            </div>
-                        </div>
-                        <div class="modalTXT2">
-                        <div class="row">
-                        <div class="col" id="idPrenotazione">
-                            10201
-                        </div>
-                        <div class="col" id="username">
-                            samucard
-                        </div>
-                        <div class="col" id="titoloFilm">
-                            Black Adam
-                        </div>
-                    </div>
-                    </div>
-                    </div>-->
                 </div>
                 <div class="modal-footer">
-                    <!--<button type="button" class="btn btn-secondary">Aggiungi</button>
-                    <button type="button" class="btn btn-primary">Elimina</button>-->
                 </div>
             </div>
         </div>
@@ -293,7 +268,7 @@
 
 
     <!-- Footer -->
-    <footer class="text-center text-lg-start bg-BLACK text-muted GY-5">
+    <footer class="text-center text-lg-start bg-BLACK text-muted GY-5 fixed-bottom">
         <!-- Section: Social media -->
         <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
             <!-- Left -->
@@ -329,7 +304,10 @@
                             <i class="fas fa-gem me-3 text-secondary"></i>Somnia Cinema
                         </h6>
                         <p>
-                            Dove i tuoi sogni diventano realtà
+                            <a href="chisiamo.html" class="text-reset">Chi siamo</a>
+                        </p>
+                        <p>
+                            <a href="workinprogress.html" class="text-reset">Lavora con noi</a>
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -338,13 +316,16 @@
                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                         <!-- Links -->
                         <h6 class="text-uppercase fw-bold mb-4">
-                            Products
+                            Note Legali
                         </h6>
                         <p>
-                            <a href="#!" class="text-reset">Angular</a>
+                            <a href="Privacy.html" class="text-reset">Privacy Policy</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">React</a>
+                            <a href="Cookie.html" class="text-reset">Cookie Policy</a>
+                        </p>
+                        <p>
+                            <a href="Condizioni.html" class="text-reset">Condizioni di utilizzo</a>
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -353,13 +334,16 @@
                     <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                         <!-- Links -->
                         <h6 class="text-uppercase fw-bold mb-4">
-                            Useful links
+                            Link utili
                         </h6>
                         <p>
-                            <a href="#!" class="text-reset">Pricing</a>
+                            <a href="workinprogress.html" class="text-reset">Partners</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Help</a>
+                            <a href="workinprogress.html" class="text-reset">Help</a>
+                        </p>
+                        <p>
+                            <a href="workinprogress.html" class="text-reset">FAQ</a>
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -367,7 +351,7 @@
                     <!-- Grid column -->
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                         <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                        <h6 class="text-uppercase fw-bold mb-4">Contatti</h6>
                         <p><i class="fas fa-home me-3 text-secondary"></i> Via Domodossola 42, Torino</p>
                         <p>
                             <i class="fas fa-envelope me-3 text-secondary"></i>
@@ -377,6 +361,12 @@
                     </div>
                     <!-- Grid column -->
                 </div>
+                <div class="row">
+                    <div id="teamKino">
+                        <img src="https://cdn.discordapp.com/attachments/1025133315637915648/1038024954538643516/logo_tk.png"
+                            height="100vw" alt="" class="center">
+                    </div>
+                </div>
                 <!-- Grid row -->
             </div>
         </section>
@@ -385,7 +375,9 @@
         <!-- Copyright -->
         <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
             © 2022 Copyright:
-            <a class="text-reset" href="https://mdbootstrap.com/">SOMNIA CINEMA</a>
+            <a class="text-reset" href="https://mdbootstrap.com/">Somnia Cinema</a>
+            <br>
+            <a>A product by Team Kino</a>
         </div>
         <!-- Copyright -->
     </footer>
@@ -520,7 +512,7 @@
 
                             <div class="form-check text-start">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault" >
+                                <label class="form-check-label" for="flexCheckDefault">
                                     Accetti i termini e le condizioni.
                                 </label>
                             </div>
@@ -544,19 +536,18 @@
         </div>
     </div>
 
-<!-- MODAL FORM SUCCESS LOGIN/REGISTER -->
-<div class="modal fade" id="modalRisposta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body text-center rounded-4" id="modaleRisposta">
-                <h5 class="modal-title" id="contentModalRisposta"></h5>
+    <!-- MODAL FORM SUCCESS LOGIN/REGISTER -->
+    <div class="modal fade" id="modalRisposta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body text-center rounded-4" id="modaleRisposta">
+                    <h5 class="modal-title" id="contentModalRisposta"></h5>
+                </div>
             </div>
         </div>
     </div>
-</div>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
 </body>
 
 </html>
-

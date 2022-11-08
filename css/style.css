@@ -590,8 +590,14 @@ h4 {
 }
 
 /****************************** SEARCHBAR *************/
-#searchBar {
-    background-color: #000000!important;
+#dropDownSearch {
+    width: 15.5rem!important;
+    background-color: rgba(56, 33, 0, 0.9);
+    margin-left: -1rem; 
+}
+
+#dropDownSearch li {
+    color: black!important;
 }
 
 hr {
@@ -601,10 +607,4 @@ hr {
 /****************************** CARD PAYMENT *************/
 
 
-<<<<<<< Updated upstream
 /****************************** CARD PAYMENT ************
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes

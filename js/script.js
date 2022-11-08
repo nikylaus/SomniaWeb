@@ -17,7 +17,8 @@ $(document).ready(function () {
             $('#containerFilmSala').empty();
             listaFilm = response;
             if (location.pathname == '/index.html') {
-                let result = '<div class="row"><div class="col text-start"><h2>NUOVI ARRIVI</h2></div><div class="col-2 mb-2 form-outline form-white">   <input type="text" id="searchBar" class="form-control" />   <label class="form-label" for="searchBar">Cerca</label> <hr class="mt-0"> </div></div><div class="row mt-3">'
+                //let result = '<div class="row"><div class="col text-start"><h2>NUOVI ARRIVI</h2></div><div class="col-2 mb-2 form-outline form-white">   <input type="text" id="searchBar" class="form-control" />   <label class="form-label" for="searchBar">Cerca</label> <hr class="mt-0"> </div></div><div class="row mt-3">'
+                let result = '<div class="row mt-3">'
                 let counter = 0;
                 for (let film of response) {
                     if (film.condizione == "sala") {
@@ -37,10 +38,45 @@ $(document).ready(function () {
         })
     })();
 
+    $('#searchBar').on('input', function(){
+        let valore = $(this).val().toLowerCase();
+        let trovati = [];
+        let c = 0;
+        for (const i of listaFilm) {
+            if(i.nome.toLowerCase().includes(valore) & i.condizione == "sala"){
+                trovati[c] = i;
+                c++;
+            }
+        }
+        console.log(trovati);
+        if(trovati.length>0){
+            inserisciRisultati(trovati);
+        } else {
+            $('#dropDownSearch').empty();
+        }
+    });
 
-    
+    $('body').on('click', function(){
+        if(active){
+            $(".dropdown-menu").toggle();
+            active = false;
+        }
+    })
 
-    
+    let active = false;
+    function inserisciRisultati(array){
+        let finale = ''
+        for (const i of array) {
+            finale += '<li><button data-id="'+i.id+'" class="dropdown-item content" type="button">'+i.nome+'</button></li>'
+        }
+        $('#dropDownSearch').empty();
+        $('#dropDownSearch').append(finale);
+        console.log(active)
+        if(!active){
+            $(".dropdown-menu").toggle("on");
+            active = true;
+        }   
+    }
 
     (() => {
         if (location.pathname == "/comingsoon.html") {
@@ -213,6 +249,10 @@ $(document).ready(function () {
         $('#btnLogin').hide()
         $('#imgProfilo').attr("src", "img/avatar/" + info.img)
         $('#containerImg').show();
+        $('.imp').hide();
+        if(info.ruoli[0].id == 1){
+            $('.imp').show();
+        }
     }
 
     async function impostaProfilo() {
@@ -220,6 +260,10 @@ $(document).ready(function () {
         $('#btnLogin').hide()
         $('#imgProfilo').attr("src", "img/avatar/" + infoDentro.img)
         $('#containerImg').show();
+        $('.imp').hide();
+        if(infoDentro.ruoli[0].id == 1){
+            $('.imp').show();
+        }
     }
 
     async function getUserInfoUsername(username) {
@@ -592,7 +636,7 @@ $(document).ready(function () {
                             }
                         }
                     }
-                } getFilmBy
+                }
             }
         }
     }
