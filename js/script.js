@@ -6,12 +6,15 @@ $(document).ready(function () {
     //HOMEPAGE FILM+PAGINA FILM////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     $('body',).on('mouseenter', ".content", function () {
         $(this).addClass('transition');
+        $(this).css('z-index', 30);
     });
     $('body').on('mouseleave', ".content", function () {
         $(this).removeClass('transition');
+        $(this).css('z-index', 1);
     });
     //popolazione film homepage
     let listaFilm = null;
+    let listaFilmSala = [];
     (() => {
         $.get('http://localhost:8080/api/film', function (response) {
             $('#containerFilmSala').empty();
@@ -20,8 +23,11 @@ $(document).ready(function () {
                 //let result = '<div class="row"><div class="col text-start"><h2>NUOVI ARRIVI</h2></div><div class="col-2 mb-2 form-outline form-white">   <input type="text" id="searchBar" class="form-control" />   <label class="form-label" for="searchBar">Cerca</label> <hr class="mt-0"> </div></div><div class="row mt-3">'
                 let result = '<div class="row mt-3">'
                 let counter = 0;
+                let c = 0;
                 for (let film of response) {
                     if (film.condizione == "sala") {
+                        listaFilmSala[c] = film;
+                        c++;
                         if (counter % 3 == 0) {
                             if (counter == 3) {
                                 result += '<h2 class="mt-3 mb-4">DA NON PREDERE</h2>'
@@ -34,48 +40,115 @@ $(document).ready(function () {
                 }
                 result += '</div>';
                 $('#containerFilmSala').append(result);
+                $('#surpriseThem').attr('data-id', listaFilmSala[Math.floor(Math.random() * listaFilmSala.length)].id);
             }
+
         })
     })();
 
-    $('#searchBar').on('input', function(){
+    $('#guessTheMovie').click(function () {
+        $('#modalGuessFilm').modal('show');
+    })
+
+    let filmGuess = [];
+    $('body').on('click', '#btnStupiscimi', function () {
+        filmGuess = [];
+        let sangueVal = $('#sangueVal').val();
+        let azioneVal = $('#azioneVal').val();
+        let cadaveriVal = $('#cadaveriVal').val();
+        let fantasyVal = $('#fantasyVal').val();
+        let ridereVal = $('#ridereVal').val();
+        let totale = parseInt(sangueVal) + parseInt(azioneVal) + parseInt(cadaveriVal) + parseInt(fantasyVal) - parseInt(ridereVal);
+        let c = 0;
+        if (totale < 6) {
+            for (const i of listaFilmSala) {
+                if (i.genere.toLowerCase() == "commedia") {
+                    filmGuess[c] = i;
+                    c++;
+                }
+            }
+        } else if (totale > 5 & totale < 8) {
+            for (const i of listaFilmSala) {
+                if (i.genere.toLowerCase() == "drammatico") {
+                    filmGuess[c] = i;
+                    c++;
+                }
+            }
+        } else if (totale > 7 & totale < 11) {
+            for (const i of listaFilmSala) {
+                if (i.genere.toLowerCase() == "fantasy") {
+                    filmGuess[c] = i;
+                    c++;
+                }
+            }
+        } else if (totale > 10 & totale < 15) {
+            for (const i of listaFilmSala) {
+                if (i.genere.toLowerCase() == "azione") {
+                    filmGuess[c] = i;
+                    c++;
+                }
+            }
+        } else if (totale > 14) {
+            for (const i of listaFilmSala) {
+                if (i.genere.toLowerCase() == "horror") {
+                    filmGuess[c] = i;
+                    c++;
+                }
+            }
+        }
+        appendGuess(filmGuess);
+    });
+
+    function appendGuess(films){
+        let result = "";
+        for (const i of films) {
+            result += '<div class="row mt-3"><div class="col d-flex justify-content-center"> <div class="card content" data-id="'+i.id+'" style="width: 18rem;">   <img src="'+i.img+'" class="card-img-top" alt="Sunset Over the Sea"/>   <div class="card-body">     <p class="card-text">'+i.descrizione+'</p> </div> </div></div> </div>'
+        }
+        $('#modalGuessFilm').modal('hide');
+        $('#contentStupiscimi').empty();
+        $('#contentStupiscimi').append(result);
+        $('#modalRisultatiGuessFilm').modal('show');
+    }
+
+
+    $('#searchBar').on('input', function () {
         let valore = $(this).val().toLowerCase();
         let trovati = [];
         let c = 0;
         for (const i of listaFilm) {
-            if(i.nome.toLowerCase().includes(valore) & i.condizione == "sala"){
+            if (i.nome.toLowerCase().includes(valore) & i.condizione == "sala") {
                 trovati[c] = i;
                 c++;
             }
         }
         console.log(trovati);
-        if(trovati.length>0){
+        if (trovati.length > 0) {
             inserisciRisultati(trovati);
         } else {
             $('#dropDownSearch').empty();
         }
     });
 
-    $('body').on('click', function(){
-        if(active){
+    $('body').on('click', function () {
+        if (active) {
             $(".dropdown-menu").toggle();
             active = false;
         }
     })
 
     let active = false;
-    function inserisciRisultati(array){
+    function inserisciRisultati(array) {
         let finale = ''
         for (const i of array) {
-            finale += '<li><button data-id="'+i.id+'" class="dropdown-item content" type="button">'+i.nome+'</button></li>'
+            finale += '<li><button data-id="' + i.id + '" class="dropdown-item content" type="button">' + i.nome + '</button></li>'
         }
         $('#dropDownSearch').empty();
         $('#dropDownSearch').append(finale);
         console.log(active)
-        if(!active){
+        if (!active) {
             $(".dropdown-menu").toggle("on");
             active = true;
-        }   
+        }
     }
 
     (() => {
@@ -250,7 +323,7 @@ $(document).ready(function () {
         $('#imgProfilo').attr("src", "img/avatar/" + info.img)
         $('#containerImg').show();
         $('.imp').hide();
-        if(info.ruoli[0].id == 1){
+        if (info.ruoli[0].id == 1) {
             $('.imp').show();
         }
     }
@@ -261,7 +334,7 @@ $(document).ready(function () {
         $('#imgProfilo').attr("src", "img/avatar/" + infoDentro.img)
         $('#containerImg').show();
         $('.imp').hide();
-        if(infoDentro.ruoli[0].id == 1){
+        if (infoDentro.ruoli[0].id == 1) {
             $('.imp').show();
         }
     }
@@ -1133,7 +1206,7 @@ $(document).ready(function () {
         let passConfirm = $('#passwordRegisterConfirm').val();
         if (testRegisterForm(username, email, pass, passConfirm, "flexCheckDefault")) {
         } else {
-            if(cRegister%2==0){
+            if (cRegister % 2 == 0) {
                 setTimeout(function () {
                     $('#submitRegister').css('transform', `translateX(100px)`)
                 }, 100)
@@ -1152,7 +1225,7 @@ $(document).ready(function () {
         let pass = $('#passwordLogin').val().length > 2;
         if (email & pass) {
         } else {
-            if(cLogin%2==0){
+            if (cLogin % 2 == 0) {
                 setTimeout(function () {
                     $('#submitLogin').css('transform', `translateX(100px)`)
                 }, 100)
@@ -1264,7 +1337,7 @@ $(document).ready(function () {
             //console.log(film);
         }
         //let deleteButton = '<div class="modal-footer"> <button type="button" class="btn btn-primary" id="deleteBtn">Elimina </button></div>';
-       //console.log('select content: ' + selectContent);
+        //console.log('select content: ' + selectContent);
         //$('.in').append('<td data-film = ></td>')
         //$('#updatePortata').html(selectContent);
         //console.log('opzioni = ' + selectContent);
@@ -1297,12 +1370,12 @@ $(document).ready(function () {
         });
     });
 
-    $.get('http://localhost:8080/api/prenotazione', function(response){
+    $.get('http://localhost:8080/api/prenotazione', function (response) {
         let listaPrenotazioni = response;
         console.log(listaPrenotazioni);
         let input = '';
-        for(pren of listaPrenotazioni){
-           
+        for (pren of listaPrenotazioni) {
+
             input += createListPren(pren);
         }
         console.log(pren);
@@ -1340,24 +1413,24 @@ $(document).ready(function () {
         //$('.nameFilm').append('Film');
     })
 
-   $('#natale').click(function(){
+    $('#natale').click(function () {
         $('#logoSomnia').attr('src', 'img/somnia_logonatale.png');
 
     })
 
-    $('#pasqua').click(function(){
+    $('#pasqua').click(function () {
         $('#logoSomnia').attr('src', 'img/logo_pasqua.png');
 
     })
 
-    $('#standard').click(function(){
+    $('#standard').click(function () {
         $('#logoSomnia').attr('src', 'img/logo.png');
 
     })
 
 
 
-    
+
 
     //FINE ADMIN PANEL/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1373,9 +1446,9 @@ function createInput(inputData) {
 }
 
 //CREAZIONE LISTA PRENOTAZIONI PER ELIMINAZIONE/////////////////////////////////////////////////////////////////////////7
-function createListPren(prenotazione){
+function createListPren(prenotazione) {
     let input = '<div class="modalTXT1"><div class="row"><div class="col">ID</div><div class="col">DATA</div><div class="col">VALUTAZIONE</div></div> <div> </div><div class="modalTXT2"><div class="row"><div class="col" id="idPrenotazione">' + prenotazione.id + '</div><div class="col" id="data">' + prenotazione.data + '</div> <div class="col" id="valutazione">' + prenotazione.valutazione + ' <div class="row mt-2"><button type="button" class="btn-outline-warning mb-10 eliminaPrenbtn" data-id="' + prenotazione.id + '">Elimina </button></div></div></div></div></div>'
-      
+
     return input;
 }
 

@@ -19,6 +19,22 @@
 </head>
 
 <body>
+    <div class="fixed-action-btn">
+        <a class="btn btn-floating text-white btn-lg" style="background-color: rgb(255, 119, 0);">
+            <i class="fas fa-gift"></i>
+        </a>
+
+        <ul class="list-unstyled" style="margin-bottom: 80px; transform: translateY(368px);">
+            <li>
+                <a class="btn text-white btn-floating btn-lg" style="background-color: rgb(255, 17, 0);"><i
+                        id="surpriseThem" data-id="" class="fas fa-face-surprise content"></i></a>
+            </li>
+            <li>
+                <a class="btn text-white btn-floating btn-lg" style="background-color: #4823ff;"><i
+                        class="fas fa-align-left" id="guessTheMovie"></i></a>
+            </li>
+        </ul>
+    </div>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: black !important;">
             <!-- Container wrapper -->
@@ -183,11 +199,12 @@
                         class="form-control" />
                     <label class="form-label" for="searchBar">Cerca film</label>
                     <div class="dropdown">
-                        <ul class="dropdown-menu dropdown-menu-dark" id="dropDownSearch" aria-labelledby="dropdownMenu2">
+                        <ul class="dropdown-menu dropdown-menu-dark" id="dropDownSearch"
+                            aria-labelledby="dropdownMenu2">
                         </ul>
                     </div>
                 </div>
-                
+
             </div>
         </div>
         <div class="container position-relative" id="containerFilmSala">
@@ -471,6 +488,86 @@
                     </div>
                     <div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Indovina Film -->
+    <div class="modal fade" id="modalGuessFilm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+
+                    <div class="row mt-4">
+                        <label for="sangueVal" class="form-label guess">Ti piace vedere il sangue?</label>
+                        <div class="range">
+                            <input type="range" class="form-range" min="0" max="5" step="1" id="sangueVal" />
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col">
+                            <label for="azioneVal" class="form-label guess">Ti piace l'azione?</label>
+                            <div class="range">
+                                <input type="range" class="form-range" min="0" max="5" step="1" id="azioneVal" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <label for="cadaveriVal" class="form-label guess ">Ti piace vedere cadaveri?</label>
+                            <div class="range">
+                                <input type="range" class="form-range" min="0" max="5" step="1" id="cadaveriVal" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col">
+                            <label for="fantasyVal" class="form-label guess">Ti piace il fantasy?</label>
+                            <div class="range">
+                                <input type="range" class="form-range" min="0" max="5" step="1" id="fantasyVal" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col">
+                            <label for="ridereVal" class="form-label guess ">Ti piace ridere?</label>
+                            <div class="range">
+                                <input type="range" class="form-range" min="0" max="5" step="1" id="ridereVal" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="btnStupiscimi" type="button"
+                        class="btn btn-outline-warning mt-4 mb-4">Stupiscimi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Risultati Indovina Film -->
+    <div class="modal fade" id="modalRisultatiGuessFilm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center" >
+
+                    <h2 class="mt-3">Somnia ti consiglia:</h2>
+
+                    <div class="container mt-5" id="contentStupiscimi">
+
+                    </div>
+
                 </div>
             </div>
         </div>
